@@ -254,5 +254,6 @@ python3 tools/export_png_server.py        # 1) 로컬 변환 서버 (localhost:8
 ```bash
 python3 tools/build_artifact.py           # 3) build/artifact/: PNG 경로로 바꾼 media.json·chapters.json, base64 모델, 업로드 목록 files.json
 ```
-4) `artifact.html`(문서 머리 없이 본문만 있는 페이지)과 `build/artifact/files.json`의 파일을 아티팩트로 게시.
+4) 공개판(2D 전용): `python3 tools/build_public.py` → `artifact-public.html` + `build/public/files.json` (모델 도판은 JPEG, 투명 도식은 PNG)
+5) `artifact.html`(문서 머리 없이 본문만 있는 페이지)과 `build/artifact/files.json`의 파일을 아티팩트로 게시.
    3D 뷰어는 `.b64.json`을 받으면 GLB로 되돌려 읽습니다.

@@ -17,13 +17,15 @@ async function svgToPng(url) {
   await img.decode();
   const w = img.naturalWidth, h = img.naturalHeight;
   const scale = w < 800 ? 2 : 1; // 400px 개념 도식은 선명하게 2배
+  const jpg = url.startsWith('media/plates/'); // 모델 도판: 바탕이 불투명 → JPEG(용량 약 1/3)
   const c = document.createElement('canvas');
   c.width = w * scale; c.height = h * scale;
   const g = c.getContext('2d');
   // 바탕을 칠하지 않음: 레이어·궤적처럼 겹쳐 보는 도식은 투명해야 함 (도판은 SVG 안에 자체 바탕이 있음)
+  if (jpg) { g.fillStyle = '#FDFCF9'; g.fillRect(0, 0, c.width, c.height); }
   g.drawImage(img, 0, 0, c.width, c.height);
-  const blob = await new Promise((r) => c.toBlob(r, 'image/png'));
-  const res = await fetch('/__export/' + url.replace(/\.svg$/, '.png'), { method: 'PUT', body: blob });
+  const blob = await new Promise((r) => c.toBlob(r, jpg ? 'image/jpeg' : 'image/png', 0.86));
+  const res = await fetch('/__export/' + url.replace(/\.svg$/, jpg ? '.jpg' : '.png'), { method: 'PUT', body: blob });
   if (!res.ok) throw new Error('저장 실패 ' + res.status);
   return [c.width, c.height, blob.size];
 }

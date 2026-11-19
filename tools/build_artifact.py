@@ -46,7 +46,7 @@ def main():
     missing = []
     for m in media:
         if m["url"].endswith(".svg"):
-            png = m["url"][:-4] + ".png"
+            png = m["url"][:-4] + (".jpg" if m["url"].startswith("media/plates/") else ".png")
             src = os.path.join("build", "png", png)
             if not os.path.exists(os.path.join(ROOT, src)):
                 missing.append(src)
