@@ -1,0 +1,296 @@
+{
+  "layers": [
+    {
+      "id": "skin",
+      "label": "피부",
+      "order": 0
+    },
+    {
+      "id": "superficial",
+      "label": "표층 근육",
+      "order": 1
+    },
+    {
+      "id": "intermediate",
+      "label": "중간층 근육",
+      "order": 2
+    },
+    {
+      "id": "deep",
+      "label": "심부 근육",
+      "order": 3
+    },
+    {
+      "id": "bone",
+      "label": "뼈",
+      "order": 4
+    },
+    {
+      "id": "cartilage",
+      "label": "연골 (갈비연골)",
+      "order": 5
+    },
+    {
+      "id": "joint",
+      "label": "관절 (관절낭)",
+      "order": 6,
+      "missing": "BodyParts3D 4.0에 어깨 관절낭 메쉬가 없습니다"
+    },
+    {
+      "id": "ligament",
+      "label": "인대",
+      "order": 7,
+      "missing": "BodyParts3D 4.0에 어깨 인대 메쉬가 없습니다"
+    },
+    {
+      "id": "tendon",
+      "label": "힘줄",
+      "order": 8,
+      "missing": "힘줄은 별도 메쉬가 아니라 각 근육 메쉬에 포함되어 있습니다"
+    }
+  ],
+  "models": [
+    {
+      "id": "shoulder-right",
+      "title": "오른쪽 어깨 · 위팔 · 가슴우리 위부분",
+      "url": "models/shoulder-right.glb",
+      "region": "shoulder",
+      "side": "right",
+      "reviewStatus": "needs-review",
+      "relatedItems": [
+        "j-shoulder",
+        "c-rotator-cuff",
+        "c-scapular-movements",
+        "mv-shoulder-abduction",
+        "mv-shoulder-flexion",
+        "mv-shoulder-extension"
+      ],
+      "source": {
+        "name": "BodyParts3D 4.0 (isa_BP3D_4.0_obj_99, 99% polygon reduction)",
+        "author": "The Database Center for Life Science (DBCLS)",
+        "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+        "license": "CC BY 4.0 (현재 공식 라이선스 페이지) — 단, 배포 OBJ 파일 머리말에는 이전 라이선스 CC BY-SA 2.1 Japan 표기가 남아 있음",
+        "licenseUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+        "commercialUse": "가능 — CC BY 4.0과 CC BY-SA 2.1 JP 모두 상업적 이용을 허용 (출처 표기 필수)",
+        "attribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+        "modified": "수정함 — 필요한 부위의 OBJ만 골라 GLB로 변환, 좌표계를 Y-up으로 바꾸고 원점 이동, 정점 법선 재계산. 피부(전신 1개 메쉬)는 어깨 주변 영역만 잘라 사용. 형상 자체는 편집하지 않음.",
+        "attributionLegacy": "BodyParts3D, (c) The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan",
+        "derivativeLicense": "보수적 해석: 파생물(models/*.glb)은 CC BY-SA 2.1 JP의 동일조건변경허락도 충족하도록 CC BY-SA 4.0으로 표기·배포 권장"
+      },
+      "notes": [
+        "라이선스 표기 불일치: 공식 페이지는 CC BY 4.0, 2011년 OBJ 파일 머리말은 CC BY-SA 2.1 JP. 상업 배포 전 DBCLS에 현재 조건 확인을 권장합니다.",
+        "BodyParts3D는 한 사람의 MRI 기반 정적 모델이며 리깅·애니메이션 데이터가 없습니다.",
+        "넓은등근(latissimus dorsi) 메쉬는 BodyParts3D 4.0에 없어 포함하지 못했습니다."
+      ],
+      "mapping": "data/mappings/shoulder-right.json",
+      "camera": {
+        "view": "front",
+        "fov": 35,
+        "fitPadding": 1.05
+      },
+      "fileSize": 6070464,
+      "meshCount": 55,
+      "triangles": 294932
+    },
+    {
+      "id": "arm-right",
+      "title": "오른팔 · 위팔 · 아래팔 · 손",
+      "url": "models/arm-right.glb",
+      "region": "upper-limb",
+      "side": "right",
+      "reviewStatus": "needs-review",
+      "relatedItems": [
+        "j-elbow",
+        "j-radioulnar",
+        "j-wrist",
+        "j-thumb-cmc",
+        "mv-elbow-flexion",
+        "mv-elbow-extension",
+        "mv-pronation",
+        "mv-supination",
+        "mv-wrist-flexion",
+        "mv-wrist-extension",
+        "mv-finger-flexion",
+        "mv-finger-abduction",
+        "mv-thumb-opposition",
+        "c-carpal-tunnel",
+        "c-hand-grips"
+      ],
+      "source": {
+        "name": "BodyParts3D 4.0 (isa_BP3D_4.0_obj_99, 99% polygon reduction)",
+        "author": "The Database Center for Life Science (DBCLS)",
+        "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+        "license": "CC BY 4.0 (현재 공식 라이선스 페이지) — 단, 배포 OBJ 파일 머리말에는 이전 라이선스 CC BY-SA 2.1 Japan 표기가 남아 있음",
+        "licenseUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+        "commercialUse": "가능 — CC BY 4.0과 CC BY-SA 2.1 JP 모두 상업적 이용을 허용 (출처 표기 필수)",
+        "attribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+        "modified": "수정함 — 필요한 부위의 OBJ만 골라 GLB로 변환, 좌표계를 Y-up으로 바꾸고 원점 이동, 정점 법선 재계산. 피부(전신 1개 메쉬)는 어깨 주변 영역만 잘라 사용. 형상 자체는 편집하지 않음.",
+        "attributionLegacy": "BodyParts3D, (c) The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan",
+        "derivativeLicense": "보수적 해석: 파생물(models/*.glb)은 CC BY-SA 2.1 JP의 동일조건변경허락도 충족하도록 CC BY-SA 4.0으로 표기·배포 권장"
+      },
+      "notes": [],
+      "mapping": "data/mappings/arm-right.json",
+      "camera": {
+        "view": "front",
+        "fov": 35,
+        "fitPadding": 1.05
+      },
+      "fileSize": 2611636,
+      "meshCount": 43,
+      "triangles": 110334
+    },
+    {
+      "id": "leg-right",
+      "title": "오른다리 · 골반 · 허벅지 · 종아리 · 발",
+      "url": "models/leg-right.glb",
+      "region": "lower-limb",
+      "side": "right",
+      "reviewStatus": "needs-review",
+      "relatedItems": [
+        "j-hip",
+        "j-knee",
+        "j-ankle",
+        "j-subtalar",
+        "mv-hip-flexion",
+        "mv-hip-extension",
+        "mv-hip-abduction",
+        "mv-knee-flexion",
+        "mv-knee-extension",
+        "mv-ankle-dorsiflexion",
+        "mv-ankle-plantarflexion",
+        "mv-ankle-inversion",
+        "mv-ankle-eversion",
+        "mv-toe-flexion",
+        "c-foot-arches",
+        "c-plantar-fascia",
+        "c-gait",
+        "c-pelvic-tilt",
+        "c-quadriceps"
+      ],
+      "source": {
+        "name": "BodyParts3D 4.0 (isa_BP3D_4.0_obj_99, 99% polygon reduction)",
+        "author": "The Database Center for Life Science (DBCLS)",
+        "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+        "license": "CC BY 4.0 (현재 공식 라이선스 페이지) — 단, 배포 OBJ 파일 머리말에는 이전 라이선스 CC BY-SA 2.1 Japan 표기가 남아 있음",
+        "licenseUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+        "commercialUse": "가능 — CC BY 4.0과 CC BY-SA 2.1 JP 모두 상업적 이용을 허용 (출처 표기 필수)",
+        "attribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+        "modified": "수정함 — 필요한 부위의 OBJ만 골라 GLB로 변환, 좌표계를 Y-up으로 바꾸고 원점 이동, 정점 법선 재계산. 피부(전신 1개 메쉬)는 어깨 주변 영역만 잘라 사용. 형상 자체는 편집하지 않음.",
+        "attributionLegacy": "BodyParts3D, (c) The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan",
+        "derivativeLicense": "보수적 해석: 파생물(models/*.glb)은 CC BY-SA 2.1 JP의 동일조건변경허락도 충족하도록 CC BY-SA 4.0으로 표기·배포 권장"
+      },
+      "notes": [],
+      "mapping": "data/mappings/leg-right.json",
+      "camera": {
+        "view": "front",
+        "fov": 35,
+        "fitPadding": 1.05
+      },
+      "fileSize": 3332260,
+      "meshCount": 50,
+      "triangles": 143940
+    },
+    {
+      "id": "trunk",
+      "title": "몸통 · 척추 · 가슴우리 · 목",
+      "url": "models/trunk.glb",
+      "region": "trunk",
+      "side": "right",
+      "reviewStatus": "needs-review",
+      "relatedItems": [
+        "j-intervertebral-disc",
+        "j-costovertebral",
+        "j-atlanto-joints",
+        "c-spinal-ligaments",
+        "c-breathing-mechanics",
+        "mv-breathing",
+        "mv-trunk-flexion",
+        "mv-trunk-extension",
+        "mv-trunk-rotation",
+        "mv-trunk-lateral-flexion",
+        "mv-neck-flexion",
+        "mv-neck-extension",
+        "mv-neck-rotation",
+        "mv-neck-lateral-flexion",
+        "c-core-stability",
+        "m-rectus-abdominis",
+        "m-internal-oblique",
+        "m-transversus-abdominis",
+        "m-quadratus-lumborum",
+        "m-multifidus",
+        "m-longus-colli",
+        "c-rectus-sheath"
+      ],
+      "source": {
+        "name": "BodyParts3D 4.0 (isa_BP3D_4.0_obj_99, 99% polygon reduction)",
+        "author": "The Database Center for Life Science (DBCLS)",
+        "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+        "license": "CC BY 4.0 (현재 공식 라이선스 페이지) — 단, 배포 OBJ 파일 머리말에는 이전 라이선스 CC BY-SA 2.1 Japan 표기가 남아 있음",
+        "licenseUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+        "commercialUse": "가능 — CC BY 4.0과 CC BY-SA 2.1 JP 모두 상업적 이용을 허용 (출처 표기 필수)",
+        "attribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+        "modified": "수정함 — 필요한 부위의 OBJ만 골라 GLB로 변환, 좌표계를 Y-up으로 바꾸고 원점 이동, 정점 법선 재계산. 피부(전신 1개 메쉬)는 어깨 주변 영역만 잘라 사용. 형상 자체는 편집하지 않음. 몸통 모델은 삼각형이 많은 메쉬(갈비사이근·배바깥빗근·갈비뼈·가로막 등)를 정점 군집화로 메쉬당 약 1만6천 개 이하로 단순화했습니다.",
+        "attributionLegacy": "BodyParts3D, (c) The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan",
+        "derivativeLicense": "보수적 해석: 파생물(models/*.glb)은 CC BY-SA 2.1 JP의 동일조건변경허락도 충족하도록 CC BY-SA 4.0으로 표기·배포 권장"
+      },
+      "notes": [],
+      "mapping": "data/mappings/trunk.json",
+      "camera": {
+        "view": "oblique",
+        "fov": 35,
+        "fitPadding": 1.0
+      },
+      "fileSize": 5709724,
+      "meshCount": 53,
+      "triangles": 285237,
+      "maxTrianglesPerMesh": 16000
+    },
+    {
+      "id": "head",
+      "title": "머리뼈 · 아래턱 · 목뿔",
+      "url": "models/head.glb",
+      "region": "head",
+      "side": "right",
+      "reviewStatus": "needs-review",
+      "relatedItems": [
+        "j-tmj",
+        "mv-mouth-opening",
+        "mv-mouth-closing",
+        "mv-jaw-protrusion",
+        "mv-jaw-lateral",
+        "m-masseter",
+        "m-temporalis",
+        "m-medial-pterygoid",
+        "m-lateral-pterygoid",
+        "b-facial-skeleton",
+        "c-facial-nerve",
+        "c-facial-expressions",
+        "mv-facial-expression"
+      ],
+      "source": {
+        "name": "BodyParts3D 4.0 (isa_BP3D_4.0_obj_99, 99% polygon reduction)",
+        "author": "The Database Center for Life Science (DBCLS)",
+        "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+        "license": "CC BY 4.0 (현재 공식 라이선스 페이지) — 단, 배포 OBJ 파일 머리말에는 이전 라이선스 CC BY-SA 2.1 Japan 표기가 남아 있음",
+        "licenseUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+        "commercialUse": "가능 — CC BY 4.0과 CC BY-SA 2.1 JP 모두 상업적 이용을 허용 (출처 표기 필수)",
+        "attribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+        "modified": "수정함 — 필요한 부위의 OBJ만 골라 GLB로 변환, 좌표계를 Y-up으로 바꾸고 원점 이동, 정점 법선 재계산. 피부(전신 1개 메쉬)는 어깨 주변 영역만 잘라 사용. 형상 자체는 편집하지 않음.",
+        "attributionLegacy": "BodyParts3D, (c) The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan",
+        "derivativeLicense": "보수적 해석: 파생물(models/*.glb)은 CC BY-SA 2.1 JP의 동일조건변경허락도 충족하도록 CC BY-SA 4.0으로 표기·배포 권장"
+      },
+      "notes": [
+        "BodyParts3D 4.0에는 씹기근육(깨물근·관자근·날개근)과 얼굴 표정근 메쉬가 없습니다. 이 모델의 뼈는 실제 메쉬이며, 근육은 움직임 모드에서 이는곳·닿는곳 기준점 사이의 작용선(교육용 표시)으로만 나타냅니다."
+      ],
+      "mapping": "data/mappings/head.json",
+      "camera": {
+        "view": "oblique",
+        "fov": 35,
+        "fitPadding": 1.05
+      },
+      "fileSize": 2336776,
+      "meshCount": 18,
+      "triangles": 111980
+    }
+  ]
+}
