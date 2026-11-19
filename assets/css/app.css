@@ -727,3 +727,5 @@ select { height: 38px; border: 1px solid var(--line); border-radius: 8px; paddin
 .mo-disclaimer { margin-top: 0; }
 .v3d-nomesh { margin-bottom: 10px; }
 button.text-link { border: 0; background: none; padding: 0; cursor: pointer; }
+
+.prov-region{background:#FFF4E5;color:#8A4B00;border:1px solid #E0A84E}

@@ -6,7 +6,8 @@
   python3 tools/audit.py --out FILE.md   → 파일로 저장
 
 챕터 상태 분류
-  완료        : 근육·뼈(또는 관절)·움직임 항목이 있고, 근육 필수 정보가 모두 있고, 모든 근육에 도판이 있음
+  작성 완료   : 근육·뼈(또는 관절)·움직임 항목이 있고, 근육 필수 정보가 모두 있고, 모든 근육에 도판이 있음
+                (근육 메쉬가 없어 '뼈대만' 도판인 근육 수를 함께 표시 — 전문가 검수와는 무관)
   보완 필요   : 항목은 있으나 필수 정보·도판·움직임 일부 부족
   미작성      : 항목 0개
   (모든 항목은 전문가 검수 전이므로 별도로 '검증 필요' 열에 표시)
@@ -29,6 +30,8 @@ def main():
     items = load("data/items.json")
     media = load("data/media.json")
     reg = load("data/models3d.json")
+    motions = load("data/motions3d.json")
+    motions = motions.get("motions", motions) if isinstance(motions, dict) else motions
     mapped = set()
     related3d = set()
     for m in reg["models"]:
@@ -60,8 +63,8 @@ def main():
     out += [f"- 챕터 {len(chapters)}개 · 항목 {len(items)}개 (근육 {tot['muscle']} · 뼈 {tot['bone']} · 관절 {tot['joint']} · 움직임 {tot['movement']} · 개념 {tot['concept']})",
             f"- 미디어 {len(media)}개 · 파일 없음 {len(missing_files)} · 대체 텍스트 없음 {len(no_alt)} · 출처/라이선스 없음 {len(no_src)}",
             f"- 중복 ID {dup or '없음'} · 잘못된 참조 {len(bad_refs)}건", ""]
-    out.append("| # | 챕터 | 항목 | 근육 | 뼈·관절 | 움직임 | 근육 필수정보 누락 | 도판 있는 근육 | 3D 연결 | 상태 | 검증 |")
-    out.append("|---|---|---|---|---|---|---|---|---|---|---|")
+    out.append("| # | 챕터 | 항목 | 근육 | 뼈·관절 | 움직임 | 근육 필수정보 누락 | 도판 있는 근육 (형상/뼈대만) | 도판 있는 뼈 | 3D 연결 | 3D 동작 | 상태 | 검증 |")
+    out.append("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
     detail = []
     for c in chapters:
         its = [i for i in items if i["chapterId"] == c["id"]]
@@ -71,20 +74,26 @@ def main():
         lack = [(i["id"], [f for f in REQ_MUSCLE if not i.get(f) and f not in i.get("notApplicable", {})]) for i in mus]
         lack = [x for x in lack if x[1]]
         with_img = [i for i in mus if any(m["type"] in ("plate", "image") for m in by_item[i["id"]])]
+        shaped = [i for i in mus if any(m["type"] in ("plate", "image") and m.get("provenance") == "model-render" for m in by_item[i["id"]])]
+        bones_ = [i for i in its if i["category"] == "bone"]
+        bone_img = [i for i in bones_ if any(m["type"] in ("plate", "image") for m in by_item[i["id"]])]
         in3d = [i for i in its if i["id"] in mapped or i["id"] in related3d]
+        mvs = [x for x in motions if x.get("movementItemId") in {i["id"] for i in mv}]
         concepts = [i for i in its if i["category"] == "concept"]
         if not its:
             status = "미작성"
         elif c.get("category") == "foundation":
             with_cimg = [i for i in concepts if by_item[i["id"]]]
-            status = "완료" if len(concepts) >= 5 else "보완 필요"
+            status = "작성 완료" if len(concepts) >= 5 else "보완 필요"
             status += f" (개념 {len(concepts)}개 · 도식 있는 개념 {len(with_cimg)})"
         elif mus and (bj or all(i.get("relatedJoints") or i.get("relatedBones") for i in mus)) and mv and not lack and len(with_img) == len(mus):
-            status = "완료"
+            status = "작성 완료"
+            if len(shaped) < len(mus):
+                status += f" · 근육 형상 도판 없음 {len(mus) - len(shaped)} (모델에 메쉬 없음)"
         else:
             status = "보완 필요"
         rev = Counter(i.get("reviewStatus", "needs-review") for i in its)
-        out.append(f"| {c['order']} | {c['title']} | {len(its)} | {len(mus)} | {len(bj)} | {len(mv)} | {len(lack)} | {len(with_img)}/{len(mus)} | {len(in3d)} | {status} | "
+        out.append(f"| {c['order']} | {c['title']} | {len(its)} | {len(mus)} | {len(bj)} | {len(mv)} | {len(lack)} | {len(with_img)}/{len(mus)} ({len(shaped)}/{len(with_img) - len(shaped)}) | {len(bone_img)}/{len(bones_)} | {len(in3d)} | {len(mvs)} | {status} | "
                    + ", ".join(f"{k} {v}" for k, v in rev.items()) + " |")
         if lack or (mus and len(with_img) < len(mus)):
             detail.append(f"### {c['title']}")
@@ -93,6 +102,8 @@ def main():
             no_img = [i["id"] for i in mus if i not in with_img]
             if no_img:
                 detail.append(f"- 도판 없는 근육: {', '.join(no_img)}")
+    out += ["", "- '작성 완료'는 필수 필드·도판·움직임이 채워졌다는 뜻이며 **전문가 검증 완료가 아닙니다** (검증 열 참고).",
+            "- '도판 있는 근육 (형상/뼈대만)': 형상 = BodyParts3D 근육 메쉬를 렌더링한 도판, 뼈대만 = 메쉬가 없어 주변 뼈대만 그린 부위 도판.", ""]
     out += ["", "## 챕터별 부족 항목", ""] + (detail or ["없음"])
     out += ["", "## 미디어 오류", "", f"- 파일 없음: {missing_files or '없음'}", f"- 대체 텍스트 없음: {no_alt or '없음'}",
             f"- 출처·라이선스 없음: {no_src or '없음'}", "", "## 잘못된 참조", ""] + ([f"- {b}" for b in bad_refs] or ["없음"])

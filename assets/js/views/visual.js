@@ -23,6 +23,9 @@ function mediaNotice(list) {
   if (list.some((m) => m.provenance === 'model-render')) {
     out.push('<strong>모델 추출 도판</strong> — BodyParts3D 3D 모델(© DBCLS)의 실제 형상을 직접 렌더링했습니다. 색 구분·설명선·부착 영역 표시는 자체 추가했고, 검토 필요 상태입니다. 라이선스: CC BY-SA 4.0 (파생 도판).');
   }
+  if (list.some((m) => m.provenance === 'model-render-region')) {
+    out.push('<strong>부위 뼈대 도판 (근육 형상 없음)</strong> — 사용한 3D 모델(BodyParts3D)에 이 근육의 메쉬가 없어, 주변 뼈대만 렌더링했습니다. 근육 모양을 임의로 그려 넣지 않았으며, 이는곳·닿는곳은 해부학 설명의 텍스트를 참고하세요.');
+  }
   if (list.some((m) => m.schematic)) {
     out.push('<strong>자체 제작 개념 도식</strong> — 각도·자세·층의 순서만 단순화해 보여 주며, 근육의 실제 형태나 부착 위치를 그린 해부학 일러스트가 아닙니다.');
   }
@@ -31,6 +34,7 @@ function mediaNotice(list) {
 }
 
 function provBadge(m) {
+  if (m.provenance === 'model-render-region') return '<span class="prov prov-region">뼈대만 · 근육 형상 없음</span>';
   return m.provenance === 'model-render'
     ? '<span class="prov prov-model">모델 추출 도판</span>'
     : m.schematic ? '<span class="prov prov-schem">자체 제작 도식</span>' : '';
@@ -43,7 +47,7 @@ function labelList(m) {
 
 function plateFigure(m, cls = '') {
   return `<figure class="plate ${cls}">
-    <a href="${esc(m.url)}" target="_blank" rel="noopener" title="원본 크기로 보기"><img src="${esc(m.url)}" alt="${esc(m.altText || m.title)}" ${m.provenance === 'model-render' ? 'width="1200" height="1000"' : ''} ${cls.includes('hero') ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async"></a>
+    <a href="${esc(m.url)}" target="_blank" rel="noopener" title="원본 크기로 보기"><img src="${esc(m.url)}" alt="${esc(m.altText || m.title)}" ${String(m.provenance).startsWith('model-render') ? 'width="1200" height="1000"' : ''} ${cls.includes('hero') ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async"></a>
     <figcaption><strong>${esc(m.title)}</strong>${m.description ? `<span>${esc(m.description)}</span>` : ''}
       ${labelList(m)}
       <span class="plate-meta">${provBadge(m)}<span class="badge badge-warn">검토 필요</span><span class="plate-zoom">도판을 누르면 원본 크기로 열립니다</span></span></figcaption>
@@ -135,10 +139,12 @@ function renderAngles(el, item, api) {
   const hero = plates.find((m) => m.role === 'hero');
   const parts = plates.filter((m) => m.role === 'parts');
   const attach = plates.filter((m) => m.role === 'attachment');
-  const rest = plates.filter((m) => !['hero', 'parts', 'attachment'].includes(m.role));
+  const region = plates.filter((m) => m.role === 'region');
+  const rest = plates.filter((m) => !['hero', 'parts', 'attachment', 'region'].includes(m.role));
   const has3d = model3dFor(item);
   el.innerHTML = `
     ${hero ? plateFigure(hero, 'plate-hero') : ''}
+    ${!hero && region.length ? `<section class="plate-sec"><h3>부위 뼈대 <small>이 근육은 3D 모델에 형상이 없습니다</small></h3>${region.map((m) => plateFigure(m, 'plate-hero')).join('')}</section>` : ''}
     ${images.length ? `
       <section class="plate-sec">
         <div class="plate-sec-head"><h3>다각도 도판 <small>${images.length}장 · 버튼·드래그·방향키로 전환</small></h3>

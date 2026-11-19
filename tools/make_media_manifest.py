@@ -17,6 +17,9 @@ media = []
 def add(**kw):
     kw.setdefault("license", LICENSE)
     kw.setdefault("schematic", SCHEMATIC)
+    kw.setdefault("source", "자체 제작 (tools/generate_media.py) — 외부 이미지 사용 안 함")
+    kw.setdefault("provenance", "schematic")
+    kw.setdefault("reviewStatus", "needs-review")
     media.append(kw)
 
 
