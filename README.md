@@ -241,6 +241,20 @@ python3 tools/inspect_model.py              # 검사 보고서 docs/3d-model-qa-
 - 모든 항목·도판은 `needs-review` 상태입니다. OpenStax 등 교과서의 일반적 서술을 바탕으로 정리했지만 전문가 검수를 받지 않았습니다. 혈액 공급은 대부분 미작성('자료 확인 중').
 - AI 생성 이미지는 사용하지 않았습니다. 참고 사이트(AnatoBase)의 이미지·영상·문구는 사용하지 않았습니다.
 
+## 공개 사이트 (GitHub Pages) — 권장
+
+주소: https://globalfashionmaven-cell.github.io/anatomy-atlas/ (저장소: https://github.com/globalfashionmaven-cell/anatomy-atlas)
+
+로컬 앱(localhost:8123)과 **같은 내용 그대로** 올립니다 — 3D 뷰어·동작 시뮬레이션·SVG 도판 포함.
+수정 후 갱신:
+
+```bash
+python3 tools/build_pages.py && git -C build/gh-pages push
+```
+
+- `build/gh-pages`는 프로젝트와 별개의 git 저장소이며, 앱 실행에 필요한 파일만 담습니다 (원본 3D 소스·작업 이력은 올리지 않음).
+- 푸시 후 1~2분 뒤 사이트에 반영됩니다. 로그인 도구: `~/bin/gh` (`gh auth status`로 확인).
+
 ## 공개 공유용 배포 (Claude 아티팩트)
 
 공개 공유는 이미지로 JPEG·PNG·GIF·WebP만 허용하고 `.glb`도 받지 않으므로, 원본(SVG·GLB)은 그대로 두고 배포용 사본을 만듭니다.
