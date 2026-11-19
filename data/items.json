@@ -976,10 +976,7 @@
     ],
     "assistingMuscles": [
       "m-trapezius",
-      "m-serratus-anterior",
-      "m-infraspinatus",
-      "m-teres-minor",
-      "m-subscapularis"
+      "m-serratus-anterior"
     ],
     "relatedJoints": [
       "j-shoulder"
@@ -1026,6 +1023,16 @@
       "md-sh-abd-03",
       "md-sh-abd-06",
       "md-sh-abd-12"
+    ],
+    "stabilizerMuscles": [
+      "m-infraspinatus",
+      "m-teres-minor",
+      "m-subscapularis"
+    ],
+    "antagonistMuscles": [
+      "m-pectoralis-major",
+      "m-latissimus-dorsi",
+      "m-teres-major"
     ]
   },
   {
@@ -1048,7 +1055,9 @@
     ],
     "assistingMuscles": [
       "m-trapezius",
-      "m-serratus-anterior"
+      "m-serratus-anterior",
+      "m-coracobrachialis",
+      "m-biceps-brachii"
     ],
     "relatedJoints": [
       "j-shoulder"
@@ -1076,7 +1085,17 @@
         "id": "os-11-5"
       }
     ],
-    "reviewStatus": "needs-review"
+    "reviewStatus": "needs-review",
+    "antagonistMuscles": [
+      "m-latissimus-dorsi",
+      "m-teres-major"
+    ],
+    "stabilizerMuscles": [
+      "m-supraspinatus",
+      "m-infraspinatus",
+      "m-teres-minor",
+      "m-subscapularis"
+    ]
   },
   {
     "id": "mv-shoulder-extension",
@@ -1097,7 +1116,9 @@
       "m-teres-major",
       "m-deltoid"
     ],
-    "assistingMuscles": [],
+    "assistingMuscles": [
+      "m-triceps-brachii"
+    ],
     "antagonistMuscles": [
       "m-pectoralis-major"
     ],
@@ -1135,7 +1156,12 @@
         "id": "os-11-5"
       }
     ],
-    "reviewStatus": "needs-review"
+    "reviewStatus": "needs-review",
+    "stabilizerMuscles": [
+      "m-infraspinatus",
+      "m-teres-minor",
+      "m-subscapularis"
+    ]
   },
   {
     "id": "b-sternum",

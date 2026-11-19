@@ -54,6 +54,12 @@ export async function loadData() {
   db.media = media;
   db.glossary = glossary;
   db.sources = sources;
+  try {
+    db.motions = (await getJSON('motions3d')).motions;
+  } catch (e) {
+    db.motions = [];
+    console.warn('3D 움직임 정의를 불러오지 못했습니다', e);
+  }
   // 3D 모델 매핑은 선택 사항: 실패해도 기존 기능은 그대로 동작
   try {
     db.models3d = await getJSON('models3d');
@@ -115,12 +121,23 @@ export async function loadData() {
   for (const it of items) it._muscles = uniq(it._muscles);
 }
 
-// 항목에 연결된 3D 모델 (구조가 직접 매핑되었거나 모델의 관련 항목인 경우)
+// 챕터별 기본 3D 모델
+const CHAPTER_MODEL = {
+  'spine-breathing': 'trunk', neck: 'trunk', abdomen: 'trunk', shoulder: 'shoulder-right', 'chest-back': 'shoulder-right',
+  'upper-arm': 'arm-right', forearm: 'arm-right', hand: 'arm-right', 'pelvis-hip': 'leg-right', thigh: 'leg-right',
+  'lower-leg': 'leg-right', foot: 'leg-right', jaw: 'head', face: 'head',
+};
+
+// 항목에 연결된 3D 모델: 챕터 기본 모델 → 이 구조를 포함한 다른 모델 → (메쉬 없음) 챕터 모델
 export function model3dFor(item) {
-  const model = db.models3d.models.find((m) => m.meshes?.length
-    && (m.meshes.some((s) => s.anatomyItemId === item.id) || (m.relatedItems || []).includes(item.id)));
-  // 모델별 레이어 그룹(model.layers)이 있으면 우선, 없으면 공통 레이어 정의 사용
-  return model ? { model, layers: model.layers || db.models3d.layers } : null;
+  const has = (m) => m.meshes?.length && (m.meshes.some((s) => s.anatomyItemId === item.id) || (m.relatedItems || []).includes(item.id));
+  const pref = db.models3d.models.find((m) => m.id === CHAPTER_MODEL[item.chapterId]);
+  let model = pref && has(pref) ? pref : db.models3d.models.find(has);
+  const inModel = Boolean(model && model.meshes.some((s) => s.anatomyItemId === item.id));
+  if (!model && pref?.meshes?.length) model = pref;
+  if (!model) return null;
+  const motions = (db.motions || []).filter((x) => x.model === model.id);
+  return { model, layers: model.layers || db.models3d.layers, motions, inModel };
 }
 
 export const itemMedia = (id, type) => (db.mediaByItem.get(id) || []).filter((m) => !type || m.type === type);

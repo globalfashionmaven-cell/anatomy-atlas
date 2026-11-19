@@ -8,6 +8,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { esc, icon } from '../ui.js';
 import { onDispose } from '../lifecycle.js';
+import { createRig, contractionState, motionPanelHtml, ROLE } from './motion.js';
 
 const LAYER_COLOR = {
   skin: '#E6C3A5', superficial: '#B85C50', intermediate: '#C98466', deep: '#8F4B5B',
@@ -41,7 +42,7 @@ const lowSpecDefault = () =>
 
 /**
  * @param {HTMLElement} root
- * @param {object} opts { model, layers, items: Map, focusItemId, cardEl, onOpenMotion(itemId) }
+ * @param {object} opts { model, layers, items: Map, focusItemId, cardEl, onOpenMotion(itemId), motions: [], focusMovementId }
  */
 export function mountViewer3D(root, opts) {
   const { model, layers } = opts;
@@ -72,6 +73,7 @@ export function mountViewer3D(root, opts) {
       <label class="v3d-speed">속도<input type="range" min="0.5" max="8" step="0.5" value="2" data-speed aria-label="자동 회전 속도"></label>
       <button class="tbtn" data-act="lowspec" aria-pressed="${lowSpecDefault()}">${icon('info')}<span>저사양 모드</span></button>
     </div>
+    ${opts.motions?.length ? motionPanelHtml(opts.motions) : ''}
     <div class="v3d-anim" data-anim hidden></div>
     <div class="v3d-panels">
       <details class="v3d-panel" data-panel="layers">
@@ -194,7 +196,7 @@ export function mountViewer3D(root, opts) {
   function applyState() {
     for (const [name, mesh] of meshes) {
       const s = structs.get(name);
-      mesh.visible = isShown(name);
+      mesh.visible = isShown(name) && !mesh.userData.motionHidden;
       let op = layerOp[s.layer] ?? 1;
       const sel = selected.has(name);
       if (selected.size && dimOthers && !sel && !isolate) op *= 0.25;
@@ -274,6 +276,7 @@ export function mountViewer3D(root, opts) {
         : `<strong>${esc(first.koreanName)}</strong><span>${esc(first.englishName)}</span>`;
     }
     renderCard();
+    if (motion.rig) updateLines();
     if (!silent) opts.onSelect?.([...selected]);
   }
 
@@ -322,6 +325,7 @@ export function mountViewer3D(root, opts) {
           ${item.antagonists.length ? `<div><dt>길항근</dt><dd class="chips">${item.antagonists.map(chip).join('')}</dd></div>` : ''}
           ${item.relatedJoints.length ? `<div><dt>관련 관절</dt><dd class="chips">${item.relatedJoints.map(chip).join('')}</dd></div>` : ''}
         </dl>
+        ${motionCardHtml(item.id)}
         ${pi ? '<p class="fine">부분별 이는곳·기능은 같은 근육의 교과서 서술을 섬유 방향에 따라 나눈 것입니다 (검토 필요).</p>' : ''}
         <div class="sel-actions">
           ${opts.focusItemId !== item.id ? `<a class="btn" href="#/item/${item.id}">${icon('book')}<span>상세 페이지</span></a>` : ''}
@@ -351,6 +355,7 @@ export function mountViewer3D(root, opts) {
     // 반투명 피부는 클릭을 가로채지 않음 (피부 투명도를 50% 이상으로 올렸을 때만 선택 대상)
     const targets = [...meshes.values()].filter((m) => m.visible && m.material.opacity > 0.05
       && (structs.get(m.name).layer !== 'skin' || layerOp.skin >= 0.5));
+    if (motion.lines) motion.lines.children.forEach((c) => { if (c.visible) targets.push(c); });
     const hits = ray.intersectObjects(targets, false);
     return hits[0]?.object.name || null;
   }
@@ -438,6 +443,7 @@ export function mountViewer3D(root, opts) {
     if (!visible) return;
     const dt = clock.getDelta();
     if (tween) tween(now);
+    if (motion.rig && motion.playing) { stepMotion(dt); dirty = true; }
     const moved = controls.update();
     if (mixer && animState.playing) { mixer.update(dt * animState.speed * (animState.reverse ? -1 : 1)); syncAnim(); dirty = true; }
     if (moved || dirty || controls.autoRotate) {
@@ -525,6 +531,154 @@ export function mountViewer3D(root, opts) {
     });
   }
 
+  // ---------------------------------------------------------- 움직임 시뮬레이션
+  const motion = { rig: null, t: 0, dir: 0, playing: false, speed: 1, reverse: false, loop: true, cache: { verts: new Map(), points: new Map() }, lines: null, roles: new Set(Object.keys(ROLE)), showLines: true };
+  const lineGeo = new THREE.CylinderGeometry(1, 1, 1, 10, 1);
+  function motionCardHtml(itemId) {
+    if (!motion.rig) return '';
+    const mus = motion.rig.muscles.filter((m) => m.itemId === itemId);
+    if (!mus.length) return `<p class="mo-card muted">현재 동작(${esc(motion.rig.def.title)})에서 역할이 지정되지 않은 구조입니다.</p>`;
+    const m = mus.find((x) => x.mode === 'line') || mus[0];
+    const st = m.mode === 'line' ? contractionState(m, motion.dir, motion.rig.def.load) : null;
+    return `<div class="mo-card"><p class="eyebrow">현재 동작 · ${esc(motion.rig.def.title)}</p>
+      <p><strong style="color:${ROLE[m.role]?.color || '#555'}">${esc(ROLE[m.role]?.label || '역할 지정 없음')}</strong>${st ? ` · ${esc(st.state)} · 작용선 ${esc(st.lenTxt)}` : ' · 같은 분절과 함께 이동 (관절을 가로지르지 않음)'}</p></div>`;
+  }
+  function ensureLines() {
+    if (motion.lines) return;
+    motion.lines = new THREE.Group();
+    scene.add(motion.lines);
+  }
+  function rebuildLines() {
+    ensureLines();
+    motion.lines.clear();
+    if (!motion.rig) return;
+    for (const mu of motion.rig.muscles.filter((m) => m.mode === 'line')) {
+      const color = new THREE.Color(ROLE[mu.role]?.color || '#9AA0A6');
+      const mat = new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.25, roughness: 0.5 });
+      const c = new THREE.Mesh(lineGeo, mat);
+      if (mu.meshId) c.name = mu.meshId;
+      else {
+        const vid = `v:${mu.itemId}:${mu.label}`;
+        structs.set(vid, { meshId: vid, anatomyItemId: mu.itemId, koreanName: `${mu.label} (가상 작용선)`, englishName: '교육용 기준점 작용선', layer: 'deep' });
+        c.name = vid;
+      }
+      c.userData.mu = mu;
+      motion.lines.add(c);
+    }
+  }
+  function updateLines() {
+    if (!motion.lines) return;
+    const up = new THREE.Vector3(0, 1, 0);
+    for (const c of motion.lines.children) {
+      const mu = c.userData.mu;
+      const d = mu.pb.clone().sub(mu.pa);
+      const L = d.length();
+      c.position.copy(mu.pa).addScaledVector(d, 0.5);
+      c.quaternion.setFromUnitVectors(up, d.normalize());
+      const sel = selected.has(c.name);
+      const w = sel ? 0.55 : 0.32;
+      c.scale.set(w, L, w);
+      c.visible = motion.showLines && (!mu.role || motion.roles.has(mu.role));
+      c.material.emissiveIntensity = sel ? 0.9 : 0.25;
+    }
+  }
+  function applyMotion() {
+    motion.rig.apply(motion.t);
+    updateLines();
+    renderMotionInfo();
+    dirty = true;
+  }
+  function setMotionHidden(on) {
+    for (const [name, m] of meshes) m.userData.motionHidden = false;
+    if (on && motion.rig) for (const mu of motion.rig.muscles) if ((mu.mode === 'line' || mu.mode === 'hide') && mu.meshId && meshes.get(mu.meshId)) meshes.get(mu.meshId).userData.motionHidden = true;
+    applyState();
+  }
+  function selectMotion(id) {
+    if (motion.rig) { motion.rig.reset(); motion.rig = null; }
+    motion.playing = false; motion.t = 0; motion.dir = 0;
+    const body = root.querySelector('[data-mo-body]');
+    const badge = root.querySelector('[data-mo-badge]');
+    const def = (opts.motions || []).find((d) => d.id === id);
+    if (!def) {
+      body.hidden = true; badge.hidden = true;
+      if (motion.lines) motion.lines.clear();
+      setMotionHidden(false); renderCard(); dirty = true; return;
+    }
+    body.hidden = false; badge.hidden = false;
+    const st = statusEl;
+    st.hidden = false; st.innerHTML = '<span class="spinner"></span><span>근육 부착부·관절 중심 계산 중…</span>';
+    setTimeout(() => {
+      motion.rig = createRig(meshes, structs, opts.items, def, motion.cache);
+      st.hidden = true;
+      rebuildLines();
+      setMotionHidden(true);
+      root.querySelector('[data-mo-note]').textContent = def.note || '';
+      root.querySelector('[data-mo-select]').value = id;
+      applyMotion();
+      renderCard();
+    }, 30);
+  }
+  function stepMotion(dt) {
+    const dur = motion.rig.def.duration || 3;
+    let dir = motion.reverse ? -1 : 1;
+    motion.t += (dir * dt * motion.speed) / dur;
+    if (motion.t >= 1 || motion.t <= 0) {
+      motion.t = Math.min(1, Math.max(0, motion.t));
+      if (motion.loop) motion.reverse = !motion.reverse;
+      else { motion.playing = false; dir = 0; }
+      root.querySelector('[data-mo="rev"]')?.setAttribute('aria-pressed', motion.reverse);
+    }
+    motion.dir = motion.playing ? dir : 0;
+    applyMotion();
+  }
+  function renderMotionInfo() {
+    if (!motion.rig) return;
+    const def = motion.rig.def;
+    const pct = Math.round(motion.t * 100);
+    const $m = (sel) => root.querySelector(sel);
+    $m('[data-mo-range]').value = Math.round(motion.t * 1000);
+    $m('[data-mo-pct]').textContent = `${pct}%`;
+    $m('[data-mo="play"]').innerHTML = icon(motion.playing ? 'pause' : 'play');
+    $m('[data-mo-angles]').innerHTML = motion.rig.angles(motion.t).map((a) => `<span><b>${a.value}°</b>${esc(a.label)}</span>`).join('');
+    const ph = [...(def.phases || [])].reverse().find((p) => pct >= p.at) || def.phases?.[0];
+    $m('[data-mo-phase]').innerHTML = ph ? `<p class="mo-phase-t">${ph.at}% · ${esc(ph.title)}</p><p>${esc(ph.text)}</p>` : '';
+    $m('[data-mo-kin]').innerHTML = ph?.kinematics ? `<p class="mo-phase-t">관절면 움직임</p><p>${esc(ph.kinematics)}</p>` : '';
+    const rows = motion.rig.muscles.filter((m) => m.mode === 'line' && m.role).sort((a, b) => Object.keys(ROLE).indexOf(a.role) - Object.keys(ROLE).indexOf(b.role));
+    $m('[data-mo-tbody]').innerHTML = rows.map((m) => {
+      const it = m.itemId && opts.items.get(m.itemId);
+      const nm = m.meshId ? structs.get(m.meshId).koreanName : `${m.label} (가상)`;
+      const s2 = contractionState(m, motion.dir, def.load);
+      return `<tr data-mo-row="${esc(m.meshId || `v:${m.itemId}:${m.label}`)}"><td><button class="linklike">${esc(nm)}</button>${it ? '' : ''}</td><td><i class="dot" style="background:${ROLE[m.role].color}"></i>${ROLE[m.role].label}</td><td>${esc(s2.lenTxt)}</td><td>${esc(s2.state)}</td></tr>`;
+    }).join('') || '<tr><td colspan="4" class="muted">관절을 가로지르는 근육 메쉬가 없습니다.</td></tr>';
+  }
+  function initMotion() {
+    const box = root.querySelector('.mo');
+    if (!box) return;
+    box.addEventListener('change', (e) => {
+      if (e.target.matches('[data-mo-select]')) selectMotion(e.target.value);
+      if (e.target.dataset.moRole) { e.target.checked ? motion.roles.add(e.target.dataset.moRole) : motion.roles.delete(e.target.dataset.moRole); updateLines(); dirty = true; }
+    });
+    box.addEventListener('input', (e) => {
+      if ('moRange' in e.target.dataset && motion.rig) { motion.playing = false; motion.dir = 0; motion.t = Number(e.target.value) / 1000; applyMotion(); }
+    });
+    box.addEventListener('click', (e) => {
+      const b = e.target.closest('button');
+      if (!b || !motion.rig) return;
+      const a = b.dataset.mo;
+      if (a === 'play') { motion.playing = !motion.playing; if (motion.playing && !motion.loop && (motion.t >= 1 && !motion.reverse)) motion.t = 0; motion.dir = motion.playing ? (motion.reverse ? -1 : 1) : 0; clock.getDelta(); renderMotionInfo(); }
+      else if (a === 'back' || a === 'fwd') { motion.playing = false; motion.dir = a === 'fwd' ? 1 : -1; motion.t = Math.min(1, Math.max(0, motion.t + (a === 'fwd' ? 0.02 : -0.02))); applyMotion(); motion.dir = 0; }
+      else if (a === 'rev') { motion.reverse = !motion.reverse; b.setAttribute('aria-pressed', motion.reverse); }
+      else if (a === 'loop') { motion.loop = !motion.loop; b.setAttribute('aria-pressed', motion.loop); }
+      else if (a === 'reset') { motion.playing = false; motion.dir = 0; motion.t = 0; motion.reverse = false; root.querySelector('[data-mo="rev"]').setAttribute('aria-pressed', 'false'); applyMotion(); }
+      else if (a === 'lines') { motion.showLines = !motion.showLines; b.setAttribute('aria-pressed', motion.showLines); updateLines(); dirty = true; }
+      else if (b.dataset.moSpeed) { motion.speed = Number(b.dataset.moSpeed); box.querySelectorAll('[data-mo-speed]').forEach((x) => x.setAttribute('aria-pressed', x === b)); }
+      const row = e.target.closest('[data-mo-row]');
+      if (row) { select([row.dataset.moRow]); updateLines(); dirty = true; }
+    });
+    const pre = (opts.motions || []).find((d) => d.movementItemId === opts.focusMovementId) || (opts.autoMotion && opts.motions[0]);
+    if (pre) selectMotion(pre.id);
+  }
+
   // ---------------------------------------------------------- 모델 로딩 (Lazy)
   const loader = new GLTFLoader();
   let disposed = false;
@@ -577,6 +731,7 @@ export function mountViewer3D(root, opts) {
       setupAnimations(gltf);
       statusEl.hidden = true;
       applyPixelRatio();
+      initMotion();
       const focus = model.meshes.filter((s) => s.anatomyItemId === opts.focusItemId).map((s) => s.meshId);
       select(focus, { silent: true });
       root.dataset.ready = 'true';
@@ -624,6 +779,12 @@ export function mountViewer3D(root, opts) {
       const r = canvas.getBoundingClientRect();
       return { x: r.left + ((c.x + 1) / 2) * r.width, y: r.top + ((1 - c.y) / 2) * r.height };
     },
+    motion: (id) => (id === undefined ? { id: motion.rig?.def.id, t: motion.t, muscles: motion.rig?.muscles.map((m) => ({ id: m.meshId || m.label, item: m.itemId, mode: m.mode, role: m.role, len: m.len && +m.len.toFixed(2), len0: m.len0 && +m.len0.toFixed(2), pa: m.pa?.toArray().map((n) => +n.toFixed(1)), pb: m.pb?.toArray().map((n) => +n.toFixed(1)) })) } : selectMotion(id)),
+    setMotionT: (t) => { if (motion.rig) { motion.t = t; applyMotion(); } },
+    motionReady: () => Boolean(motion.rig),
+    // 품질 검수용: 메쉬의 현재(변환 후) 중심 좌표
+    meshCenter: (name) => { const m = meshes.get(name); if (!m) return null; scene.updateMatrixWorld(true); return new THREE.Box3().setFromObject(m).getCenter(new THREE.Vector3()).toArray().map((n) => +n.toFixed(2)); },
+    motionIds: () => (opts.motions || []).map((d) => d.id),
     state: () => ({ camera: camera.position.toArray().map((n) => +n.toFixed(2)), target: controls.target.toArray().map((n) => +n.toFixed(2)), distance: +camera.position.distanceTo(controls.target).toFixed(2), selected: [...selected], materials: Object.fromEntries([...meshes].map(([n, m]) => [n, { visible: m.visible, opacity: +m.material.opacity.toFixed(3), highlight: m.material.emissiveIntensity > 0 }])), visible: [...meshes].filter(([, m]) => m.visible).map(([n]) => n), triangles: renderer.info.render.triangles, calls: renderer.info.render.calls }),
   };
   // 품질 검수용: 클릭 정확도 — 각 화면 좌표에서 Raycaster 결과와

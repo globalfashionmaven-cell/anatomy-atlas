@@ -31,6 +31,9 @@ SCALE = 0.1  # mm → cm
 
 
 def find_obj(folder, fj):
+    direct = os.path.join(folder, f"{fj}.obj")
+    if os.path.exists(direct):
+        return direct
     for dirpath, _, files in os.walk(folder):
         for f in files:
             if f.lower() == f"{fj.lower()}.obj":
@@ -116,6 +119,38 @@ def detect_axes(meshes):
     return tf
 
 
+def decimate(verts, faces, target):
+    """정점 군집화(vertex clustering) 단순화: 격자 칸마다 정점을 평균 하나로 합쳐 삼각형 수를 target 이하로"""
+    lo, hi = bbox(verts)
+    diag = math.dist(lo, hi) or 1.0
+    cell = diag / 400
+    while True:
+        cid, sums = {}, []
+        remap = []
+        for p in verts:
+            k = (int(p[0] // cell), int(p[1] // cell), int(p[2] // cell))
+            if k not in cid:
+                cid[k] = len(sums)
+                sums.append([0.0, 0.0, 0.0, 0])
+            j = cid[k]
+            sums[j][0] += p[0]; sums[j][1] += p[1]; sums[j][2] += p[2]; sums[j][3] += 1
+            remap.append(j)
+        seen, nf = set(), []
+        for a, b, c in faces:
+            a, b, c = remap[a], remap[b], remap[c]
+            if a == b or b == c or a == c:
+                continue
+            key = tuple(sorted((a, b, c)))
+            if key in seen:
+                continue
+            seen.add(key)
+            nf.append((a, b, c))
+        if len(nf) <= target or cell > diag / 20:
+            nv = [(x / n, y / n, z / n) for x, y, z, n in sums]
+            return nv, nf
+        cell *= 1.35
+
+
 def pad4(b, fill=b"\x00"):
     return b + fill * ((4 - len(b) % 4) % 4)
 
@@ -173,10 +208,17 @@ def write_glb(path, nodes_data):
 def build(obj_folder, model):
     raw = {}
     for s in model["meshes"]:
-        p = find_obj(obj_folder, s["sourceId"])
-        if not p:
-            raise SystemExit(f"OBJ 없음: {s['sourceId']} ({s['meshId']})")
-        raw[s["meshId"]] = read_obj(p)
+        # sourceId 가 목록이면 여러 OBJ 를 하나의 메쉬로 합침 (예: 손가락뼈 14개)
+        verts, faces = [], []
+        for fj in (s["sourceId"] if isinstance(s["sourceId"], list) else [s["sourceId"]]):
+            p = find_obj(obj_folder, fj)
+            if not p:
+                raise SystemExit(f"OBJ 없음: {fj} ({s['meshId']})")
+            v, f = read_obj(p)
+            off = len(verts)
+            verts += v
+            faces += [(a + off, b + off, c + off) for a, b, c in f]
+        raw[s["meshId"]] = (verts, faces)
 
     tf = bp3d_to_three
     if all(k in raw for k in ("rib_1", "rib_8", "sternum_body", "vertebra_t4", "humerus")):
@@ -202,8 +244,13 @@ def build(obj_folder, model):
     c = [(lo[i] + hi[i]) / 2 for i in range(3)]
 
     nodes, tris = [], 0
+    cap = model.get("maxTrianglesPerMesh")
     for s in model["meshes"]:
         v, f = meshes[s["meshId"]]
+        if cap and len(f) > cap:
+            before = len(f)
+            v, f = decimate(v, f, cap)
+            print(f"  단순화 {s['meshId']}: {before:,} → {len(f):,} 삼각형")
         v = [tuple((p[i] - c[i]) * SCALE for i in range(3)) for p in v]
         nodes.append((s["meshId"], v, normals(v, f), f))
         tris += len(f)

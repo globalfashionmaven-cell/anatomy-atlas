@@ -188,7 +188,8 @@ function renderAngles(el, item, api) {
 function renderMotion(el, item, state) {
   const sources = motionSources(item);
   const m3 = model3dFor(item);
-  const note3d = m3 ? `<p class="media-notice">${icon('info')}<span>3D 모델(BodyParts3D)에는 리깅·동작 데이터가 없어 3D 애니메이션은 제공하지 않습니다. 대신 같은 모델의 뼈로 만든 <strong>모델 도판</strong>(위팔뼈만 관절 중심에서 회전, 근육은 작용선)과 <strong>개념 도식</strong>으로 움직임을 분석합니다. <a class="text-link" href="#/about">필요한 3D 동작 데이터</a></span></p>` : '';
+  const mot = m3 ? m3.motions.filter((x) => x.movementItemId === state.motionId || item.relatedMovements.includes(x.movementItemId) || x.movementItemId === item.id) : [];
+  const note3d = m3 ? `<p class="media-notice">${icon('info')}<span>3D 관찰 탭의 <strong>움직임 시뮬레이션</strong>에서 실제 뼈 메쉬의 움직임과 근육 작용선(교육용 단순화)을 볼 수 있습니다.${mot.length ? ` <button class="text-link" data-goto3d-motion="${esc(mot[0].movementItemId)}">3D로 ${esc(mot[0].title)} 보기 ${icon('right')}</button>` : ''}</span></p>` : '';
   if (!sources.length) { el.innerHTML = note3d + placeholder(item, 'motion'); return; }
   const cur = sources.find((s) => s.id === state.motionId) || sources[0];
   state.motionId = cur.id;
@@ -264,6 +265,9 @@ async function render3D(el, item, api, opts = {}) {
     return null;
   }
   if (!el.isConnected) return null;
+  if (!found.inModel) {
+    el.insertAdjacentHTML('beforebegin', `<p class="media-notice v3d-nomesh">${icon('info')}<span>‘${esc(item.koreanName)}’은(는) BodyParts3D 모델에 별도 메쉬가 없어 3D에서 직접 선택할 수 없습니다. 같은 부위의 실제 메쉬(뼈·주변 근육)를 함께 보여 줍니다${found.motions.length ? '. 아래 움직임 시뮬레이션에서 관련 동작을 확인할 수 있습니다' : ''}.</span></p>`);
+  }
   if (!mod.webglAvailable()) {
     el.innerHTML = `<div class="empty"><p class="empty-title">이 브라우저에서는 3D를 표시할 수 없습니다</p><p class="empty-text">WebGL을 지원하지 않거나 꺼져 있습니다. ‘근육 구조’, ‘다각도 이미지’, ‘움직임 분석’ 탭의 자료를 이용해 주세요.</p></div>`;
     return null;
@@ -274,6 +278,8 @@ async function render3D(el, item, api, opts = {}) {
     items: db.item,
     focusItemId: item.id,
     initialView: opts.view,
+    motions: found.motions,
+    focusMovementId: opts.motionId || (item.category === 'movement' ? item.id : null),
     cardEl: api.card,
     onOpenMotion: (id) => {
       const it = db.item.get(id);
@@ -359,6 +365,8 @@ export function visualPanel(item, params = new URLSearchParams()) {
     body.addEventListener('click', (e) => {
       const m = e.target.closest('[data-motion]');
       if (m) { state.motionId = m.dataset.motion; state.motionMode = null; renderMotion(fresh(), item, state); }
+      const g3 = e.target.closest('[data-goto3d-motion]');
+      if (g3) api.show('3d', { motionId: g3.dataset.goto3dMotion, scroll: true });
       const q = e.target.closest('[data-seq]');
       if (q) { state.seq = q.dataset.seq; state.motionMode = null; renderMotion(fresh(), item, state); }
       const s = e.target.closest('[data-sub]');
