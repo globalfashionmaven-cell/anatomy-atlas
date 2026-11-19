@@ -1,0 +1,2475 @@
+[
+  {
+    "id": "c-anatomical-position",
+    "chapterId": "basics",
+    "category": "concept",
+    "order": 1,
+    "koreanName": "해부학적 자세",
+    "oldKoreanName": [],
+    "englishName": "Anatomical position",
+    "latinName": "",
+    "summary": "모든 방향 용어의 기준이 되는 표준 자세입니다. 똑바로 서서 얼굴과 시선은 앞을, 팔은 몸통 옆으로 내리고 손바닥은 앞을 향하며, 두 발은 앞을 향합니다.",
+    "description": "해부학 설명에서 '위쪽', '가쪽', '앞쪽'이라고 할 때는 사람이 실제로 어떤 자세를 취하고 있든 항상 이 자세를 기준으로 말합니다. 그림에서 대상자의 오른쪽은 보는 사람의 왼쪽에 놓인다는 점에 주의하세요.",
+    "tags": [
+      "기준 자세",
+      "방향",
+      "정면",
+      "후면",
+      "측면"
+    ],
+    "relatedItems": [
+      "c-planes",
+      "c-directional-terms"
+    ],
+    "sources": [
+      {
+        "id": "os-1-6"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "c-planes",
+    "chapterId": "basics",
+    "category": "concept",
+    "order": 2,
+    "koreanName": "해부학적 면",
+    "oldKoreanName": [
+      "해부학적 평면"
+    ],
+    "englishName": "Anatomical planes",
+    "latinName": "",
+    "summary": "몸을 자르는 세 가지 기준 면입니다. 시상면은 몸을 왼쪽·오른쪽으로, 관상면(이마면)은 앞·뒤로, 수평면(가로면)은 위·아래로 나눕니다.",
+    "description": "관절 운동은 대개 특정 면에서 일어납니다. 예를 들어 어깨관절 굽힘·폄은 주로 시상면, 벌림·모음은 관상면, 안쪽·가쪽돌림은 수평면에서의 움직임으로 설명합니다. 정중선을 지나는 시상면을 정중시상면이라고 합니다.",
+    "tags": [
+      "시상면",
+      "관상면",
+      "이마면",
+      "수평면",
+      "가로면",
+      "sagittal",
+      "coronal",
+      "frontal",
+      "transverse"
+    ],
+    "relatedItems": [
+      "c-anatomical-position",
+      "c-joint-movements"
+    ],
+    "sources": [
+      {
+        "id": "os-1-6"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "c-directional-terms",
+    "chapterId": "basics",
+    "category": "concept",
+    "order": 3,
+    "koreanName": "방향 용어",
+    "oldKoreanName": [],
+    "englishName": "Directional terms",
+    "latinName": "",
+    "summary": "구조물의 상대적 위치를 나타내는 말입니다. 위쪽/아래쪽, 앞쪽/뒤쪽, 안쪽/가쪽, 몸쪽/먼쪽, 얕은/깊은이 기본 짝입니다.",
+    "description": "안쪽(medial)은 정중선에 가까운 쪽, 가쪽(lateral)은 먼 쪽입니다. 몸쪽(proximal)과 먼쪽(distal)은 팔다리에서 몸통에 붙는 곳을 기준으로 가깝거나 먼 것을 말합니다. 얕은(superficial)과 깊은(deep)은 몸 표면으로부터의 거리입니다.",
+    "keyPoints": [
+      "위쪽 superior ↔ 아래쪽 inferior",
+      "앞쪽 anterior(배쪽 ventral) ↔ 뒤쪽 posterior(등쪽 dorsal)",
+      "안쪽 medial ↔ 가쪽 lateral",
+      "몸쪽 proximal ↔ 먼쪽 distal",
+      "얕은 superficial ↔ 깊은 deep"
+    ],
+    "tags": [
+      "위쪽",
+      "아래쪽",
+      "안쪽",
+      "가쪽",
+      "몸쪽",
+      "먼쪽",
+      "표층",
+      "심층",
+      "medial",
+      "lateral",
+      "proximal",
+      "distal"
+    ],
+    "relatedItems": [
+      "c-anatomical-position"
+    ],
+    "sources": [
+      {
+        "id": "os-1-6"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "c-tissue-layers",
+    "chapterId": "basics",
+    "category": "concept",
+    "order": 4,
+    "koreanName": "몸의 층 구조",
+    "oldKoreanName": [],
+    "englishName": "Layers from skin to bone",
+    "latinName": "",
+    "summary": "팔다리를 가로로 자르면 바깥에서 안쪽으로 피부 → 피하조직 → 근막과 근육 → 뼈 순서로 층이 놓입니다.",
+    "description": "표층 근육과 심부 근육을 구분하려면 먼저 이 층의 순서를 이해해야 합니다. 이 항목의 레이어 뷰어는 각 층을 분리된 투명 이미지로 겹쳐 놓은 개념 도식이며, 실제 단면의 근육 배치를 나타내지 않습니다.",
+    "tags": [
+      "레이어",
+      "표층",
+      "심층",
+      "피부",
+      "피하조직",
+      "근막"
+    ],
+    "relatedItems": [
+      "c-directional-terms"
+    ],
+    "sources": [
+      {
+        "id": "os-5-1"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "c-origin-insertion",
+    "chapterId": "basics",
+    "category": "concept",
+    "order": 5,
+    "koreanName": "이는곳과 닿는곳",
+    "oldKoreanName": [
+      "기시",
+      "정지",
+      "기시부",
+      "정지부"
+    ],
+    "englishName": "Origin and insertion",
+    "latinName": "",
+    "summary": "근육이 붙는 두 끝입니다. 수축할 때 비교적 고정되는 쪽을 이는곳, 더 많이 움직이는 쪽을 닿는곳이라고 합니다.",
+    "description": "대부분의 교과서는 팔다리 근육의 몸쪽 부착부를 이는곳, 먼쪽 부착부를 닿는곳으로 적습니다. 다만 실제 움직임에서는 고정되는 쪽이 바뀔 수 있습니다. 예를 들어 턱걸이처럼 손이 고정되면 넓은등근은 몸통을 팔 쪽으로 끌어올립니다.",
+    "tags": [
+      "기시",
+      "정지",
+      "부착부",
+      "origin",
+      "insertion"
+    ],
+    "relatedItems": [
+      "c-muscle-roles"
+    ],
+    "sources": [
+      {
+        "id": "os-11-1"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "c-muscle-roles",
+    "chapterId": "basics",
+    "category": "concept",
+    "order": 6,
+    "koreanName": "주동근·협력근·길항근",
+    "oldKoreanName": [
+      "작용근"
+    ],
+    "englishName": "Prime mover, synergist, antagonist",
+    "latinName": "",
+    "summary": "한 동작에서 가장 크게 일하는 근육이 주동근, 돕는 근육이 협력근, 반대 방향으로 작용하는 근육이 길항근입니다.",
+    "description": "이 역할은 근육에 고정된 속성이 아니라 '어떤 동작인가'에 따라 달라집니다. 같은 근육이 한 동작에서는 주동근, 다른 동작에서는 길항근이 될 수 있습니다. 관절을 안정시키는 근육은 고정근(stabilizer)이라고 부르기도 합니다.",
+    "tags": [
+      "주동근",
+      "협력근",
+      "길항근",
+      "고정근",
+      "agonist",
+      "synergist",
+      "antagonist"
+    ],
+    "relatedItems": [
+      "c-origin-insertion",
+      "c-contraction-types"
+    ],
+    "sources": [
+      {
+        "id": "os-11-1"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "c-contraction-types",
+    "chapterId": "basics",
+    "category": "concept",
+    "order": 7,
+    "koreanName": "수축의 종류",
+    "oldKoreanName": [
+      "구심성 수축",
+      "원심성 수축",
+      "편심성 수축"
+    ],
+    "englishName": "Types of muscle contraction",
+    "latinName": "",
+    "summary": "근육이 짧아지며 힘을 내면 단축성(동심성), 늘어나면서 힘을 내면 신장성(편심성), 길이 변화 없이 힘을 내면 등척성 수축입니다.",
+    "description": "물건을 들어 올릴 때 위팔두갈래근은 단축성 수축을, 천천히 내려놓을 때는 신장성 수축을 하며 속도를 조절합니다. 자세를 유지하는 동안에는 등척성 수축이 일어납니다. 이완은 근육이 힘을 내지 않는 상태로, 길항근이 이완해야 주동근의 움직임이 원활해집니다.",
+    "keyPoints": [
+      "단축성(concentric): 근육 길이 짧아짐 + 힘 생성",
+      "신장성(eccentric): 근육 길이 늘어남 + 힘 생성(감속·제어)",
+      "등척성(isometric): 근육 길이 변화 거의 없음 + 힘 생성"
+    ],
+    "tags": [
+      "수축",
+      "이완",
+      "단축성",
+      "신장성",
+      "등척성",
+      "concentric",
+      "eccentric",
+      "isometric"
+    ],
+    "relatedItems": [
+      "c-muscle-roles"
+    ],
+    "sources": [
+      {
+        "id": "os-10-4"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "c-joint-movements",
+    "chapterId": "basics",
+    "category": "concept",
+    "order": 8,
+    "koreanName": "관절 운동 용어",
+    "oldKoreanName": [
+      "굴곡",
+      "신전",
+      "외전",
+      "내전",
+      "내회전",
+      "외회전"
+    ],
+    "englishName": "Joint movement terms",
+    "latinName": "",
+    "summary": "굽힘·폄, 벌림·모음, 안쪽돌림·가쪽돌림처럼 관절에서 일어나는 움직임을 짝지어 부르는 용어입니다.",
+    "description": "굽힘(flexion)은 대개 시상면에서 관절 각도가 줄어드는 움직임, 폄(extension)은 그 반대입니다. 벌림(abduction)은 정중선에서 멀어지는 움직임, 모음(adduction)은 가까워지는 움직임입니다. 돌림은 뼈의 긴축을 중심으로 회전하는 움직임입니다.",
+    "keyPoints": [
+      "굽힘 flexion(굴곡) ↔ 폄 extension(신전)",
+      "벌림 abduction(외전) ↔ 모음 adduction(내전)",
+      "안쪽돌림 medial rotation(내회전) ↔ 가쪽돌림 lateral rotation(외회전)",
+      "휘돌림 circumduction",
+      "어깨뼈: 올림·내림, 내밈·들임, 위쪽돌림·아래쪽돌림"
+    ],
+    "tags": [
+      "굽힘",
+      "폄",
+      "벌림",
+      "모음",
+      "돌림",
+      "flexion",
+      "extension",
+      "abduction",
+      "adduction",
+      "rotation"
+    ],
+    "relatedItems": [
+      "c-planes"
+    ],
+    "sources": [
+      {
+        "id": "os-9-5"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "b-scapula",
+    "chapterId": "shoulder",
+    "category": "bone",
+    "order": 1,
+    "koreanName": "어깨뼈",
+    "oldKoreanName": [
+      "견갑골"
+    ],
+    "englishName": "Scapula",
+    "latinName": "Scapula",
+    "summary": "등 위쪽에 놓인 납작한 세모꼴 뼈입니다. 갈비뼈 위를 미끄러지듯 움직이며 팔이 넓은 범위로 움직이도록 돕습니다.",
+    "anatomicalPosition": "가슴우리 뒤쪽 위부분, 대략 2번에서 7번 갈비뼈 높이에 놓입니다.",
+    "features": [
+      "어깨뼈가시 (spine of scapula)",
+      "봉우리 (acromion)",
+      "부리돌기 (coracoid process)",
+      "접시오목 (glenoid cavity)",
+      "가시위오목 · 가시아래오목",
+      "어깨밑오목",
+      "아래각 · 안쪽모서리 · 가쪽모서리"
+    ],
+    "relatedBones": [
+      "b-clavicle",
+      "b-humerus"
+    ],
+    "relatedJoints": [
+      "j-shoulder"
+    ],
+    "tags": [
+      "견갑골",
+      "날개뼈",
+      "어깨이음뼈",
+      "봉우리",
+      "견봉"
+    ],
+    "sources": [
+      {
+        "id": "os-8-2"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "b-clavicle",
+    "chapterId": "shoulder",
+    "category": "bone",
+    "order": 2,
+    "koreanName": "빗장뼈",
+    "oldKoreanName": [
+      "쇄골"
+    ],
+    "englishName": "Clavicle",
+    "latinName": "Clavicula",
+    "summary": "가슴 위쪽에 가로로 놓인 S자 모양의 긴뼈로, 팔과 몸통을 잇는 유일한 뼈 연결 버팀대입니다.",
+    "anatomicalPosition": "안쪽 끝은 복장뼈자루와, 가쪽 끝은 어깨뼈의 봉우리와 관절합니다.",
+    "features": [
+      "복장끝 (sternal end)",
+      "봉우리끝 (acromial end)"
+    ],
+    "relatedBones": [
+      "b-scapula",
+      "b-sternum"
+    ],
+    "relatedJoints": [
+      "j-shoulder"
+    ],
+    "tags": [
+      "쇄골",
+      "어깨이음뼈"
+    ],
+    "sources": [
+      {
+        "id": "os-8-2"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "j-shoulder",
+    "chapterId": "shoulder",
+    "category": "joint",
+    "order": 3,
+    "koreanName": "어깨관절",
+    "oldKoreanName": [
+      "견관절",
+      "오목위팔관절",
+      "관절와상완관절"
+    ],
+    "englishName": "Shoulder joint (Glenohumeral joint)",
+    "latinName": "Articulatio humeri",
+    "summary": "위팔뼈머리와 어깨뼈의 접시오목이 만나는 절구관절입니다. 몸에서 가장 운동 범위가 넓은 관절이지만, 그만큼 안정성은 근육에 크게 의존합니다.",
+    "jointType": "윤활관절 · 절구관절(ball-and-socket)",
+    "articulatingBones": [
+      "b-humerus",
+      "b-scapula"
+    ],
+    "movementsAllowed": [
+      "굽힘·폄",
+      "벌림·모음",
+      "안쪽돌림·가쪽돌림",
+      "휘돌림"
+    ],
+    "stabilizers": "얕은 접시오목을 관절테두리(glenoid labrum)가 깊게 해 주고, 돌림근띠 근육들이 위팔뼈머리를 접시오목 쪽으로 붙잡아 안정시킵니다.",
+    "relatedBones": [
+      "b-humerus",
+      "b-scapula"
+    ],
+    "relatedMovements": [
+      "mv-shoulder-abduction",
+      "mv-shoulder-flexion",
+      "mv-shoulder-extension"
+    ],
+    "tags": [
+      "견관절",
+      "어깨",
+      "절구관절",
+      "관절와"
+    ],
+    "sources": [
+      {
+        "id": "os-9-6"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-deltoid",
+    "chapterId": "shoulder",
+    "category": "muscle",
+    "order": 4,
+    "koreanName": "어깨세모근",
+    "oldKoreanName": [
+      "삼각근"
+    ],
+    "englishName": "Deltoid",
+    "latinName": "Musculus deltoideus",
+    "summary": "어깨의 둥근 윤곽을 만드는 표층 근육입니다. 앞·중간·뒤 섬유가 각각 다른 방향으로 팔을 움직입니다.",
+    "anatomicalPosition": "어깨관절을 앞·가쪽·뒤에서 덮는 세모꼴 근육입니다.",
+    "layer": "superficial",
+    "origin": [
+      "빗장뼈 가쪽 1/3",
+      "어깨뼈의 봉우리",
+      "어깨뼈가시"
+    ],
+    "insertion": [
+      "위팔뼈의 세모근거친면 (deltoid tuberosity)"
+    ],
+    "innervation": "겨드랑신경 (axillary nerve, C5–C6)",
+    "action": [
+      "전체(특히 중간섬유): 어깨관절 벌림",
+      "앞섬유: 어깨관절 굽힘, 안쪽돌림",
+      "뒤섬유: 어깨관절 폄, 가쪽돌림"
+    ],
+    "actionKeywords": [
+      "어깨관절 벌림",
+      "어깨관절 굽힘",
+      "어깨관절 폄",
+      "어깨관절 안쪽돌림",
+      "어깨관절 가쪽돌림"
+    ],
+    "contraction": "팔을 옆으로 들어 올릴 때 중간섬유가 단축성 수축을 하고, 들어 올린 팔을 천천히 내릴 때는 신장성 수축으로 하강 속도를 조절합니다.",
+    "roleInMovement": "팔을 옆으로 들거나 앞으로 드는 대부분의 동작에서 주동근으로 작용합니다. 이때 돌림근띠가 위팔뼈머리를 안정시켜 어깨세모근의 힘이 팔을 들어 올리는 데 쓰이도록 돕습니다.",
+    "synergists": [
+      {
+        "ref": "m-supraspinatus",
+        "note": "벌림"
+      },
+      {
+        "ref": "m-pectoralis-major",
+        "note": "앞섬유와 함께 굽힘(빗장부분)"
+      },
+      {
+        "ref": "m-infraspinatus",
+        "note": "뒤섬유와 함께 가쪽돌림"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-latissimus-dorsi",
+        "note": "모음·폄 방향"
+      },
+      {
+        "ref": "m-pectoralis-major",
+        "note": "벌림에 대한 모음"
+      }
+    ],
+    "relatedBones": [
+      "b-clavicle",
+      "b-scapula",
+      "b-humerus"
+    ],
+    "relatedJoints": [
+      "j-shoulder"
+    ],
+    "relatedMovements": [
+      "mv-shoulder-abduction",
+      "mv-shoulder-flexion",
+      "mv-shoulder-extension"
+    ],
+    "tags": [
+      "어깨",
+      "삼각근",
+      "벌림",
+      "외전",
+      "측면 어깨"
+    ],
+    "sources": [
+      {
+        "id": "os-11-5"
+      },
+      {
+        "id": "kaa-terms"
+      },
+      {
+        "id": "fipat-ta2"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "c-rotator-cuff",
+    "chapterId": "shoulder",
+    "category": "concept",
+    "order": 5,
+    "koreanName": "돌림근띠",
+    "oldKoreanName": [
+      "회전근개",
+      "회선건판"
+    ],
+    "englishName": "Rotator cuff",
+    "latinName": "",
+    "summary": "가시위근·가시아래근·작은원근·어깨밑근 네 근육의 힘줄이 위팔뼈머리를 감싸는 구조입니다.",
+    "description": "네 근육은 어깨뼈에서 시작해 위팔뼈의 큰결절과 작은결절에 붙습니다. 각자 돌림이나 벌림에 관여하면서, 함께 위팔뼈머리를 접시오목 쪽으로 눌러 어깨관절을 안정시키는 것이 공통 역할입니다.",
+    "keyPoints": [
+      "가시위근 → 큰결절 (벌림)",
+      "가시아래근 → 큰결절 (가쪽돌림)",
+      "작은원근 → 큰결절 (가쪽돌림)",
+      "어깨밑근 → 작은결절 (안쪽돌림)"
+    ],
+    "relatedItems": [
+      "m-supraspinatus",
+      "m-infraspinatus",
+      "m-teres-minor",
+      "m-subscapularis",
+      "j-shoulder"
+    ],
+    "tags": [
+      "회전근개",
+      "SITS",
+      "어깨 안정성"
+    ],
+    "sources": [
+      {
+        "id": "os-11-5"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-supraspinatus",
+    "chapterId": "shoulder",
+    "category": "muscle",
+    "order": 6,
+    "koreanName": "가시위근",
+    "oldKoreanName": [
+      "극상근"
+    ],
+    "englishName": "Supraspinatus",
+    "latinName": "Musculus supraspinatus",
+    "summary": "어깨뼈가시 위쪽 오목을 채우는 돌림근띠 근육입니다. 팔 벌림을 돕고 위팔뼈머리를 안정시킵니다.",
+    "anatomicalPosition": "어깨뼈 가시위오목에 놓이며 등세모근에 덮여 있습니다. 힘줄은 봉우리 아래를 지나갑니다.",
+    "layer": "deep",
+    "origin": [
+      "어깨뼈의 가시위오목 (supraspinous fossa)"
+    ],
+    "insertion": [
+      "위팔뼈 큰결절의 위쪽 면"
+    ],
+    "innervation": "어깨위신경 (suprascapular nerve, C5–C6)",
+    "action": [
+      "어깨관절 벌림 (어깨세모근과 함께)",
+      "위팔뼈머리를 접시오목에 안정"
+    ],
+    "actionKeywords": [
+      "어깨관절 벌림",
+      "어깨관절 안정"
+    ],
+    "contraction": "팔을 옆으로 들어 올릴 때 어깨세모근과 함께 단축성 수축을 합니다. 동작 내내 위팔뼈머리를 접시오목 쪽으로 당겨 관절을 안정시킵니다.",
+    "roleInMovement": "팔 벌림의 협력근이며 돌림근띠의 일원으로서 어깨관절 안정에 기여합니다.",
+    "synergists": [
+      {
+        "ref": "m-deltoid",
+        "note": "벌림"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-latissimus-dorsi",
+        "note": "모음"
+      }
+    ],
+    "relatedBones": [
+      "b-scapula",
+      "b-humerus"
+    ],
+    "relatedJoints": [
+      "j-shoulder"
+    ],
+    "relatedMovements": [
+      "mv-shoulder-abduction"
+    ],
+    "relatedItems": [
+      "c-rotator-cuff"
+    ],
+    "tags": [
+      "돌림근띠",
+      "회전근개",
+      "극상근",
+      "벌림"
+    ],
+    "sources": [
+      {
+        "id": "os-11-5"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-infraspinatus",
+    "chapterId": "shoulder",
+    "category": "muscle",
+    "order": 7,
+    "koreanName": "가시아래근",
+    "oldKoreanName": [
+      "극하근"
+    ],
+    "englishName": "Infraspinatus",
+    "latinName": "Musculus infraspinatus",
+    "summary": "어깨뼈가시 아래쪽 오목을 채우는 돌림근띠 근육으로, 팔을 바깥으로 돌립니다.",
+    "anatomicalPosition": "어깨뼈 뒷면의 가시아래오목에 놓입니다. 일부는 어깨세모근과 등세모근에 덮입니다.",
+    "layer": "intermediate",
+    "origin": [
+      "어깨뼈의 가시아래오목 (infraspinous fossa)"
+    ],
+    "insertion": [
+      "위팔뼈 큰결절의 중간 면"
+    ],
+    "innervation": "어깨위신경 (suprascapular nerve, C5–C6)",
+    "action": [
+      "어깨관절 가쪽돌림",
+      "위팔뼈머리를 접시오목에 안정"
+    ],
+    "actionKeywords": [
+      "어깨관절 가쪽돌림",
+      "어깨관절 안정"
+    ],
+    "contraction": "팔을 바깥으로 돌릴 때 단축성 수축을, 안쪽으로 돌아가는 움직임을 늦출 때 신장성 수축을 합니다.",
+    "roleInMovement": "가쪽돌림의 주동근입니다. 팔을 머리 위로 높이 드는 동작에서도 위팔뼈를 바깥으로 돌려 주는 데 관여합니다.",
+    "synergists": [
+      {
+        "ref": "m-teres-minor",
+        "note": "가쪽돌림"
+      },
+      {
+        "ref": "m-deltoid",
+        "note": "뒤섬유"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-subscapularis",
+        "note": "안쪽돌림"
+      },
+      {
+        "ref": "m-pectoralis-major",
+        "note": "안쪽돌림"
+      },
+      {
+        "ref": "m-latissimus-dorsi",
+        "note": "안쪽돌림"
+      }
+    ],
+    "relatedBones": [
+      "b-scapula",
+      "b-humerus"
+    ],
+    "relatedJoints": [
+      "j-shoulder"
+    ],
+    "relatedItems": [
+      "c-rotator-cuff"
+    ],
+    "tags": [
+      "돌림근띠",
+      "회전근개",
+      "외회전"
+    ],
+    "sources": [
+      {
+        "id": "os-11-5"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-teres-minor",
+    "chapterId": "shoulder",
+    "category": "muscle",
+    "order": 8,
+    "koreanName": "작은원근",
+    "oldKoreanName": [
+      "소원근"
+    ],
+    "englishName": "Teres minor",
+    "latinName": "Musculus teres minor",
+    "summary": "가시아래근 바로 아래에 붙어 함께 팔을 바깥으로 돌리는 작은 원기둥꼴 근육입니다.",
+    "anatomicalPosition": "어깨뼈 가쪽모서리를 따라 가시아래근 아래에 놓입니다.",
+    "layer": "intermediate",
+    "origin": [
+      "어깨뼈 가쪽모서리의 위쪽 부분"
+    ],
+    "insertion": [
+      "위팔뼈 큰결절의 아래쪽 면"
+    ],
+    "innervation": "겨드랑신경 (axillary nerve, C5–C6)",
+    "action": [
+      "어깨관절 가쪽돌림",
+      "위팔뼈머리를 접시오목에 안정"
+    ],
+    "actionKeywords": [
+      "어깨관절 가쪽돌림",
+      "어깨관절 안정"
+    ],
+    "contraction": "가시아래근과 같은 방향으로 작용하며 가쪽돌림 시 단축성 수축을 합니다.",
+    "roleInMovement": "가쪽돌림의 협력근이며 돌림근띠의 일원입니다.",
+    "synergists": [
+      {
+        "ref": "m-infraspinatus",
+        "note": "가쪽돌림"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-subscapularis",
+        "note": "안쪽돌림"
+      }
+    ],
+    "relatedBones": [
+      "b-scapula",
+      "b-humerus"
+    ],
+    "relatedJoints": [
+      "j-shoulder"
+    ],
+    "relatedItems": [
+      "c-rotator-cuff"
+    ],
+    "tags": [
+      "돌림근띠",
+      "회전근개",
+      "외회전"
+    ],
+    "sources": [
+      {
+        "id": "os-11-5"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-subscapularis",
+    "chapterId": "shoulder",
+    "category": "muscle",
+    "order": 9,
+    "koreanName": "어깨밑근",
+    "oldKoreanName": [
+      "견갑하근"
+    ],
+    "englishName": "Subscapularis",
+    "latinName": "Musculus subscapularis",
+    "summary": "어깨뼈의 앞면(갈비뼈를 향하는 면)을 채우는 큰 돌림근띠 근육으로, 팔을 안쪽으로 돌립니다.",
+    "anatomicalPosition": "어깨뼈와 가슴우리 사이, 어깨밑오목에 놓여 겉에서 잘 보이지 않는 심부 근육입니다.",
+    "layer": "deep",
+    "origin": [
+      "어깨뼈의 어깨밑오목 (subscapular fossa)"
+    ],
+    "insertion": [
+      "위팔뼈의 작은결절"
+    ],
+    "innervation": "위·아래어깨밑신경 (upper and lower subscapular nerves, C5–C6)",
+    "action": [
+      "어깨관절 안쪽돌림",
+      "위팔뼈머리를 접시오목에 안정"
+    ],
+    "actionKeywords": [
+      "어깨관절 안쪽돌림",
+      "어깨관절 안정"
+    ],
+    "contraction": "팔을 안쪽으로 돌릴 때 단축성 수축을 합니다.",
+    "roleInMovement": "안쪽돌림의 주요 근육이며 어깨관절 앞쪽을 지지하는 돌림근띠 근육입니다.",
+    "synergists": [
+      {
+        "ref": "m-pectoralis-major",
+        "note": "안쪽돌림"
+      },
+      {
+        "ref": "m-latissimus-dorsi",
+        "note": "안쪽돌림"
+      },
+      {
+        "ref": "m-teres-major",
+        "note": "안쪽돌림"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-infraspinatus",
+        "note": "가쪽돌림"
+      },
+      {
+        "ref": "m-teres-minor",
+        "note": "가쪽돌림"
+      }
+    ],
+    "relatedBones": [
+      "b-scapula",
+      "b-humerus"
+    ],
+    "relatedJoints": [
+      "j-shoulder"
+    ],
+    "relatedItems": [
+      "c-rotator-cuff"
+    ],
+    "tags": [
+      "돌림근띠",
+      "회전근개",
+      "내회전"
+    ],
+    "sources": [
+      {
+        "id": "os-11-5"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-teres-major",
+    "chapterId": "shoulder",
+    "category": "muscle",
+    "order": 10,
+    "koreanName": "큰원근",
+    "oldKoreanName": [
+      "대원근"
+    ],
+    "englishName": "Teres major",
+    "latinName": "Musculus teres major",
+    "summary": "어깨뼈 아래각 부근에서 위팔뼈 앞쪽으로 가는 근육으로, 넓은등근과 함께 일합니다. 돌림근띠에는 속하지 않습니다.",
+    "anatomicalPosition": "어깨뼈 아래각 근처에서 겨드랑이 뒤벽을 따라 위팔뼈로 갑니다.",
+    "layer": "intermediate",
+    "origin": [
+      "어깨뼈 아래각 부근의 뒷면"
+    ],
+    "insertion": [
+      "위팔뼈 결절사이고랑의 안쪽 입술 (작은결절능선)"
+    ],
+    "innervation": "아래어깨밑신경 (lower subscapular nerve, C5–C6)",
+    "action": [
+      "어깨관절 폄",
+      "어깨관절 모음",
+      "어깨관절 안쪽돌림"
+    ],
+    "actionKeywords": [
+      "어깨관절 폄",
+      "어깨관절 모음",
+      "어깨관절 안쪽돌림"
+    ],
+    "contraction": "든 팔을 아래·뒤로 끌어내릴 때 단축성 수축을 합니다.",
+    "roleInMovement": "넓은등근의 협력근으로 당기기 동작에 관여합니다.",
+    "synergists": [
+      {
+        "ref": "m-latissimus-dorsi",
+        "note": "폄·모음·안쪽돌림"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-deltoid",
+        "note": "벌림·굽힘"
+      }
+    ],
+    "relatedBones": [
+      "b-scapula",
+      "b-humerus"
+    ],
+    "relatedJoints": [
+      "j-shoulder"
+    ],
+    "tags": [
+      "대원근",
+      "당기기"
+    ],
+    "sources": [
+      {
+        "id": "os-11-5"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "c-scapular-movements",
+    "chapterId": "shoulder",
+    "category": "concept",
+    "order": 11,
+    "koreanName": "어깨뼈의 움직임",
+    "oldKoreanName": [
+      "견갑골 운동"
+    ],
+    "englishName": "Movements of the scapula",
+    "latinName": "",
+    "summary": "어깨뼈는 가슴우리 위에서 올림·내림, 내밈·들임, 위쪽돌림·아래쪽돌림을 합니다. 팔을 높이 드는 동작에는 어깨뼈의 위쪽돌림이 반드시 함께 일어납니다.",
+    "description": "팔을 머리 위로 올리는 동작은 어깨관절만의 움직임이 아니라 어깨뼈의 위쪽돌림이 함께 일어나는 협응 운동입니다(어깨위팔리듬). 위쪽돌림에는 주로 등세모근(위·아래 섬유)과 앞톱니근이 함께 작용합니다.",
+    "keyPoints": [
+      "올림 elevation ↔ 내림 depression",
+      "내밈 protraction ↔ 들임 retraction",
+      "위쪽돌림 upward rotation ↔ 아래쪽돌림 downward rotation"
+    ],
+    "relatedItems": [
+      "m-trapezius",
+      "m-serratus-anterior",
+      "m-pectoralis-minor",
+      "mv-shoulder-abduction"
+    ],
+    "tags": [
+      "견갑골",
+      "어깨위팔리듬",
+      "견갑상완리듬",
+      "위쪽돌림",
+      "상방회전"
+    ],
+    "sources": [
+      {
+        "id": "os-9-5"
+      },
+      {
+        "id": "os-11-5"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "mv-shoulder-abduction",
+    "chapterId": "shoulder",
+    "category": "movement",
+    "order": 12,
+    "koreanName": "어깨관절 벌림",
+    "oldKoreanName": [
+      "어깨 외전",
+      "견관절 외전"
+    ],
+    "englishName": "Shoulder abduction",
+    "latinName": "",
+    "summary": "팔을 옆으로 들어 올리는 움직임입니다. 관상면에서 일어나며, 높이 들수록 어깨뼈의 위쪽돌림이 함께 일어납니다.",
+    "movementType": "관절 운동 · 관상면",
+    "targetMuscles": [
+      "m-deltoid",
+      "m-supraspinatus"
+    ],
+    "assistingMuscles": [
+      "m-trapezius",
+      "m-serratus-anterior",
+      "m-infraspinatus",
+      "m-teres-minor",
+      "m-subscapularis"
+    ],
+    "relatedJoints": [
+      "j-shoulder"
+    ],
+    "steps": [
+      {
+        "title": "시작 (0°)",
+        "text": "팔이 몸통 옆에 놓인 해부학적 자세입니다."
+      },
+      {
+        "title": "들어 올리기 (0–90°)",
+        "text": "어깨세모근(특히 중간섬유)과 가시위근이 단축성 수축으로 위팔뼈를 들어 올립니다. 돌림근띠는 위팔뼈머리를 접시오목에 붙잡아 둡니다."
+      },
+      {
+        "title": "높이 들기 (90° 이후)",
+        "text": "등세모근과 앞톱니근이 어깨뼈를 위쪽으로 돌려 팔이 더 높이 올라가도록 돕습니다. 위팔뼈와 어깨뼈의 움직임 비율은 흔히 약 2:1로 설명되지만 개인과 연구에 따라 차이가 있습니다."
+      },
+      {
+        "title": "내리기",
+        "text": "같은 근육들이 신장성 수축으로 팔이 내려가는 속도를 조절합니다."
+      }
+    ],
+    "tags": [
+      "외전",
+      "팔 옆으로 들기",
+      "레터럴 레이즈",
+      "어깨위팔리듬"
+    ],
+    "relatedItems": [
+      "c-scapular-movements",
+      "c-contraction-types"
+    ],
+    "sources": [
+      {
+        "id": "os-9-5"
+      },
+      {
+        "id": "os-11-5"
+      }
+    ],
+    "reviewStatus": "needs-review",
+    "overlayPresets": [
+      "md-sh-abd-00",
+      "md-sh-abd-03",
+      "md-sh-abd-06",
+      "md-sh-abd-12"
+    ]
+  },
+  {
+    "id": "mv-shoulder-flexion",
+    "chapterId": "shoulder",
+    "category": "movement",
+    "order": 13,
+    "koreanName": "어깨관절 굽힘",
+    "oldKoreanName": [
+      "어깨 굴곡",
+      "견관절 굴곡"
+    ],
+    "englishName": "Shoulder flexion",
+    "latinName": "",
+    "summary": "팔을 앞으로 들어 올리는 움직임으로, 주로 시상면에서 일어납니다.",
+    "movementType": "관절 운동 · 시상면",
+    "targetMuscles": [
+      "m-deltoid",
+      "m-pectoralis-major"
+    ],
+    "assistingMuscles": [
+      "m-trapezius",
+      "m-serratus-anterior"
+    ],
+    "relatedJoints": [
+      "j-shoulder"
+    ],
+    "steps": [
+      {
+        "title": "들어 올리기",
+        "text": "어깨세모근 앞섬유와 큰가슴근 빗장부분이 위팔뼈를 앞으로 들어 올립니다. 부리위팔근도 관여합니다(자료 준비 중)."
+      },
+      {
+        "title": "높이 들기",
+        "text": "벌림과 마찬가지로 어깨뼈의 위쪽돌림이 함께 일어납니다."
+      }
+    ],
+    "tags": [
+      "굴곡",
+      "팔 앞으로 들기",
+      "프론트 레이즈"
+    ],
+    "sources": [
+      {
+        "id": "os-9-5"
+      },
+      {
+        "id": "os-11-5"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "mv-shoulder-extension",
+    "chapterId": "shoulder",
+    "category": "movement",
+    "order": 14,
+    "koreanName": "어깨관절 폄",
+    "oldKoreanName": [
+      "어깨 신전",
+      "견관절 신전"
+    ],
+    "englishName": "Shoulder extension",
+    "latinName": "",
+    "summary": "팔을 몸 뒤쪽으로 보내는 움직임입니다. 굽힘의 반대 방향이며 주로 시상면에서 일어납니다.",
+    "movementType": "관절 운동 · 시상면",
+    "targetMuscles": [
+      "m-latissimus-dorsi",
+      "m-teres-major",
+      "m-deltoid"
+    ],
+    "assistingMuscles": [],
+    "antagonistMuscles": [
+      "m-pectoralis-major"
+    ],
+    "relatedJoints": [
+      "j-shoulder"
+    ],
+    "steps": [
+      {
+        "title": "시작 (0°)",
+        "text": "팔이 몸통 옆에 놓인 해부학적 자세입니다."
+      },
+      {
+        "title": "뒤로 보내기",
+        "text": "넓은등근·큰원근과 어깨세모근 뒤섬유가 위팔뼈를 뒤쪽으로 당깁니다. 위팔세갈래근 긴갈래도 보조합니다(자료 준비 중)."
+      },
+      {
+        "title": "되돌아오기",
+        "text": "굽힌 위치에서 팔을 내리는 동작(예: 당기기)에서도 같은 근육들이 폄 방향으로 작용합니다."
+      }
+    ],
+    "tags": [
+      "신전",
+      "팔 뒤로",
+      "당기기"
+    ],
+    "relatedItems": [
+      "mv-shoulder-flexion",
+      "c-joint-movements"
+    ],
+    "sources": [
+      {
+        "id": "os-9-5"
+      },
+      {
+        "id": "os-11-5"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "b-sternum",
+    "chapterId": "chest-back",
+    "category": "bone",
+    "order": 1,
+    "koreanName": "복장뼈",
+    "oldKoreanName": [
+      "흉골"
+    ],
+    "englishName": "Sternum",
+    "latinName": "Sternum",
+    "summary": "가슴 앞 한가운데의 납작한 뼈로, 갈비연골을 통해 갈비뼈와 연결되어 가슴우리 앞벽을 이룹니다.",
+    "anatomicalPosition": "가슴 앞면 정중선에 세로로 놓입니다.",
+    "features": [
+      "복장뼈자루 (manubrium)",
+      "복장뼈몸통 (body)",
+      "칼돌기 (xiphoid process)",
+      "목아래패임 (jugular notch)"
+    ],
+    "relatedBones": [
+      "b-clavicle"
+    ],
+    "tags": [
+      "흉골",
+      "가슴우리"
+    ],
+    "sources": [
+      {
+        "id": "os-7-4"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-pectoralis-major",
+    "chapterId": "chest-back",
+    "category": "muscle",
+    "order": 2,
+    "koreanName": "큰가슴근",
+    "oldKoreanName": [
+      "대흉근"
+    ],
+    "englishName": "Pectoralis major",
+    "latinName": "Musculus pectoralis major",
+    "summary": "가슴 앞면을 덮는 넓은 부채꼴 근육입니다. 팔을 몸 앞쪽으로 모으고 안쪽으로 돌리는 힘을 냅니다.",
+    "anatomicalPosition": "가슴 앞벽의 가장 겉층에 놓이며, 빗장부분(위)과 복장갈비부분(아래)으로 나뉩니다. 아래가장자리는 겨드랑이 앞벽을 이룹니다.",
+    "layer": "superficial",
+    "origin": [
+      "빗장부분: 빗장뼈 안쪽 절반의 앞면",
+      "복장갈비부분: 복장뼈 앞면, 위쪽 6개 갈비연골",
+      "배바깥빗근 널힘줄 (배부분)"
+    ],
+    "insertion": [
+      "위팔뼈 결절사이고랑의 가쪽 입술 (큰결절능선)"
+    ],
+    "innervation": "가쪽가슴신경·안쪽가슴신경 (lateral and medial pectoral nerves, C5–T1)",
+    "action": [
+      "어깨관절 모음",
+      "어깨관절 안쪽돌림",
+      "빗장부분: 어깨관절 굽힘",
+      "복장갈비부분: 굽힌 위치의 팔을 폄"
+    ],
+    "actionKeywords": [
+      "어깨관절 모음",
+      "어깨관절 안쪽돌림",
+      "어깨관절 굽힘",
+      "어깨관절 폄"
+    ],
+    "contraction": "팔을 몸 앞쪽으로 끌어모을 때(예: 푸시업에서 몸을 밀어 올릴 때) 단축성 수축을 하고, 몸을 내릴 때는 신장성 수축으로 속도를 조절합니다.",
+    "roleInMovement": "밀기·껴안기처럼 팔을 몸 앞쪽으로 모으는 동작의 주동근입니다. 빗장부분은 팔을 앞으로 드는 동작에도 관여합니다.",
+    "synergists": [
+      {
+        "ref": "m-deltoid",
+        "note": "앞섬유: 굽힘·안쪽돌림"
+      },
+      {
+        "ref": "m-latissimus-dorsi",
+        "note": "모음·안쪽돌림"
+      },
+      {
+        "ref": "m-subscapularis",
+        "note": "안쪽돌림"
+      },
+      {
+        "ref": "m-teres-major",
+        "note": "모음·안쪽돌림"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-deltoid",
+        "note": "중간·뒤섬유: 벌림"
+      },
+      {
+        "ref": "m-infraspinatus",
+        "note": "가쪽돌림"
+      },
+      {
+        "ref": "m-teres-minor",
+        "note": "가쪽돌림"
+      }
+    ],
+    "relatedBones": [
+      "b-clavicle",
+      "b-sternum",
+      "b-humerus"
+    ],
+    "relatedJoints": [
+      "j-shoulder"
+    ],
+    "relatedMovements": [
+      "mv-shoulder-flexion"
+    ],
+    "tags": [
+      "가슴",
+      "대흉근",
+      "모음",
+      "내전",
+      "내회전",
+      "푸시업",
+      "벤치프레스"
+    ],
+    "sources": [
+      {
+        "id": "os-11-5"
+      },
+      {
+        "id": "kaa-terms"
+      },
+      {
+        "id": "fipat-ta2"
+      },
+      {
+        "id": "ncbi-statpearls"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-pectoralis-minor",
+    "chapterId": "chest-back",
+    "category": "muscle",
+    "order": 3,
+    "koreanName": "작은가슴근",
+    "oldKoreanName": [
+      "소흉근"
+    ],
+    "englishName": "Pectoralis minor",
+    "latinName": "Musculus pectoralis minor",
+    "summary": "큰가슴근 아래에 숨어 있는 얇은 세모꼴 근육으로, 어깨뼈를 앞·아래로 당깁니다.",
+    "anatomicalPosition": "큰가슴근에 덮인 가슴 앞벽의 심층에 놓입니다.",
+    "layer": "deep",
+    "origin": [
+      "3–5번 갈비뼈의 앞면 (갈비연골 근처)"
+    ],
+    "insertion": [
+      "어깨뼈의 부리돌기"
+    ],
+    "innervation": "안쪽가슴신경 (medial pectoral nerve, C8–T1)",
+    "action": [
+      "어깨뼈를 앞·아래로 당김 (내밈·내림)",
+      "어깨뼈를 가슴우리에 안정",
+      "어깨뼈가 고정되면 갈비뼈를 들어 올려 강한 들숨을 보조"
+    ],
+    "actionKeywords": [
+      "어깨뼈 내밈",
+      "어깨뼈 내림",
+      "들숨 보조"
+    ],
+    "contraction": "어깨뼈를 앞·아래로 당길 때 단축성 수축을 합니다.",
+    "roleInMovement": "어깨뼈를 안정시키는 근육으로, 팔 동작의 기반을 만듭니다.",
+    "synergists": [
+      {
+        "ref": "m-serratus-anterior",
+        "note": "내밈"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-trapezius",
+        "note": "들임·위쪽돌림"
+      }
+    ],
+    "relatedBones": [
+      "b-scapula"
+    ],
+    "relatedItems": [
+      "c-scapular-movements"
+    ],
+    "tags": [
+      "소흉근",
+      "어깨뼈",
+      "견갑골"
+    ],
+    "sources": [
+      {
+        "id": "os-11-5"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-serratus-anterior",
+    "chapterId": "chest-back",
+    "category": "muscle",
+    "order": 4,
+    "koreanName": "앞톱니근",
+    "oldKoreanName": [
+      "전거근"
+    ],
+    "englishName": "Serratus anterior",
+    "latinName": "Musculus serratus anterior",
+    "summary": "옆구리 갈비뼈 위에 톱니 모양으로 붙는 근육으로, 어깨뼈를 앞으로 내밀고 위쪽으로 돌립니다.",
+    "anatomicalPosition": "가슴우리 가쪽면에서 어깨뼈 안쪽모서리의 앞면(갈비뼈 쪽)으로 이어집니다.",
+    "layer": "intermediate",
+    "origin": [
+      "위쪽 8–9개 갈비뼈의 가쪽면"
+    ],
+    "insertion": [
+      "어깨뼈 안쪽모서리의 앞면 (갈비면)"
+    ],
+    "innervation": "긴가슴신경 (long thoracic nerve, C5–C7)",
+    "action": [
+      "어깨뼈 내밈",
+      "어깨뼈 위쪽돌림",
+      "어깨뼈를 가슴우리에 밀착"
+    ],
+    "actionKeywords": [
+      "어깨뼈 내밈",
+      "어깨뼈 위쪽돌림"
+    ],
+    "contraction": "팔을 앞으로 뻗어 밀 때 단축성 수축으로 어깨뼈를 앞으로 내밉니다.",
+    "roleInMovement": "팔을 머리 위로 올리는 동작에서 등세모근과 짝을 이루어 어깨뼈를 위쪽으로 돌립니다.",
+    "synergists": [
+      {
+        "ref": "m-trapezius",
+        "note": "위쪽돌림"
+      },
+      {
+        "ref": "m-pectoralis-minor",
+        "note": "내밈"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-trapezius",
+        "note": "중간섬유: 들임"
+      }
+    ],
+    "relatedBones": [
+      "b-scapula"
+    ],
+    "relatedMovements": [
+      "mv-shoulder-abduction",
+      "mv-shoulder-flexion"
+    ],
+    "relatedItems": [
+      "c-scapular-movements"
+    ],
+    "tags": [
+      "전거근",
+      "복서근육",
+      "견갑골",
+      "상방회전"
+    ],
+    "sources": [
+      {
+        "id": "os-11-5"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-trapezius",
+    "chapterId": "chest-back",
+    "category": "muscle",
+    "order": 5,
+    "koreanName": "등세모근",
+    "oldKoreanName": [
+      "승모근"
+    ],
+    "englishName": "Trapezius",
+    "latinName": "Musculus trapezius",
+    "summary": "목 뒤에서 등 가운데까지 넓게 덮는 마름모꼴 표층 근육입니다. 위·중간·아래 섬유가 어깨뼈를 서로 다른 방향으로 움직입니다.",
+    "anatomicalPosition": "목 뒤와 등 위쪽의 가장 겉층에 놓입니다.",
+    "layer": "superficial",
+    "origin": [
+      "뒤통수뼈의 위목덜미선 안쪽부분과 바깥뒤통수뼈융기",
+      "목덜미인대",
+      "7번 목뼈와 1–12번 등뼈의 가시돌기"
+    ],
+    "insertion": [
+      "빗장뼈 가쪽 1/3",
+      "어깨뼈의 봉우리",
+      "어깨뼈가시"
+    ],
+    "innervation": "더부신경 (accessory nerve, CN XI) — 운동; C3–C4 목신경 가지 — 주로 감각·고유감각",
+    "action": [
+      "위섬유: 어깨뼈 올림, 위쪽돌림",
+      "중간섬유: 어깨뼈 들임",
+      "아래섬유: 어깨뼈 내림, 위쪽돌림"
+    ],
+    "actionKeywords": [
+      "어깨뼈 올림",
+      "어깨뼈 들임",
+      "어깨뼈 내림",
+      "어깨뼈 위쪽돌림"
+    ],
+    "contraction": "어깨를 으쓱할 때 위섬유가, 어깨뼈를 뒤로 모을 때 중간섬유가 단축성 수축을 합니다.",
+    "roleInMovement": "팔을 머리 위로 올릴 때 앞톱니근과 함께 어깨뼈를 위쪽으로 돌립니다.",
+    "synergists": [
+      {
+        "ref": "m-serratus-anterior",
+        "note": "위쪽돌림"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-serratus-anterior",
+        "note": "내밈에 대한 들임"
+      },
+      {
+        "ref": "m-pectoralis-minor",
+        "note": "내밈·내림"
+      }
+    ],
+    "relatedBones": [
+      "b-scapula",
+      "b-clavicle"
+    ],
+    "relatedMovements": [
+      "mv-shoulder-abduction",
+      "mv-shoulder-flexion"
+    ],
+    "relatedItems": [
+      "c-scapular-movements"
+    ],
+    "tags": [
+      "승모근",
+      "목",
+      "등",
+      "견갑골",
+      "으쓱"
+    ],
+    "sources": [
+      {
+        "id": "os-11-5"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-latissimus-dorsi",
+    "chapterId": "chest-back",
+    "category": "muscle",
+    "order": 6,
+    "koreanName": "넓은등근",
+    "oldKoreanName": [
+      "광배근"
+    ],
+    "englishName": "Latissimus dorsi",
+    "latinName": "Musculus latissimus dorsi",
+    "summary": "등 아래쪽을 넓게 덮고 위팔뼈 앞쪽으로 모이는 큰 근육으로, 팔을 아래·뒤로 끌어내립니다.",
+    "anatomicalPosition": "등 아래·가쪽 부분의 겉층에 놓이며, 겨드랑이 뒤벽을 이룹니다.",
+    "layer": "superficial",
+    "origin": [
+      "아래쪽 6개 등뼈(T7–T12)의 가시돌기",
+      "등허리근막",
+      "엉덩뼈능선",
+      "아래쪽 3–4개 갈비뼈",
+      "(흔히) 어깨뼈 아래각"
+    ],
+    "insertion": [
+      "위팔뼈 결절사이고랑의 바닥"
+    ],
+    "innervation": "가슴등신경 (thoracodorsal nerve, C6–C8)",
+    "action": [
+      "어깨관절 폄",
+      "어깨관절 모음",
+      "어깨관절 안쪽돌림"
+    ],
+    "actionKeywords": [
+      "어깨관절 폄",
+      "어깨관절 모음",
+      "어깨관절 안쪽돌림"
+    ],
+    "contraction": "턱걸이에서 몸을 끌어올릴 때 단축성 수축을, 천천히 내려올 때 신장성 수축을 합니다. 이때는 팔이 고정되어 몸통이 움직입니다.",
+    "roleInMovement": "당기기 동작(로우, 풀다운, 턱걸이)의 주동근입니다.",
+    "synergists": [
+      {
+        "ref": "m-teres-major",
+        "note": "폄·모음·안쪽돌림"
+      },
+      {
+        "ref": "m-pectoralis-major",
+        "note": "모음·안쪽돌림"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-deltoid",
+        "note": "벌림·굽힘"
+      },
+      {
+        "ref": "m-supraspinatus",
+        "note": "벌림"
+      }
+    ],
+    "relatedBones": [
+      "b-humerus",
+      "b-scapula"
+    ],
+    "relatedJoints": [
+      "j-shoulder"
+    ],
+    "tags": [
+      "광배근",
+      "등",
+      "당기기",
+      "턱걸이",
+      "풀다운"
+    ],
+    "sources": [
+      {
+        "id": "os-11-5"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "b-humerus",
+    "chapterId": "upper-arm",
+    "category": "bone",
+    "order": 1,
+    "koreanName": "위팔뼈",
+    "oldKoreanName": [
+      "상완골"
+    ],
+    "englishName": "Humerus",
+    "latinName": "Humerus",
+    "summary": "어깨에서 팔꿈치까지 이어지는 위팔의 긴뼈입니다. 위끝은 어깨관절을, 아래끝은 팔꿉관절을 이룹니다.",
+    "anatomicalPosition": "위팔 한가운데에 세로로 놓입니다.",
+    "features": [
+      "위팔뼈머리 (head)",
+      "해부목 · 외과목",
+      "큰결절 · 작은결절",
+      "결절사이고랑 (intertubercular sulcus)",
+      "세모근거친면 (deltoid tuberosity)",
+      "안쪽위관절융기 · 가쪽위관절융기"
+    ],
+    "relatedBones": [
+      "b-scapula"
+    ],
+    "relatedJoints": [
+      "j-shoulder"
+    ],
+    "tags": [
+      "상완골",
+      "위팔"
+    ],
+    "sources": [
+      {
+        "id": "os-8-3"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "j-hip",
+    "chapterId": "pelvis-hip",
+    "category": "joint",
+    "order": 1,
+    "koreanName": "엉덩관절",
+    "oldKoreanName": [
+      "고관절"
+    ],
+    "englishName": "Hip joint",
+    "latinName": "Articulatio coxae",
+    "summary": "넙다리뼈머리와 골반의 절구가 만나는 절구관절입니다. 깊은 절구와 강한 인대 덕분에 어깨관절보다 안정적입니다.",
+    "jointType": "윤활관절 · 절구관절(ball-and-socket)",
+    "articulatingBones": [
+      "b-femur"
+    ],
+    "movementsAllowed": [
+      "굽힘·폄",
+      "벌림·모음",
+      "안쪽돌림·가쪽돌림",
+      "휘돌림"
+    ],
+    "relatedBones": [
+      "b-femur"
+    ],
+    "tags": [
+      "고관절",
+      "골반",
+      "절구"
+    ],
+    "sources": [
+      {
+        "id": "os-9-6"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "b-femur",
+    "chapterId": "thigh",
+    "category": "bone",
+    "order": 1,
+    "koreanName": "넙다리뼈",
+    "oldKoreanName": [
+      "대퇴골"
+    ],
+    "englishName": "Femur",
+    "latinName": "Femur",
+    "summary": "허벅지의 긴뼈로 몸에서 가장 길고 튼튼한 뼈입니다. 위로는 엉덩관절, 아래로는 무릎관절을 이룹니다.",
+    "anatomicalPosition": "허벅지 한가운데에 놓이며 위끝에서 아래끝으로 갈수록 안쪽으로 비스듬히 기울어집니다.",
+    "features": [
+      "넙다리뼈머리 · 넙다리뼈목",
+      "큰돌기 · 작은돌기",
+      "돌기사이선",
+      "거친선 (linea aspera)",
+      "안쪽관절융기 · 가쪽관절융기"
+    ],
+    "relatedBones": [
+      "b-patella",
+      "b-tibia"
+    ],
+    "relatedJoints": [
+      "j-hip",
+      "j-knee"
+    ],
+    "tags": [
+      "대퇴골",
+      "허벅지뼈"
+    ],
+    "sources": [
+      {
+        "id": "os-8-5"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "b-patella",
+    "chapterId": "thigh",
+    "category": "bone",
+    "order": 2,
+    "koreanName": "무릎뼈",
+    "oldKoreanName": [
+      "슬개골"
+    ],
+    "englishName": "Patella",
+    "latinName": "Patella",
+    "summary": "넙다리네갈래근 힘줄 안에 들어 있는 종자뼈로, 무릎 앞에서 만져집니다.",
+    "anatomicalPosition": "무릎관절 앞쪽, 넙다리뼈 아래끝 앞면에 놓입니다.",
+    "features": [
+      "무릎뼈바닥 (위쪽)",
+      "무릎뼈꼭대기 (아래쪽)",
+      "관절면 (뒤쪽)"
+    ],
+    "relatedBones": [
+      "b-femur",
+      "b-tibia"
+    ],
+    "relatedJoints": [
+      "j-knee"
+    ],
+    "tags": [
+      "슬개골",
+      "종자뼈",
+      "무릎"
+    ],
+    "sources": [
+      {
+        "id": "os-8-5"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "j-knee",
+    "chapterId": "thigh",
+    "category": "joint",
+    "order": 3,
+    "koreanName": "무릎관절",
+    "oldKoreanName": [
+      "슬관절"
+    ],
+    "englishName": "Knee joint",
+    "latinName": "Articulatio genus",
+    "summary": "넙다리뼈·정강뼈·무릎뼈가 만나는 몸에서 가장 큰 관절입니다. 주로 굽힘과 폄을 하며, 굽힌 상태에서는 약간의 돌림도 일어납니다.",
+    "jointType": "윤활관절 · 경첩관절로 분류되나 약간의 돌림이 가능",
+    "articulatingBones": [
+      "b-femur",
+      "b-tibia",
+      "b-patella"
+    ],
+    "movementsAllowed": [
+      "굽힘·폄",
+      "굽힌 상태에서 약간의 안쪽·가쪽돌림"
+    ],
+    "stabilizers": "앞·뒤십자인대, 안쪽·가쪽곁인대, 안쪽·가쪽 반달연골이 안정성에 기여합니다.",
+    "relatedBones": [
+      "b-femur",
+      "b-tibia",
+      "b-patella"
+    ],
+    "relatedMovements": [
+      "mv-knee-extension"
+    ],
+    "tags": [
+      "슬관절",
+      "무릎",
+      "십자인대",
+      "반달연골",
+      "반월상연골"
+    ],
+    "sources": [
+      {
+        "id": "os-9-6"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "c-quadriceps",
+    "chapterId": "thigh",
+    "category": "concept",
+    "order": 4,
+    "koreanName": "넙다리네갈래근",
+    "oldKoreanName": [
+      "대퇴사두근"
+    ],
+    "englishName": "Quadriceps femoris",
+    "latinName": "Musculus quadriceps femoris",
+    "summary": "허벅지 앞쪽의 네 근육(넙다리곧은근, 가쪽넓은근, 안쪽넓은근, 중간넓은근)을 합쳐 부르는 이름입니다. 공통 힘줄로 무릎뼈를 거쳐 정강뼈거친면에 붙어 무릎을 폅니다.",
+    "description": "네 근육 중 넙다리곧은근만 엉덩관절을 가로지르므로 엉덩관절 굽힘에도 관여합니다. 중간넓은근은 넙다리곧은근 아래에 있는 심부 근육입니다.",
+    "relatedItems": [
+      "m-rectus-femoris",
+      "m-vastus-lateralis",
+      "m-vastus-medialis",
+      "m-vastus-intermedius",
+      "mv-knee-extension"
+    ],
+    "tags": [
+      "대퇴사두근",
+      "허벅지 앞",
+      "무릎 폄",
+      "스쿼트"
+    ],
+    "sources": [
+      {
+        "id": "os-11-6"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-rectus-femoris",
+    "chapterId": "thigh",
+    "category": "muscle",
+    "order": 5,
+    "koreanName": "넙다리곧은근",
+    "oldKoreanName": [
+      "대퇴직근"
+    ],
+    "englishName": "Rectus femoris",
+    "latinName": "Musculus rectus femoris",
+    "summary": "허벅지 앞 한가운데를 곧게 내려가는 근육으로, 무릎을 펴고 엉덩관절을 굽힙니다.",
+    "anatomicalPosition": "허벅지 앞면 중앙의 표층에 놓입니다. 넙다리네갈래근 중 유일하게 엉덩관절과 무릎관절을 모두 가로지릅니다.",
+    "layer": "superficial",
+    "origin": [
+      "아래앞엉덩뼈가시 (AIIS)",
+      "절구 위쪽의 엉덩뼈"
+    ],
+    "insertion": [
+      "넙다리네갈래근힘줄을 통해 무릎뼈바닥",
+      "무릎인대를 통해 정강뼈거친면"
+    ],
+    "innervation": "넙다리신경 (femoral nerve, L2–L4)",
+    "action": [
+      "무릎관절 폄",
+      "엉덩관절 굽힘"
+    ],
+    "actionKeywords": [
+      "무릎관절 폄",
+      "엉덩관절 굽힘"
+    ],
+    "contraction": "앉은 자세에서 다리를 펼 때 단축성 수축을, 스쿼트에서 내려갈 때 신장성 수축을 합니다.",
+    "roleInMovement": "차기 동작처럼 엉덩관절 굽힘과 무릎 폄이 함께 일어나는 동작에서 특히 크게 쓰입니다.",
+    "synergists": [
+      {
+        "ref": "m-vastus-lateralis",
+        "note": "무릎 폄"
+      },
+      {
+        "ref": "m-vastus-medialis",
+        "note": "무릎 폄"
+      },
+      {
+        "ref": "m-vastus-intermedius",
+        "note": "무릎 폄"
+      },
+      {
+        "ref": "m-sartorius",
+        "note": "엉덩관절 굽힘"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-biceps-femoris",
+        "note": "무릎 굽힘·엉덩관절 폄"
+      },
+      {
+        "ref": "m-semitendinosus",
+        "note": "무릎 굽힘·엉덩관절 폄"
+      }
+    ],
+    "relatedBones": [
+      "b-femur",
+      "b-patella",
+      "b-tibia"
+    ],
+    "relatedJoints": [
+      "j-hip",
+      "j-knee"
+    ],
+    "relatedMovements": [
+      "mv-knee-extension"
+    ],
+    "relatedItems": [
+      "c-quadriceps"
+    ],
+    "tags": [
+      "대퇴사두근",
+      "대퇴직근",
+      "무릎 폄",
+      "고관절 굴곡"
+    ],
+    "sources": [
+      {
+        "id": "os-11-6"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-vastus-lateralis",
+    "chapterId": "thigh",
+    "category": "muscle",
+    "order": 6,
+    "koreanName": "가쪽넓은근",
+    "oldKoreanName": [
+      "외측광근"
+    ],
+    "englishName": "Vastus lateralis",
+    "latinName": "Musculus vastus lateralis",
+    "summary": "허벅지 바깥쪽을 이루는 넙다리네갈래근 중 가장 큰 근육입니다.",
+    "anatomicalPosition": "허벅지 앞·가쪽의 표층에 놓입니다.",
+    "layer": "superficial",
+    "origin": [
+      "넙다리뼈의 큰돌기",
+      "거친선의 가쪽 입술"
+    ],
+    "insertion": [
+      "넙다리네갈래근힘줄을 통해 무릎뼈",
+      "무릎인대를 통해 정강뼈거친면"
+    ],
+    "innervation": "넙다리신경 (femoral nerve, L2–L4)",
+    "action": [
+      "무릎관절 폄"
+    ],
+    "actionKeywords": [
+      "무릎관절 폄"
+    ],
+    "contraction": "무릎을 펼 때 단축성, 무릎이 굽혀지는 것을 제어할 때 신장성 수축을 합니다.",
+    "roleInMovement": "일어서기·계단 오르기·스쿼트에서 무릎 폄의 주동근 중 하나입니다.",
+    "synergists": [
+      {
+        "ref": "m-rectus-femoris",
+        "note": "무릎 폄"
+      },
+      {
+        "ref": "m-vastus-medialis",
+        "note": "무릎 폄"
+      },
+      {
+        "ref": "m-vastus-intermedius",
+        "note": "무릎 폄"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-biceps-femoris",
+        "note": "무릎 굽힘"
+      },
+      {
+        "ref": "m-semitendinosus",
+        "note": "무릎 굽힘"
+      }
+    ],
+    "relatedBones": [
+      "b-femur",
+      "b-patella",
+      "b-tibia"
+    ],
+    "relatedJoints": [
+      "j-knee"
+    ],
+    "relatedMovements": [
+      "mv-knee-extension"
+    ],
+    "relatedItems": [
+      "c-quadriceps"
+    ],
+    "tags": [
+      "대퇴사두근",
+      "외측광근",
+      "무릎 폄"
+    ],
+    "sources": [
+      {
+        "id": "os-11-6"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-vastus-medialis",
+    "chapterId": "thigh",
+    "category": "muscle",
+    "order": 7,
+    "koreanName": "안쪽넓은근",
+    "oldKoreanName": [
+      "내측광근"
+    ],
+    "englishName": "Vastus medialis",
+    "latinName": "Musculus vastus medialis",
+    "summary": "허벅지 안쪽 아래, 무릎 위 안쪽에서 볼록하게 보이는 넙다리네갈래근입니다.",
+    "anatomicalPosition": "허벅지 앞·안쪽의 표층에 놓입니다.",
+    "layer": "superficial",
+    "origin": [
+      "넙다리뼈의 돌기사이선",
+      "거친선의 안쪽 입술"
+    ],
+    "insertion": [
+      "넙다리네갈래근힘줄을 통해 무릎뼈",
+      "무릎인대를 통해 정강뼈거친면"
+    ],
+    "innervation": "넙다리신경 (femoral nerve, L2–L4)",
+    "action": [
+      "무릎관절 폄"
+    ],
+    "actionKeywords": [
+      "무릎관절 폄"
+    ],
+    "contraction": "무릎을 펼 때 단축성, 굽힘을 제어할 때 신장성 수축을 합니다.",
+    "roleInMovement": "무릎 폄의 주동근 중 하나로, 무릎뼈의 안쪽에 붙어 무릎뼈 움직임에도 관여합니다.",
+    "synergists": [
+      {
+        "ref": "m-rectus-femoris",
+        "note": "무릎 폄"
+      },
+      {
+        "ref": "m-vastus-lateralis",
+        "note": "무릎 폄"
+      },
+      {
+        "ref": "m-vastus-intermedius",
+        "note": "무릎 폄"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-biceps-femoris",
+        "note": "무릎 굽힘"
+      },
+      {
+        "ref": "m-semitendinosus",
+        "note": "무릎 굽힘"
+      }
+    ],
+    "relatedBones": [
+      "b-femur",
+      "b-patella",
+      "b-tibia"
+    ],
+    "relatedJoints": [
+      "j-knee"
+    ],
+    "relatedMovements": [
+      "mv-knee-extension"
+    ],
+    "relatedItems": [
+      "c-quadriceps"
+    ],
+    "tags": [
+      "대퇴사두근",
+      "내측광근",
+      "VMO",
+      "무릎 폄"
+    ],
+    "sources": [
+      {
+        "id": "os-11-6"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-vastus-intermedius",
+    "chapterId": "thigh",
+    "category": "muscle",
+    "order": 8,
+    "koreanName": "중간넓은근",
+    "oldKoreanName": [
+      "중간광근"
+    ],
+    "englishName": "Vastus intermedius",
+    "latinName": "Musculus vastus intermedius",
+    "summary": "넙다리곧은근 바로 아래에 숨어 있는 넙다리네갈래근의 심부 근육입니다.",
+    "anatomicalPosition": "넙다리뼈 몸통의 앞면에 붙어 넙다리곧은근에 덮여 있습니다.",
+    "layer": "deep",
+    "origin": [
+      "넙다리뼈 몸통의 앞면과 가쪽면"
+    ],
+    "insertion": [
+      "넙다리네갈래근힘줄을 통해 무릎뼈",
+      "무릎인대를 통해 정강뼈거친면"
+    ],
+    "innervation": "넙다리신경 (femoral nerve, L2–L4)",
+    "action": [
+      "무릎관절 폄"
+    ],
+    "actionKeywords": [
+      "무릎관절 폄"
+    ],
+    "contraction": "다른 넓은근과 함께 무릎 폄 시 단축성 수축을 합니다.",
+    "roleInMovement": "무릎 폄의 주동근 중 하나입니다.",
+    "synergists": [
+      {
+        "ref": "m-rectus-femoris",
+        "note": "무릎 폄"
+      },
+      {
+        "ref": "m-vastus-lateralis",
+        "note": "무릎 폄"
+      },
+      {
+        "ref": "m-vastus-medialis",
+        "note": "무릎 폄"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-biceps-femoris",
+        "note": "무릎 굽힘"
+      }
+    ],
+    "relatedBones": [
+      "b-femur",
+      "b-patella",
+      "b-tibia"
+    ],
+    "relatedJoints": [
+      "j-knee"
+    ],
+    "relatedMovements": [
+      "mv-knee-extension"
+    ],
+    "relatedItems": [
+      "c-quadriceps"
+    ],
+    "tags": [
+      "대퇴사두근",
+      "중간광근",
+      "무릎 폄",
+      "심부"
+    ],
+    "sources": [
+      {
+        "id": "os-11-6"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-biceps-femoris",
+    "chapterId": "thigh",
+    "category": "muscle",
+    "order": 9,
+    "koreanName": "넙다리두갈래근",
+    "oldKoreanName": [
+      "대퇴이두근"
+    ],
+    "englishName": "Biceps femoris",
+    "latinName": "Musculus biceps femoris",
+    "summary": "허벅지 뒤·가쪽의 두 갈래 근육으로, 뒤넙다리근(햄스트링) 중 하나입니다. 무릎을 굽히고 엉덩관절을 폅니다.",
+    "anatomicalPosition": "허벅지 뒷면 가쪽의 표층에 놓입니다.",
+    "layer": "superficial",
+    "origin": [
+      "긴갈래: 궁둥뼈결절",
+      "짧은갈래: 넙다리뼈 거친선의 가쪽 입술"
+    ],
+    "insertion": [
+      "종아리뼈머리"
+    ],
+    "innervation": "긴갈래: 궁둥신경의 정강신경 부분 / 짧은갈래: 궁둥신경의 온종아리신경 부분 (L5–S2)",
+    "action": [
+      "무릎관절 굽힘",
+      "긴갈래: 엉덩관절 폄",
+      "무릎을 굽힌 상태에서 정강이 가쪽돌림"
+    ],
+    "actionKeywords": [
+      "무릎관절 굽힘",
+      "엉덩관절 폄"
+    ],
+    "contraction": "무릎을 굽힐 때 단축성 수축을, 무릎 폄 동작에서 속도를 늦출 때 신장성 수축을 합니다.",
+    "roleInMovement": "걷기·달리기에서 다리를 앞으로 뻗을 때 무릎 폄 속도를 조절하고, 엉덩관절 폄에 관여합니다.",
+    "synergists": [
+      {
+        "ref": "m-semitendinosus",
+        "note": "무릎 굽힘·엉덩관절 폄"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-rectus-femoris",
+        "note": "무릎 폄·엉덩관절 굽힘"
+      },
+      {
+        "ref": "m-vastus-lateralis",
+        "note": "무릎 폄"
+      }
+    ],
+    "relatedBones": [
+      "b-femur"
+    ],
+    "relatedJoints": [
+      "j-hip",
+      "j-knee"
+    ],
+    "relatedMovements": [
+      "mv-knee-extension"
+    ],
+    "tags": [
+      "햄스트링",
+      "뒤넙다리근",
+      "대퇴이두근",
+      "무릎 굽힘"
+    ],
+    "sources": [
+      {
+        "id": "os-11-6"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-semitendinosus",
+    "chapterId": "thigh",
+    "category": "muscle",
+    "order": 10,
+    "koreanName": "반힘줄근",
+    "oldKoreanName": [
+      "반건양근"
+    ],
+    "englishName": "Semitendinosus",
+    "latinName": "Musculus semitendinosus",
+    "summary": "허벅지 뒤·안쪽의 뒤넙다리근으로, 아래 절반이 긴 힘줄로 되어 있어 이런 이름이 붙었습니다.",
+    "anatomicalPosition": "허벅지 뒷면 안쪽의 표층에 놓이며, 반막근 위에 있습니다.",
+    "layer": "superficial",
+    "origin": [
+      "궁둥뼈결절"
+    ],
+    "insertion": [
+      "정강뼈 위쪽 안쪽면 (거위발)"
+    ],
+    "innervation": "궁둥신경의 정강신경 부분 (L5–S2)",
+    "action": [
+      "무릎관절 굽힘",
+      "엉덩관절 폄",
+      "무릎을 굽힌 상태에서 정강이 안쪽돌림"
+    ],
+    "actionKeywords": [
+      "무릎관절 굽힘",
+      "엉덩관절 폄"
+    ],
+    "contraction": "무릎을 굽힐 때 단축성 수축을, 상체를 앞으로 숙일 때 엉덩관절 굽힘을 제어하며 신장성 수축을 합니다.",
+    "roleInMovement": "넙다리두갈래근과 함께 무릎 굽힘과 엉덩관절 폄을 담당합니다.",
+    "synergists": [
+      {
+        "ref": "m-biceps-femoris",
+        "note": "무릎 굽힘·엉덩관절 폄"
+      },
+      {
+        "ref": "m-sartorius",
+        "note": "무릎 굽힘"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-rectus-femoris",
+        "note": "무릎 폄·엉덩관절 굽힘"
+      },
+      {
+        "ref": "m-vastus-medialis",
+        "note": "무릎 폄"
+      }
+    ],
+    "relatedBones": [
+      "b-tibia"
+    ],
+    "relatedJoints": [
+      "j-hip",
+      "j-knee"
+    ],
+    "tags": [
+      "햄스트링",
+      "뒤넙다리근",
+      "반건양근",
+      "거위발"
+    ],
+    "sources": [
+      {
+        "id": "os-11-6"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "m-sartorius",
+    "chapterId": "thigh",
+    "category": "muscle",
+    "order": 11,
+    "koreanName": "넙다리빗근",
+    "oldKoreanName": [
+      "봉공근"
+    ],
+    "englishName": "Sartorius",
+    "latinName": "Musculus sartorius",
+    "summary": "허벅지 앞을 바깥 위에서 안쪽 아래로 비스듬히 가로지르는 몸에서 가장 긴 근육입니다.",
+    "anatomicalPosition": "허벅지 앞면의 표층을 대각선으로 지납니다.",
+    "layer": "superficial",
+    "origin": [
+      "위앞엉덩뼈가시 (ASIS)"
+    ],
+    "insertion": [
+      "정강뼈 위쪽 안쪽면 (거위발)"
+    ],
+    "innervation": "넙다리신경 (femoral nerve, L2–L3)",
+    "action": [
+      "엉덩관절 굽힘, 벌림, 가쪽돌림",
+      "무릎관절 굽힘"
+    ],
+    "actionKeywords": [
+      "엉덩관절 굽힘",
+      "엉덩관절 벌림",
+      "엉덩관절 가쪽돌림",
+      "무릎관절 굽힘"
+    ],
+    "contraction": "책상다리처럼 발을 반대쪽 무릎 위로 올리는 동작에서 단축성 수축을 합니다.",
+    "roleInMovement": "여러 관절 움직임에 조금씩 관여하는 보조 근육입니다.",
+    "synergists": [
+      {
+        "ref": "m-rectus-femoris",
+        "note": "엉덩관절 굽힘"
+      },
+      {
+        "ref": "m-semitendinosus",
+        "note": "무릎 굽힘"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-biceps-femoris",
+        "note": "엉덩관절 폄"
+      }
+    ],
+    "relatedBones": [
+      "b-tibia"
+    ],
+    "relatedJoints": [
+      "j-hip",
+      "j-knee"
+    ],
+    "tags": [
+      "봉공근",
+      "재봉사근",
+      "거위발"
+    ],
+    "sources": [
+      {
+        "id": "os-11-6"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  },
+  {
+    "id": "mv-knee-extension",
+    "chapterId": "thigh",
+    "category": "movement",
+    "order": 12,
+    "koreanName": "무릎관절 폄",
+    "oldKoreanName": [
+      "무릎 신전",
+      "슬관절 신전"
+    ],
+    "englishName": "Knee extension",
+    "latinName": "",
+    "summary": "굽혀진 무릎을 펴는 움직임입니다. 시상면에서 일어나며 넙다리네갈래근이 주동근입니다.",
+    "movementType": "관절 운동 · 시상면",
+    "targetMuscles": [
+      "m-rectus-femoris",
+      "m-vastus-lateralis",
+      "m-vastus-medialis",
+      "m-vastus-intermedius"
+    ],
+    "assistingMuscles": [],
+    "antagonistMuscles": [
+      "m-biceps-femoris",
+      "m-semitendinosus"
+    ],
+    "relatedJoints": [
+      "j-knee"
+    ],
+    "steps": [
+      {
+        "title": "시작 (무릎 굽힘 90°)",
+        "text": "의자에 앉아 정강이가 바닥에 수직으로 놓인 자세입니다."
+      },
+      {
+        "title": "펴기",
+        "text": "넙다리네갈래근이 단축성 수축으로 정강이를 앞으로 들어 올립니다. 뒤넙다리근은 이완하며 늘어납니다."
+      },
+      {
+        "title": "완전 폄 (0°)",
+        "text": "무릎이 곧게 펴진 자세입니다."
+      },
+      {
+        "title": "내리기",
+        "text": "넙다리네갈래근이 신장성 수축으로 정강이가 내려가는 속도를 조절합니다."
+      }
+    ],
+    "tags": [
+      "신전",
+      "레그 익스텐션",
+      "무릎 펴기"
+    ],
+    "relatedItems": [
+      "c-quadriceps",
+      "c-contraction-types"
+    ],
+    "sources": [
+      {
+        "id": "os-9-5"
+      },
+      {
+        "id": "os-11-6"
+      }
+    ],
+    "reviewStatus": "needs-review",
+    "overlayPresets": [
+      "md-knee-ext-00",
+      "md-knee-ext-05",
+      "md-knee-ext-09"
+    ]
+  },
+  {
+    "id": "b-tibia",
+    "chapterId": "lower-leg",
+    "category": "bone",
+    "order": 1,
+    "koreanName": "정강뼈",
+    "oldKoreanName": [
+      "경골"
+    ],
+    "englishName": "Tibia",
+    "latinName": "Tibia",
+    "summary": "종아리 안쪽의 굵은 긴뼈로 체중을 지탱합니다. 앞쪽 모서리는 피부 바로 아래에서 만져집니다.",
+    "anatomicalPosition": "종아리의 안쪽에 놓이며 가쪽의 종아리뼈와 나란합니다.",
+    "features": [
+      "안쪽관절융기 · 가쪽관절융기",
+      "정강뼈거친면 (tibial tuberosity)",
+      "안쪽복사 (medial malleolus)"
+    ],
+    "relatedBones": [
+      "b-femur",
+      "b-patella"
+    ],
+    "relatedJoints": [
+      "j-knee"
+    ],
+    "tags": [
+      "경골",
+      "정강이"
+    ],
+    "sources": [
+      {
+        "id": "os-8-5"
+      }
+    ],
+    "reviewStatus": "needs-review"
+  }
+]

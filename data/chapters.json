@@ -1,0 +1,17 @@
+[
+  { "id": "basics", "order": 1, "title": "해부학 기초", "slug": "basics", "englishTitle": "Foundations", "category": "foundation", "description": "해부학적 자세, 면과 방향, 조직의 층, 근육의 역할처럼 모든 부위 학습의 바탕이 되는 개념입니다.", "thumbnail": "media/basics/anatomical-position/front.svg" },
+  { "id": "spine-breathing", "order": 2, "title": "척추와 호흡", "slug": "spine-breathing", "englishTitle": "Spine & Breathing", "category": "trunk", "description": "척추뼈의 구조와 척추 주변 근육, 호흡에 관여하는 가로막과 갈비사이근을 다룹니다.", "thumbnail": "" },
+  { "id": "neck", "order": 3, "title": "목", "slug": "neck", "englishTitle": "Neck", "category": "head-neck", "description": "목뼈와 목의 앞·옆·뒤 근육을 다룹니다.", "thumbnail": "" },
+  { "id": "abdomen", "order": 4, "title": "복부", "slug": "abdomen", "englishTitle": "Abdomen", "category": "trunk", "description": "배곧은근, 배빗근, 배가로근 등 복벽의 층 구조를 다룹니다.", "thumbnail": "" },
+  { "id": "shoulder", "order": 5, "title": "어깨", "slug": "shoulder", "englishTitle": "Shoulder", "category": "upper-limb", "description": "어깨뼈·빗장뼈와 어깨관절, 어깨세모근과 돌림근띠 근육을 다룹니다.", "thumbnail": "media/movements/shoulder-abduction/f06.svg" },
+  { "id": "chest-back", "order": 6, "title": "가슴과 등", "slug": "chest-back", "englishTitle": "Chest & Back", "category": "trunk", "description": "큰가슴근, 앞톱니근, 등세모근, 넓은등근처럼 몸통과 팔을 잇는 근육을 다룹니다.", "thumbnail": "" },
+  { "id": "upper-arm", "order": 7, "title": "위팔", "slug": "upper-arm", "englishTitle": "Upper Arm", "category": "upper-limb", "description": "위팔뼈와 위팔두갈래근·위팔세갈래근 등 위팔 근육을 다룹니다.", "thumbnail": "" },
+  { "id": "forearm", "order": 8, "title": "아래팔", "slug": "forearm", "englishTitle": "Forearm", "category": "upper-limb", "description": "노뼈·자뼈와 손목·손가락을 움직이는 아래팔 근육을 다룹니다.", "thumbnail": "" },
+  { "id": "hand", "order": 9, "title": "손", "slug": "hand", "englishTitle": "Hand", "category": "upper-limb", "description": "손목뼈·손허리뼈·손가락뼈와 손의 내재근을 다룹니다.", "thumbnail": "" },
+  { "id": "pelvis-hip", "order": 10, "title": "골반과 엉덩이", "slug": "pelvis-hip", "englishTitle": "Pelvis & Hip", "category": "lower-limb", "description": "골반뼈와 엉덩관절, 볼기근과 엉덩허리근을 다룹니다.", "thumbnail": "" },
+  { "id": "thigh", "order": 11, "title": "허벅지", "slug": "thigh", "englishTitle": "Thigh", "category": "lower-limb", "description": "넙다리뼈와 무릎관절, 넙다리네갈래근·뒤넙다리근·넙다리빗근을 다룹니다.", "thumbnail": "media/movements/knee-extension/f05.svg" },
+  { "id": "lower-leg", "order": 12, "title": "종아리", "slug": "lower-leg", "englishTitle": "Lower Leg", "category": "lower-limb", "description": "정강뼈·종아리뼈와 종아리 근육을 다룹니다.", "thumbnail": "" },
+  { "id": "foot", "order": 13, "title": "발", "slug": "foot", "englishTitle": "Foot", "category": "lower-limb", "description": "발목뼈·발허리뼈·발가락뼈와 발의 아치, 발 근육을 다룹니다.", "thumbnail": "" },
+  { "id": "jaw", "order": 14, "title": "턱", "slug": "jaw", "englishTitle": "Jaw", "category": "head-neck", "description": "아래턱뼈와 턱관절, 씹기근육을 다룹니다.", "thumbnail": "" },
+  { "id": "face", "order": 15, "title": "얼굴", "slug": "face", "englishTitle": "Face", "category": "head-neck", "description": "얼굴뼈와 표정근을 다룹니다.", "thumbnail": "" }
+]

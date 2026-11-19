@@ -1,0 +1,42 @@
+<title>해부 아틀라스</title>
+<link rel="stylesheet" href="assets/css/app.css">
+<a class="skip" href="#view">본문 바로가기</a>
+  <div class="app">
+    <aside class="sidebar" aria-label="주 메뉴">
+      <a class="brand" href="#/" aria-label="해부 아틀라스 홈">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">해부 아틀라스<small>Digital Anatomy Atlas</small></span>
+      </a>
+      <nav class="side-nav" id="side-nav"></nav>
+      <p class="side-label">신체 부위</p>
+      <nav class="side-chapters" id="side-chapters" aria-label="신체 부위"></nav>
+    </aside>
+
+    <div class="main-col">
+      <header class="topbar">
+        <a class="brand brand-compact" href="#/" aria-label="해부 아틀라스 홈">
+          <span class="brand-mark" aria-hidden="true"></span><span class="brand-text">해부 아틀라스</span>
+        </a>
+        <form class="top-search" id="top-search" role="search">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" placeholder="근육·뼈·동작 검색 (/)" aria-label="해부학 자료 검색" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="suggest">
+          <div class="suggest" id="suggest" role="listbox" hidden></div>
+        </form>
+      </header>
+      <nav class="chapter-strip" id="chapter-strip" aria-label="신체 부위 바로가기"></nav>
+      <main id="view" class="view" tabindex="-1">
+        <p class="loading">자료를 불러오는 중…</p>
+      </main>
+      <footer class="footer">
+        <p>해부 아틀라스 · 학습용 디지털 해부학 자료집. 의학적 진단·치료 정보를 제공하지 않습니다.</p>
+        <p>모든 항목은 전문가 검수 전 ‘검토 필요’ 상태입니다. <a href="#/about">자료 원칙과 출처</a></p>
+      </footer>
+    </div>
+  </div>
+  <nav class="tabbar" id="tabbar" aria-label="하단 메뉴"></nav>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <!-- Three.js r170 (MIT) 로컬 사본. CDN으로 바꾸려면 경로를 https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js 등으로 교체 -->
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/three/addons/" } }
+  </script>
+  <script type="module" src="assets/js/main.js"></script>
