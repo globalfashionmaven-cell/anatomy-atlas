@@ -79,7 +79,7 @@ export async function loadData() {
     db.item.set(it.id, it);
     for (const k of ['oldKoreanName', 'tags', 'origin', 'insertion', 'action', 'actionKeywords', 'synergists',
       'antagonists', 'relatedBones', 'relatedJoints', 'relatedMovements', 'relatedItems', 'targetMuscles',
-      'assistingMuscles', 'antagonistMuscles', 'sources', 'features', 'keyPoints', 'steps', 'movementsAllowed',
+      'assistingMuscles', 'antagonistMuscles', 'stabilizerMuscles', 'sources', 'features', 'keyPoints', 'steps', 'movementsAllowed',
       'articulatingBones']) {
       if (!Array.isArray(it[k])) it[k] = it[k] ? [it[k]] : [];
     }

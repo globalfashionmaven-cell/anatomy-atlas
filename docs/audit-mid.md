@@ -9,7 +9,7 @@
 | 1 | 해부학 기초 | 8 | 0 | 0 | 0 | 0 | 0/0 | 0 | 완료 (개념 8개 · 도식 있는 개념 3) | needs-review 8 |
 | 2 | 척추와 호흡 | 18 | 5 | 8 | 3 | 0 | 0/5 | 0 | 보완 필요 | needs-review 18 |
 | 3 | 목 | 13 | 7 | 2 | 4 | 0 | 0/7 | 0 | 보완 필요 | needs-review 13 |
-| 4 | 복부 | 11 | 6 | 0 | 2 | 1 | 0/6 | 0 | 보완 필요 | needs-review 11 |
+| 4 | 복부 | 11 | 6 | 0 | 2 | 0 | 0/6 | 0 | 보완 필요 | needs-review 11 |
 | 5 | 어깨 | 14 | 6 | 3 | 3 | 0 | 1/6 | 14 | 보완 필요 | needs-review 14 |
 | 6 | 가슴과 등 | 8 | 5 | 2 | 1 | 0 | 0/5 | 5 | 보완 필요 | needs-review 8 |
 | 7 | 위팔 | 8 | 4 | 2 | 2 | 0 | 0/4 | 1 | 보완 필요 | needs-review 8 |
@@ -29,7 +29,6 @@
 ### 목
 - 도판 없는 근육: m-sternocleidomastoid, m-scalenes, m-longus-colli, m-longus-capitis, m-levator-scapulae, m-suprahyoid, m-infrahyoid
 ### 복부
-- m-transversus-abdominis: 누락 relatedJoints
 - 도판 없는 근육: m-rectus-abdominis, m-external-oblique, m-internal-oblique, m-transversus-abdominis, m-quadratus-lumborum, m-iliopsoas
 ### 어깨
 - 도판 없는 근육: m-supraspinatus, m-infraspinatus, m-teres-minor, m-subscapularis, m-teres-major

@@ -17,40 +17,49 @@ const list = (arr) => (arr.length ? `<ul class="bullets">${arr.map((x) => `<li>$
 const para = (s) => (s ? `<p>${esc(s)}</p>` : '');
 const chips = (arr) => (arr.length ? `<div class="chips">${arr.map((r) => (typeof r === 'string' ? refChip(r) : refChip(r.ref, r.note))).join('')}</div>` : '');
 
+// 해당 없음 사유 (예: 표정근은 관절을 움직이지 않음)
+const na = (it, field) => (it.notApplicable?.[field] ? `<p class="fine na">해당 없음 — ${esc(it.notApplicable[field])}</p>` : '');
+
 function infoSections(it) {
   const s = [];
   if (it.category === 'muscle') {
-    s.push(section('위치 및 형태', para(it.anatomicalPosition) + depthIndicator(it)));
+    s.push(section('위치 및 형태', (it.muscleGroup ? `<p class="mgroup">${esc(it.muscleGroup)}</p>` : '') + para(it.anatomicalPosition) + depthIndicator(it)));
     s.push(section('이는곳 (Origin)', list(it.origin)));
     s.push(section('닿는곳 (Insertion)', list(it.insertion)));
     s.push(section('신경 지배 (Innervation)', para(it.innervation)));
     s.push(section('주요 기능 (Action)', list(it.action)));
     s.push(section('수축과 이완', para(it.contraction), { open: false }));
     s.push(section('실제 움직임에서의 역할', para(it.roleInMovement), { open: false }));
-    s.push(section('협력근', chips(it.synergists), { open: false }));
-    s.push(section('길항근', chips(it.antagonists) + (it.antagonists.length ? '<p class="fine">협력·길항 관계는 동작에 따라 달라집니다. 괄호 안은 해당 관계가 성립하는 움직임입니다.</p>' : ''), { open: false }));
-    s.push(section('관련 뼈 · 관절', chips([...it.relatedBones, ...it.relatedJoints]), { open: false }));
+    s.push(section('협력근', chips(it.synergists) + na(it, 'synergists'), { open: false }));
+    s.push(section('길항근', chips(it.antagonists) + na(it, 'antagonists') + (it.antagonists.length ? '<p class="fine">협력·길항 관계는 동작에 따라 달라집니다. 괄호 안은 해당 관계가 성립하는 움직임입니다. 회색 칩은 아직 상세 자료가 없는 구조입니다.</p>' : ''), { open: false }));
+    s.push(section('관련 뼈 · 관절', chips([...it.relatedBones, ...it.relatedJoints]) + na(it, 'relatedJoints'), { open: false }));
+    s.push(section('혈액 공급', it.bloodSupply ? para(it.bloodSupply) : '<p class="fine">자료 확인 중 — 출처로 확인된 경우에만 표시합니다.</p>', { open: false }));
+    if (it.clinicalNotes) s.push(section('임상 참고', para(it.clinicalNotes) + '<p class="fine">학습용 참고 정보이며, 진단·치료 정보가 아닙니다.</p>', { open: false }));
   } else if (it.category === 'bone') {
     s.push(section('위치', para(it.anatomicalPosition)));
     s.push(section('주요 구조', list(it.features)));
     s.push(section('이 뼈에 붙는 근육', chips(it._muscles), { open: false }));
+    if (it.clinicalNotes) s.push(section('임상 참고', para(it.clinicalNotes), { open: false }));
     s.push(section('관련 뼈 · 관절', chips([...it.relatedBones, ...it.relatedJoints]), { open: false }));
   } else if (it.category === 'joint') {
     s.push(section('관절 유형', para(it.jointType)));
     s.push(section('관절을 이루는 뼈', chips(it.articulatingBones)));
     s.push(section('가능한 움직임', list(it.movementsAllowed)));
     s.push(section('안정 구조', para(it.stabilizers), { open: false }));
+    s.push(section('관절면 운동학', para(it.kinematics), { open: false }));
     s.push(section('이 관절을 움직이는 근육', chips(it._muscles), { open: false }));
   } else if (it.category === 'movement') {
     s.push(section('움직임 유형', para(it.movementType)));
     s.push(section('주동근', chips(it.targetMuscles)));
-    s.push(section('협력·안정 근육', chips(it.assistingMuscles)));
+    s.push(section('협력근', chips(it.assistingMuscles)));
+    s.push(section('안정화근', chips(it.stabilizerMuscles || [])));
     s.push(section('길항근', chips(it.antagonistMuscles), { open: false }));
     s.push(section('관련 관절', chips(it.relatedJoints)));
     s.push(section('단계별 설명', it.steps.length ? `<ol class="steps">${it.steps.map((st) => `<li><strong>${esc(st.title)}</strong><p>${esc(st.text)}</p></li>`).join('')}</ol>` : ''));
   } else {
     s.push(section('설명', para(it.description)));
     s.push(section('핵심 정리', list(it.keyPoints)));
+    if (it.clinicalNotes) s.push(section('임상 참고', para(it.clinicalNotes) + '<p class="fine">학습용 참고 정보이며, 진단·치료 정보가 아닙니다.</p>', { open: false }));
   }
   return s.join('');
 }

@@ -4775,7 +4775,8 @@
     "reviewStatus": "needs-review",
     "order": 4,
     "notApplicable": {
-      "antagonists": "배벽을 조이는 안정화 근육으로, 직접 반대 작용을 하는 근육으로 분류하지 않습니다"
+      "antagonists": "배벽을 조이는 안정화 근육으로, 직접 반대 작용을 하는 근육으로 분류하지 않습니다",
+      "relatedJoints": "관절을 직접 지나지 않는 배벽 근육입니다 (배안 압력으로 척주를 간접 지지)"
     }
   },
   {

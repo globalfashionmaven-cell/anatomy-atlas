@@ -691,3 +691,5 @@ select { height: 38px; border: 1px solid var(--line); border-radius: 8px; paddin
 .plate-labels-wrap { margin-top: 8px; }
 .plate-zoom { font-size: 12px; color: var(--muted); margin-left: auto; }
 @media (min-width: 1024px) { .plate-zoom { display: none; } }
+.mgroup { font-size: 13px; color: var(--accent-ink); font-weight: 600; margin-bottom: 4px; }
+.na { margin-top: 4px; }
