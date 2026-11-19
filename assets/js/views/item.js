@@ -3,6 +3,7 @@ import { db, chapterItems, related, REVIEW } from '../data.js';
 import { store } from '../store.js';
 import { esc, icon, catLabel, reviewBadge, refChip, itemCard, itemHref, chapterHref, shareLink, toast, emptyState } from '../ui.js';
 import { visualPanel, depthIndicator } from './visual.js';
+import { terms, subName } from '../terms.js';
 
 const wide = () => matchMedia('(min-width: 1024px)').matches;
 
@@ -24,8 +25,8 @@ function infoSections(it) {
   const s = [];
   if (it.category === 'muscle') {
     s.push(section('위치 및 형태', (it.muscleGroup ? `<p class="mgroup">${esc(it.muscleGroup)}</p>` : '') + para(it.anatomicalPosition) + depthIndicator(it)));
-    s.push(section('이는곳 (Origin)', list(it.origin)));
-    s.push(section('닿는곳 (Insertion)', list(it.insertion)));
+    s.push(section(`${terms.attach.origin} (Origin)`, list(it.origin) + (terms.attach.help ? `<p class="fine">${esc(terms.attach.help)}</p>` : '')));
+    s.push(section(`${terms.attach.insertion} (Insertion)`, list(it.insertion)));
     s.push(section('신경 지배 (Innervation)', para(it.innervation)));
     s.push(section('주요 기능 (Action)', list(it.action)));
     s.push(section('수축과 이완', para(it.contraction), { open: false }));
@@ -110,10 +111,10 @@ export function itemView(id, params = new URLSearchParams()) {
         <span class="meta-part">${esc(chapter.title)}</span>
       </div>
       <h1 class="detail-title">${esc(it.koreanName)}</h1>
+      <p class="detail-sub">${esc(subName(it))}</p>
       <dl class="names">
-        ${it.englishName ? `<div><dt>영어</dt><dd>${esc(it.englishName)}</dd></div>` : ''}
         ${it.latinName ? `<div><dt>라틴어</dt><dd lang="la"><i>${esc(it.latinName)}</i></dd></div>` : ''}
-        ${it.oldKoreanName.length ? `<div><dt>구용어 · 관련 명칭</dt><dd>${it.oldKoreanName.map(esc).join(', ')}</dd></div>` : ''}
+        ${it.oldKoreanName.length ? `<div><dt>${it.newKoreanName && it.newKoreanName !== it.koreanName ? '신용어 · 관련 명칭' : '관련 명칭'}</dt><dd>${it.oldKoreanName.map(esc).join(', ')}</dd></div>` : ''}
       </dl>
       <div class="detail-actions">
         <button class="btn ${fav ? 'btn-on' : ''}" data-fav aria-pressed="${fav}">${icon('star')}<span>${fav ? '즐겨찾기됨' : '즐겨찾기'}</span></button>

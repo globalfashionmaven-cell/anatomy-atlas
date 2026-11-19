@@ -5,6 +5,7 @@
 // 3D 모듈(Three.js)은 3D 탭을 열 때만 동적으로 불러옵니다(Lazy Loading).
 import { db, itemMedia, LAYER_DEPTH, model3dFor } from '../data.js';
 import { esc, icon, itemHref, refChip } from '../ui.js';
+import { terms } from '../terms.js';
 import { mountFrameViewer } from '../viewers/frames.js';
 import { mountOverlay } from '../viewers/overlay.js';
 import { mountLayerViewer } from '../viewers/layers.js';
@@ -153,7 +154,7 @@ function renderAngles(el, item, api) {
         <p class="plate-labels-wrap" data-angle-labels></p>
       </section>` : ''}
     ${parts.length ? `<section class="plate-sec"><h3>섬유 구분</h3><div class="plate-grid">${parts.map((m) => plateFigure(m)).join('')}</div></section>` : ''}
-    ${attach.length ? `<section class="plate-sec"><h3>이는곳 · 닿는곳</h3><div class="plate-grid">${attach.map((m) => plateFigure(m)).join('')}</div></section>` : ''}
+    ${attach.length ? `<section class="plate-sec"><h3>${terms.attach.origin} · ${terms.attach.insertion}</h3><div class="plate-grid">${attach.map((m) => plateFigure(m)).join('')}</div></section>` : ''}
     ${rest.length ? `<section class="plate-sec"><div class="plate-grid">${rest.map((m) => plateFigure(m)).join('')}</div></section>` : ''}
     ${item.category === 'muscle' && (item.synergists.length || item.relatedJoints.length) ? `
       <section class="plate-sec related-box">
@@ -237,8 +238,8 @@ function renderMotion(el, item, state) {
 function renderInfo(el, item) {
   const li = (a) => `<ul class="bullets">${a.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
   const facts = [];
-  if (item.origin.length) facts.push(['이는곳', li(item.origin)]);
-  if (item.insertion.length) facts.push(['닿는곳', li(item.insertion)]);
+  if (item.origin.length) facts.push([terms.attach.origin, li(item.origin)]);
+  if (item.insertion.length) facts.push([terms.attach.insertion, li(item.insertion)]);
   if (item.innervation) facts.push(['신경 지배', esc(item.innervation)]);
   if (item.action.length) facts.push(['주요 기능', li(item.action)]);
   if (item.features.length) facts.push(['주요 구조', li(item.features)]);

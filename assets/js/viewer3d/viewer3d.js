@@ -9,6 +9,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { esc, icon } from '../ui.js';
 import { onDispose } from '../lifecycle.js';
 import { createRig, contractionState, motionPanelHtml, ROLE } from './motion.js';
+import { terms, subName } from '../terms.js';
 
 const LAYER_COLOR = {
   skin: '#E6C3A5', superficial: '#B85C50', intermediate: '#C98466', deep: '#8F4B5B',
@@ -304,19 +305,19 @@ export function mountViewer3D(root, opts) {
       <div class="sel-head">
         <p class="eyebrow">3D 선택 구조</p>
         <h3>${esc(whole && item ? item.koreanName : s.koreanName)}</h3>
-        <p class="sel-en">${esc(whole && item ? item.englishName : s.englishName)}</p>
-        ${item ? `<p class="sel-names">${item.latinName ? `<i lang="la">${esc(item.latinName)}</i>` : ''}${item.oldKoreanName.length ? ` · 구용어 ${esc(item.oldKoreanName.join(', '))}` : ''}</p>` : ''}
+        <p class="sel-en">${esc(whole && item ? subName(item) : s.englishName)}</p>
+        ${item ? `<p class="sel-names">${item.latinName ? `<i lang="la">${esc(item.latinName)}</i>` : ''}${item.oldKoreanName.length ? ` · ${esc(item.oldKoreanName.join(', '))}` : ''}</p>` : ''}
         <p class="sel-layer">${esc(layers.find((l) => l.id === s.layer)?.label || '')} · <span class="badge badge-warn">검토 필요</span></p>
       </div>
       ${parts.length > 1 ? `<div class="seg seg-wrap sel-parts" role="group" aria-label="부분 선택">
         <button data-part="__all" aria-pressed="${whole}">전체</button>
-        ${parts.map((p) => `<button data-part="${p.meshId}" aria-pressed="${!whole && names[0] === p.meshId}">${esc(p.koreanName.replace(item.koreanName, '').replace(/[()]/g, '').trim() || p.koreanName)}</button>`).join('')}
+        ${parts.map((p) => `<button data-part="${p.meshId}" aria-pressed="${!whole && names[0] === p.meshId}">${esc(p.partLabel || p.koreanName.replace(item.koreanName, '').replace(/[()]/g, '').trim() || p.koreanName)}</button>`).join('')}
       </div>` : ''}
       ${item ? `
         <dl class="sel-facts">
           <div><dt>위치</dt><dd>${esc(item.anatomicalPosition || item.summary || '')}</dd></div>
-          <div><dt>이는곳</dt><dd>${li(pi?.origin || item.origin)}</dd></div>
-          <div><dt>닿는곳</dt><dd>${li(pi?.insertion || item.insertion)}</dd></div>
+          <div><dt>${terms.attach.origin}</dt><dd>${li(pi?.origin || item.origin)}</dd></div>
+          <div><dt>${terms.attach.insertion}</dt><dd>${li(pi?.insertion || item.insertion)}</dd></div>
           ${item.innervation ? `<div><dt>신경 지배</dt><dd>${esc(item.innervation)}</dd></div>` : ''}
           ${item.category === 'muscle' ? `<div><dt>주요 기능</dt><dd>${li(pi?.action || item.action)}</dd></div>` : ''}
           ${item.features?.length ? `<div><dt>주요 구조</dt><dd>${li(item.features)}</dd></div>` : ''}
@@ -326,7 +327,7 @@ export function mountViewer3D(root, opts) {
           ${item.relatedJoints.length ? `<div><dt>관련 관절</dt><dd class="chips">${item.relatedJoints.map(chip).join('')}</dd></div>` : ''}
         </dl>
         ${motionCardHtml(item.id)}
-        ${pi ? '<p class="fine">부분별 이는곳·기능은 같은 근육의 교과서 서술을 섬유 방향에 따라 나눈 것입니다 (검토 필요).</p>' : ''}
+        ${pi ? '<p class="fine">부분별 기시·기능은 같은 근육의 교과서 서술을 섬유 방향에 따라 나눈 것입니다 (검토 필요).</p>' : ''}
         <div class="sel-actions">
           ${opts.focusItemId !== item.id ? `<a class="btn" href="#/item/${item.id}">${icon('book')}<span>상세 페이지</span></a>` : ''}
           ${item.relatedMovements.length && opts.onOpenMotion ? `<button class="btn" data-open-motion="${item.id}">${icon('film')}<span>움직임 분석 보기</span></button>` : ''}

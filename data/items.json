@@ -4048,6 +4048,93 @@
     "order": 7
   },
   {
+    "id": "m-rhomboids",
+    "chapterId": "chest-back",
+    "category": "muscle",
+    "koreanName": "마름근",
+    "oldKoreanName": [
+      "능형근",
+      "큰마름근",
+      "작은마름근",
+      "대능형근",
+      "소능형근"
+    ],
+    "englishName": "Rhomboid major and minor",
+    "latinName": "Musculi rhomboidei major et minor",
+    "muscleGroup": "등 · 어깨뼈 근육 (2층)",
+    "summary": "척추 가시돌기에서 어깨뼈 안쪽모서리로 비스듬히 내려가는 두 근육(큰마름근·작은마름근)으로, 어깨뼈를 척추 쪽으로 당깁니다.",
+    "anatomicalPosition": "등 위쪽, 승모근 아래(깊은 층). 어깨뼈 안쪽모서리와 척추 사이.",
+    "layer": "intermediate",
+    "origin": [
+      "작은마름근: 목덜미인대 아래부분, C7–T1 가시돌기",
+      "큰마름근: T2–T5 가시돌기와 가시끝인대"
+    ],
+    "insertion": [
+      "작은마름근: 어깨뼈 안쪽모서리, 어깨뼈가시 뿌리 높이",
+      "큰마름근: 어깨뼈 안쪽모서리, 가시뿌리 아래에서 아래각까지"
+    ],
+    "innervation": "등쪽어깨신경 (dorsal scapular nerve, C4–C5)",
+    "action": [
+      "어깨뼈 뒤당김",
+      "어깨뼈 아래쪽돌림",
+      "어깨뼈 올림 보조",
+      "어깨뼈를 가슴벽에 붙여 고정"
+    ],
+    "actionKeywords": [
+      "어깨뼈 뒤당김",
+      "어깨뼈 아래쪽돌림"
+    ],
+    "contraction": "",
+    "roleInMovement": "",
+    "synergists": [
+      {
+        "ref": "m-trapezius",
+        "note": "중간섬유: 어깨뼈 뒤당김"
+      },
+      {
+        "ref": "m-levator-scapulae",
+        "note": "어깨뼈 올림·아래쪽돌림"
+      }
+    ],
+    "antagonists": [
+      {
+        "ref": "m-serratus-anterior",
+        "note": "어깨뼈 내밈·위쪽돌림"
+      }
+    ],
+    "relatedBones": [
+      "b-scapula",
+      "b-cervical-vertebrae",
+      "b-thoracic-vertebrae"
+    ],
+    "relatedJoints": [
+      "j-scapulothoracic"
+    ],
+    "relatedMovements": [
+      "mv-scapular-upward-rotation"
+    ],
+    "relatedItems": [],
+    "bloodSupply": "",
+    "clinicalNotes": "",
+    "tags": [
+      "능형근",
+      "대능형근",
+      "소능형근",
+      "rhomboid",
+      "어깨뼈 모으기"
+    ],
+    "sources": [
+      {
+        "id": "os-11-5"
+      },
+      {
+        "id": "kaa-terms"
+      }
+    ],
+    "reviewStatus": "needs-review",
+    "order": 6
+  },
+  {
     "id": "m-suprahyoid",
     "chapterId": "neck",
     "category": "muscle",

@@ -1,3 +1,4 @@
+import { initTerms, applyItemTerms, applyMeshTerms, applyMotionTerms } from './terms.js';
 // 데이터 로딩과 인덱스. 모든 콘텐츠(뼈·관절·근육·동작·개념)는 하나의 items 배열에서
 // 같은 방식으로 관리되며, category 필드로만 구분합니다.
 
@@ -54,6 +55,7 @@ export async function loadData() {
   db.media = media;
   db.glossary = glossary;
   db.sources = sources;
+  try { initTerms(await getJSON('terms')); } catch (e) { console.warn('용어 표(terms.json)를 불러오지 못했습니다 — 신용어로 표시', e); }
   try {
     db.motions = (await getJSON('motions3d')).motions;
   } catch (e) {
@@ -89,7 +91,10 @@ export async function loadData() {
       'articulatingBones']) {
       if (!Array.isArray(it[k])) it[k] = it[k] ? [it[k]] : [];
     }
+    applyItemTerms(it);
   });
+  for (const m of db.models3d?.models || []) for (const mesh of m.meshes || []) applyMeshTerms(mesh, db.item.get(mesh.anatomyItemId));
+  (db.motions || []).forEach(applyMotionTerms);
   media.forEach((m) => {
     if (!db.mediaByItem.has(m.anatomyItemId)) db.mediaByItem.set(m.anatomyItemId, []);
     db.mediaByItem.get(m.anatomyItemId).push(m);
