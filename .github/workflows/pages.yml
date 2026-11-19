@@ -1,0 +1,58 @@
+# 사이트 배포 — main(공개 사이트) + preview(미리보기)를 한 번에 GitHub Pages 로 올림
+#   공개 사이트:  https://globalfashionmaven-cell.github.io/anatomy-atlas/          ← main 브랜치
+#   미리보기:     https://globalfashionmaven-cell.github.io/anatomy-atlas/preview/  ← preview 브랜치
+# preview 에 저장(커밋)하면 미리보기만 바뀌고, 공개 사이트는 '배포 (release)' 를 실행할 때만 바뀝니다.
+name: 사이트 배포 (pages)
+
+on:
+  push:
+    branches: [main, preview]
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main, path: live, fetch-depth: 0 }
+      - uses: actions/checkout@v4
+        with: { ref: preview, path: prev, fetch-depth: 1 }
+        continue-on-error: true
+      - name: 사이트 파일 모으기
+        run: |
+          set -e
+          copy_site() {  # $1 = 원본 폴더, $2 = 대상 폴더
+            mkdir -p "$2"
+            for f in index.html assets data media models vendor README.md AUDIT_REPORT.md CONTENT_COMPLETION_REPORT.md IMAGE_ASSET_REPORT.md 3D_MOTION_REPORT.md QA_REPORT.md; do
+              [ -e "$1/$f" ] && cp -R "$1/$f" "$2/"
+            done
+            touch "$2/.nojekyll"
+          }
+          copy_site live _site
+          LIVE_VER=$(git -C live describe --tags --exact-match HEAD 2>/dev/null || git -C live describe --tags --abbrev=0 2>/dev/null || echo "v0.0")
+          LIVE_DATE=$(git -C live log -1 --format=%cd --date=format:%Y-%m-%d)
+          printf '{"channel":"live","version":"%s","commit":"%s","date":"%s"}\n' "$LIVE_VER" "$(git -C live rev-parse --short HEAD)" "$LIVE_DATE" > _site/version.json
+          if [ -d prev/.git ]; then
+            copy_site prev _site/preview
+            printf '{"channel":"preview","commit":"%s","date":"%s","live":"%s"}\n' "$(git -C prev rev-parse --short HEAD)" "$(git -C prev log -1 --format=%cd --date=format:%Y-%m-%d\ %H:%M)" "$LIVE_VER" > _site/preview/version.json
+          fi
+          cat _site/version.json; [ -f _site/preview/version.json ] && cat _site/preview/version.json
+          du -sh _site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: _site }
+      - id: deployment
+        uses: actions/deploy-pages@v4

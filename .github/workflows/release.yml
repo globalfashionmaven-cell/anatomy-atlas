@@ -1,0 +1,59 @@
+# 배포 — 미리보기(preview)에서 확인한 내용을 공개 사이트(main)에 올리고 버전 이름(vX.Y)을 붙임
+# 실행: GitHub → Actions → '배포 (release)' → Run workflow  (또는  gh workflow run release.yml)
+name: 배포 (release)
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "버전 올리기: minor(v1.0→v1.1) 또는 major(v1.3→v2.0)"
+        type: choice
+        options: [minor, major]
+        default: minor
+      note:
+        description: "이번 배포 메모 (선택)"
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.ver.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main, fetch-depth: 0 }
+      - name: 다음 버전 계산
+        id: ver
+        run: |
+          LAST=$(git tag --list 'v*' --sort=-v:refname | head -1)
+          LAST=${LAST:-v0.0}
+          MAJ=${LAST#v}; MAJ=${MAJ%%.*}; MIN=${LAST##*.}
+          if [ "${{ inputs.bump }}" = major ]; then NEXT="v$((MAJ+1)).0"; else NEXT="v${MAJ}.$((MIN+1))"; fi
+          echo "이전 $LAST → 새 버전 $NEXT"
+          echo "version=$NEXT" >> "$GITHUB_OUTPUT"
+      - name: main 을 preview 와 같은 내용으로 맞추고 버전 표시
+        env:
+          NOTE: ${{ inputs.note }}
+          VERSION: ${{ steps.ver.outputs.version }}
+        run: |
+          git config user.name "anatomy-atlas"
+          git config user.email "atlas@localhost"
+          git fetch origin preview
+          git read-tree -u --reset origin/preview
+          git checkout HEAD -- .github   # 워크플로 파일은 바꾸지 않음 (자동 배포 권한으로는 수정 불가)
+          git commit --allow-empty -m "배포 $VERSION (preview $(git rev-parse --short origin/preview))${NOTE:+ — $NOTE}"
+          git tag -a "$VERSION" -m "배포 $VERSION${NOTE:+ — $NOTE}"
+          git push origin main "$VERSION"
+  deploy:
+    needs: release
+    uses: ./.github/workflows/pages.yml

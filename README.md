@@ -241,19 +241,23 @@ python3 tools/inspect_model.py              # 검사 보고서 docs/3d-model-qa-
 - 모든 항목·도판은 `needs-review` 상태입니다. OpenStax 등 교과서의 일반적 서술을 바탕으로 정리했지만 전문가 검수를 받지 않았습니다. 혈액 공급은 대부분 미작성('자료 확인 중').
 - AI 생성 이미지는 사용하지 않았습니다. 참고 사이트(AnatoBase)의 이미지·영상·문구는 사용하지 않았습니다.
 
-## 공개 사이트 (GitHub Pages) — 권장
+## 공개 사이트 · 미리보기 · 버전 · 롤백 (기본 작업 방식)
 
-주소: https://globalfashionmaven-cell.github.io/anatomy-atlas/ (저장소: https://github.com/globalfashionmaven-cell/anatomy-atlas)
+저장소: https://github.com/globalfashionmaven-cell/anatomy-atlas (프로젝트 전체, 공개)
 
-로컬 앱(localhost:8123)과 **같은 내용 그대로** 올립니다 — 3D 뷰어·동작 시뮬레이션·SVG 도판 포함.
-수정 후 갱신:
+| 단계 | 어디서 | 주소 |
+|---|---|---|
+| ① 1차 수정 | `preview` 브랜치에 저장 (github.com 웹 편집 또는 로컬에서 push) | 미리보기 https://globalfashionmaven-cell.github.io/anatomy-atlas/preview/ |
+| ② 배포 | GitHub → Actions → **배포 (release)** → Run workflow | 공개 https://globalfashionmaven-cell.github.io/anatomy-atlas/ |
+| ③ 롤백 | GitHub → Actions → **롤백 (rollback)** → 되돌릴 버전 입력 (예: `v1.0`) | 공개 사이트만 그 버전 내용으로 |
 
-```bash
-python3 tools/build_pages.py && git -C build/gh-pages push
-```
-
-- `build/gh-pages`는 프로젝트와 별개의 git 저장소이며, 앱 실행에 필요한 파일만 담습니다 (원본 3D 소스·작업 이력은 올리지 않음).
-- 푸시 후 1~2분 뒤 사이트에 반영됩니다. 로그인 도구: `~/bin/gh` (`gh auth status`로 확인).
+- **웹에서 바로 고치기**: 저장소에서 브랜치를 `preview`로 바꾼 뒤 파일(예: `data/items.json`)을 열고 연필 아이콘 → 수정 → *Commit changes*. 1~2분 뒤 미리보기 사이트에 반영됩니다. `main`에는 직접 저장하지 마세요.
+- **버전**: 배포할 때마다 `v1.1`, `v1.2`… 태그가 붙습니다. 목록: https://github.com/globalfashionmaven-cell/anatomy-atlas/tags · 공개 사이트 아래쪽에 현재 버전이 표시됩니다.
+- **롤백**도 새 버전으로 기록되므로(예: v1.3 = v1.0 내용) 롤백을 다시 되돌릴 수 있습니다. 미리보기(`preview`)는 롤백의 영향을 받지 않습니다.
+- 배포 기록: https://github.com/globalfashionmaven-cell/anatomy-atlas/actions
+- 미리보기 사이트에는 위쪽에 주황색 '미리보기' 띠가 보입니다. 주소를 아는 사람은 볼 수 있습니다(비공개 아님).
+- 워크플로 파일(`.github/workflows/`)은 자동 배포가 바꾸지 않습니다. 고칠 때는 `main`과 `preview`에 직접 올립니다.
+- 로컬 명령(gh CLI: `~/bin/gh`): `gh workflow run release.yml` · `gh workflow run rollback.yml -f version=v1.0`
 
 ## 공개 공유용 배포 (Claude 아티팩트)
 

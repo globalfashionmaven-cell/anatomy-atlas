@@ -1,0 +1,47 @@
+# 롤백 — 공개 사이트(main)를 예전 버전의 내용으로 되돌림. 미리보기(preview)는 그대로 둠.
+# 실행: GitHub → Actions → '롤백 (rollback)' → Run workflow → 되돌릴 버전 입력 (예: v1.0)
+# 롤백도 새 버전(다음 번호)으로 기록되므로, 롤백을 다시 되돌리는 것도 가능합니다.
+name: 롤백 (rollback)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "되돌릴 버전 (예: v1.0)"
+        type: string
+        required: true
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main, fetch-depth: 0 }
+      - name: main 을 지정 버전 내용으로 되돌리기
+        env:
+          TARGET: ${{ inputs.version }}
+        run: |
+          git rev-parse -q --verify "refs/tags/$TARGET" >/dev/null || { echo "버전 $TARGET 이 없습니다. 있는 버전: $(git tag --list 'v*' | tr '\n' ' ')"; exit 1; }
+          LAST=$(git tag --list 'v*' --sort=-v:refname | head -1)
+          MAJ=${LAST#v}; MAJ=${MAJ%%.*}; MIN=${LAST##*.}
+          NEXT="v${MAJ}.$((MIN+1))"
+          git config user.name "anatomy-atlas"
+          git config user.email "atlas@localhost"
+          git read-tree -u --reset "$TARGET"
+          git checkout HEAD -- .github   # 워크플로 파일은 바꾸지 않음 (자동 배포 권한으로는 수정 불가)
+          git commit --allow-empty -m "롤백: 공개 사이트를 $TARGET 내용으로 되돌림 ($NEXT)"
+          git tag -a "$NEXT" -m "롤백 → $TARGET 내용"
+          git push origin main "$NEXT"
+          echo "공개 사이트: $TARGET 내용 → 새 버전 $NEXT"
+  deploy:
+    needs: rollback
+    uses: ./.github/workflows/pages.yml

@@ -136,7 +136,34 @@ function setupTopSearch() {
   });
 }
 
+// 배포 버전 표시 + 미리보기 사이트 안내 (version.json 은 GitHub Actions 배포 때 생성 — 로컬에는 없음)
+async function showVersion() {
+  let v = null;
+  try {
+    const r = await fetch('version.json', { cache: 'no-store' });
+    if (r.ok) v = await r.json();
+  } catch { /* 로컬 실행: 버전 정보 없음 */ }
+  const footer = document.querySelector('.footer');
+  if (v && footer) {
+    const p = document.createElement('p');
+    p.className = 'version';
+    p.textContent = v.channel === 'preview'
+      ? `미리보기 · ${v.commit} · ${v.date} (공개 사이트 최신 버전: ${v.live || '없음'})`
+      : `버전 ${v.version} · ${v.date}`;
+    footer.append(p);
+  }
+  if (v?.channel === 'preview') {
+    const bar = document.createElement('div');
+    bar.className = 'preview-bar';
+    bar.setAttribute('role', 'note');
+    bar.innerHTML = `<strong>미리보기</strong><span>공개 전 확인용 사이트입니다 · ${esc(v.commit)}</span><a href="../">공개 사이트 보기</a>`;
+    document.body.prepend(bar);
+    document.body.classList.add('is-preview');
+  }
+}
+
 async function start() {
+  showVersion();
   try {
     await loadData();
   } catch (err) {
