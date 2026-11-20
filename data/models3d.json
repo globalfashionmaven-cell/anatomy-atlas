@@ -90,7 +90,8 @@
       },
       "fileSize": 6070464,
       "meshCount": 55,
-      "triangles": 294932
+      "triangles": 294932,
+      "fibers": "data/fibers/shoulder-right.json"
     },
     {
       "id": "arm-right",
@@ -229,7 +230,7 @@
         "licenseUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
         "commercialUse": "가능 — CC BY 4.0과 CC BY-SA 2.1 JP 모두 상업적 이용을 허용 (출처 표기 필수)",
         "attribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
-        "modified": "수정함 — 필요한 부위의 OBJ만 골라 GLB로 변환, 좌표계를 Y-up으로 바꾸고 원점 이동, 정점 법선 재계산. 피부(전신 1개 메쉬)는 어깨 주변 영역만 잘라 사용. 형상 자체는 편집하지 않음. 몸통 모델은 삼각형이 많은 메쉬(갈비사이근·배바깥빗근·갈비뼈·가로막 등)를 정점 군집화로 메쉬당 약 1만6천 개 이하로 단순화했습니다.",
+        "modified": "수정함 — 필요한 부위의 OBJ만 골라 GLB로 변환, 좌표계를 Y-up으로 바꾸고 원점 이동, 정점 법선 재계산. 피부(전신 1개 메쉬)는 어깨 주변 영역만 잘라 사용. 형상 자체는 편집하지 않음.",
         "attributionLegacy": "BodyParts3D, (c) The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan",
         "derivativeLicense": "보수적 해석: 파생물(models/*.glb)은 CC BY-SA 2.1 JP의 동일조건변경허락도 충족하도록 CC BY-SA 4.0으로 표기·배포 권장"
       },
@@ -291,6 +292,68 @@
       "fileSize": 2336776,
       "meshCount": 18,
       "triangles": 111980
+    },
+    {
+      "id": "back",
+      "title": "등 · 층별 해부 (오른쪽)",
+      "url": "models/back.glb",
+      "region": "back",
+      "side": "right",
+      "reviewStatus": "needs-review",
+      "relatedItems": [
+        "m-trapezius",
+        "m-rhomboids",
+        "m-levator-scapulae",
+        "m-erector-spinae",
+        "m-multifidus",
+        "m-latissimus-dorsi",
+        "m-supraspinatus",
+        "m-infraspinatus",
+        "m-teres-minor",
+        "m-teres-major",
+        "j-scapulothoracic",
+        "mv-scapular-upward-rotation",
+        "mv-trunk-extension",
+        "c-core-stability"
+      ],
+      "source": {
+        "name": "BodyParts3D 4.0 (isa_BP3D_4.0_obj_99, 99% polygon reduction)",
+        "author": "The Database Center for Life Science (DBCLS)",
+        "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+        "license": "CC BY 4.0 (현재 공식 라이선스 페이지) — 단, 배포 OBJ 파일 머리말에는 이전 라이선스 CC BY-SA 2.1 Japan 표기가 남아 있음",
+        "licenseUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+        "commercialUse": "가능 — CC BY 4.0과 CC BY-SA 2.1 JP 모두 상업적 이용을 허용 (출처 표기 필수)",
+        "attribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+        "modified": "수정함 — 필요한 부위의 OBJ만 골라 GLB로 변환, 좌표계를 Y-up으로 바꾸고 원점 이동, 정점 법선 재계산. 피부(전신 1개 메쉬)는 어깨 주변 영역만 잘라 사용. 형상 자체는 편집하지 않음.",
+        "attributionLegacy": "BodyParts3D, (c) The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan",
+        "derivativeLicense": "보수적 해석: 파생물(models/*.glb)은 CC BY-SA 2.1 JP의 동일조건변경허락도 충족하도록 CC BY-SA 4.0으로 표기·배포 권장"
+      },
+      "notes": [
+        "넓은등근·뭇갈래근(다열근)·돌림근은 BodyParts3D 4.0에 메쉬가 없어 이 모델에 없습니다 (3D 모델 확보 필요).",
+        "오른쪽 등 근육만 포함합니다. 척추뼈는 가운데 전체, 갈비뼈는 오른쪽만."
+      ],
+      "mapping": "data/mappings/back.json",
+      "camera": {
+        "view": "back",
+        "fov": 35,
+        "fitPadding": 1.0
+      },
+      "maxTrianglesPerMesh": 12000,
+      "fileSize": 4964608,
+      "meshCount": 51,
+      "triangles": 234485,
+      "dissection": "data/dissection/back.json",
+      "autoDissect": [
+        "m-rhomboids",
+        "m-levator-scapulae",
+        "m-supraspinatus",
+        "m-infraspinatus",
+        "m-teres-minor",
+        "m-teres-major",
+        "m-erector-spinae",
+        "m-multifidus"
+      ],
+      "fibers": "data/fibers/back.json"
     }
   ]
 }

@@ -187,7 +187,7 @@ export function createRig(meshes, structs, items, def, cache) {
   // 부분별 역할 보정 (예: 굽힘에서 어깨세모근 뒤섬유는 길항근)
   muscles.forEach((m) => { m.role = (m.meshId && def.meshRoles?.[m.meshId]) || (m.itemId ? role.get(m.itemId) : undefined); });
 
-  function apply(t) {
+  let apply = function applyBones(t) {
     for (const s of segs) {
       const local = new THREE.Matrix4();
       for (const r of s.rots) {
@@ -224,18 +224,104 @@ export function createRig(meshes, structs, items, def, cache) {
         mu.len = mu.pa.distanceTo(mu.pb);
       }
     }
+  };
+  // ---- 근육 메쉬 변형 (V5 4-3): 기시·정지에 구속된 선형 혼합 + 근복 부피 보존 근사
+  //   정점마다 기시→정지 축 위 위치 s(0~1)를 구해, 기시 쪽 뼈 변환과 정지 쪽 뼈 변환을 s로 섞음 (linear blend skinning)
+  //   길이가 줄면 근복(가운데)이 굵어지고, 늘면 가늘어짐 (부피 보존 근사, 최대 ±20%)
+  //   한계: 뼈를 감는 경로(어깨세모근이 위팔뼈머리를 덮는 등), 근막·이웃 근육과의 충돌은 계산하지 않음 → 관통이 생길 수 있음
+  const deformers = [];
+  for (const mu of muscles) {
+    if (mu.mode !== 'line' || !mu.meshId || !meshes.get(mu.meshId)) continue;
+    const g = meshes.get(mu.meshId).geometry;
+    const pos = g.attributes.position;
+    const ab = mu.b.p.clone().sub(mu.a.p);
+    const L2 = ab.lengthSq();
+    const w = new Float32Array(pos.count);
+    for (let i = 0; i < pos.count; i++) {
+      const sx = ((pos.getX(i) - mu.a.p.x) * ab.x + (pos.getY(i) - mu.a.p.y) * ab.y + (pos.getZ(i) - mu.a.p.z) * ab.z) / L2;
+      const c = Math.min(1, Math.max(0, sx));
+      w[i] = c * c * (3 - 2 * c);
+    }
+    deformers.push({ mu, g, pos, p0: pos.array.slice(), n0: g.attributes.normal?.array.slice(), w, on: false });
   }
+  const va = new THREE.Vector3(); const vb = new THREE.Vector3(); const ax = new THREE.Vector3(); const rad = new THREE.Vector3();
+  let deformOn = false;
+  function deform() {
+    const W = (seg) => (seg ? segById.get(seg).world : new THREE.Matrix4());
+    for (const d of deformers) {
+      const a = d.pos.array;
+      if (!deformOn) {
+        if (d.on) { a.set(d.p0); if (d.n0) d.g.attributes.normal.array.set(d.n0); d.pos.needsUpdate = true; d.g.attributes.normal && (d.g.attributes.normal.needsUpdate = true); d.g.computeBoundingSphere(); d.g.computeBoundingBox(); d.on = false; }
+        continue;
+      }
+      d.on = true;
+      const Wa = W(d.mu.a.seg); const Wb = W(d.mu.b.seg);
+      const A = d.mu.pa; const B = d.mu.pb;
+      ax.copy(B).sub(A);
+      const L = ax.length(); ax.normalize();
+      const r = d.mu.len0 ? L / d.mu.len0 : 1;
+      const bulge = Math.min(1.2, Math.max(0.8, 1 / Math.sqrt(r)));
+      for (let i = 0; i < d.pos.count; i++) {
+        va.set(d.p0[i * 3], d.p0[i * 3 + 1], d.p0[i * 3 + 2]);
+        vb.copy(va).applyMatrix4(Wb);
+        va.applyMatrix4(Wa).lerp(vb, d.w[i]);
+        // 축에서의 반지름 방향 성분만 근복 위치(4s(1-s))에 비례해 키우거나 줄임
+        const sx = Math.min(1, Math.max(0, rad.copy(va).sub(A).dot(ax) / L));
+        const k = 1 + (bulge - 1) * 4 * sx * (1 - sx);
+        rad.copy(A).addScaledVector(ax, sx * L);
+        va.sub(rad).multiplyScalar(k).add(rad);
+        a[i * 3] = va.x; a[i * 3 + 1] = va.y; a[i * 3 + 2] = va.z;
+      }
+      d.pos.needsUpdate = true;
+      d.g.computeVertexNormals();
+      d.g.computeBoundingSphere();
+      d.g.computeBoundingBox();
+    }
+  }
+  const apply0 = apply;
+  apply = (t) => { apply0(t); if (deformOn || deformers.some((d) => d.on)) deform(); };
+
   apply(0);
   muscles.forEach((m) => { if (m.mode === 'line') m.len0 = m.len; });
 
   function angles(t) {
     return (def.angles || []).map((a) => ({ label: a.label, value: Math.round(curve(segById.get(a.seg).rotations[a.rot || 0].curve, t) * (a.scale || 1)) }));
   }
+  function setDeform(on) { deformOn = on; deform(); }
   function reset() {
+    deformOn = false; deform();
     for (const s of segs) for (const n of s.meshes) { const m = meshes.get(n); if (m) { m.matrix.identity(); m.matrixWorldNeedsUpdate = true; } }
     for (const mu of muscles) if (mu.meshId && meshes.get(mu.meshId)) { const m = meshes.get(mu.meshId); m.matrix.identity(); m.matrixWorldNeedsUpdate = true; }
   }
-  return { apply, muscles, angles, reset, def };
+  // 각도 슬라이더(V5 JOINT-001): 뼈 장축(분절 회전중심 → 메쉬의 먼 끝)이 시작 자세에서 기운 각을 형상으로 측정
+  let elev = null;
+  if (def.angleSlider) {
+    const sg = segById.get(def.angleSlider.seg);
+    const vs = V(def.angleSlider.mesh);
+    const far = vs.reduce((a, q) => (q.distanceTo(sg.pivotP) > a.distanceTo(sg.pivotP) ? q : a), vs[0]);
+    elev = { sg, p0: sg.pivotP.clone(), d0: far.clone().sub(sg.pivotP).normalize(), far };
+  }
+  function dirAt(t) {
+    apply0(t); // 뼈만 계산 (근육 변형은 건너뜀)
+    const c = elev.p0.clone().applyMatrix4(elev.sg.parent ? segById.get(elev.sg.parent).world : new THREE.Matrix4());
+    return elev.far.clone().applyMatrix4(elev.sg.world).sub(c).normalize();
+  }
+  function measure(t) {
+    if (!elev) return null;
+    // 회전 평면의 법선(움직이기 시작할 때의 방향으로 고정)을 기준으로 부호 있는 각 → 180° 넘어도 접히지 않음
+    if (!elev.n) { elev.n = elev.d0.clone().cross(dirAt(0.02)).normalize(); }
+    const d = dirAt(t);
+    const ang = Math.atan2(elev.d0.clone().cross(d).dot(elev.n), elev.d0.dot(d));
+    const deg = THREE.MathUtils.radToDeg(ang);
+    return deg < -30 ? deg + 360 : deg;
+  }
+  // 목표 각도 → 진행률 t (측정값이 단조 증가한다고 보고 이분 탐색)
+  function tForAngle(deg) {
+    let lo = 0; let hi = 1;
+    for (let i = 0; i < 30; i++) { const mid = (lo + hi) / 2; if (measure(mid) < deg) lo = mid; else hi = mid; }
+    return (lo + hi) / 2;
+  }
+  return { apply: (t) => apply(t), muscles, angles, reset, def, segs, curve, measure, tForAngle, setDeform, deformable: () => deformers.map((d) => d.mu.meshId), deformOn: () => deformOn };
 }
 
 // 수축 상태 판정 (교육용): 역할 + 길이 변화 방향 + 진행 방향 + 부하 조건
@@ -283,7 +369,11 @@ export function motionPanelHtml(defs) {
         <button class="tbtn" data-mo="loop" aria-pressed="true">${icon('repeat')}<span>왕복 반복</span></button>
         <button class="tbtn" data-mo="reset">${icon('home')}<span>시작 자세</span></button>
         <button class="tbtn" data-mo="lines" aria-pressed="true">${icon('overlay')}<span>근육 작용선</span></button>
+        <button class="tbtn" data-mo="deform" aria-pressed="false" title="기시·정지에 구속된 메쉬 변형 (교육용 근사)">${icon('layers')}<span>근육 형태 변화 (근사)</span></button>
       </div>
+      <label class="mo-deg" data-mo-deg hidden><span data-mo-deglabel></span>
+        <input class="range" type="range" min="0" max="180" step="1" value="0" data-mo-degin aria-label="관절 각도">
+        <output data-mo-degout>0°</output></label>
       <div class="mo-legend">${Object.entries(ROLE).map(([k, r]) => `<label><input type="checkbox" checked data-mo-role="${k}"><i style="background:${r.color}"></i>${r.label}</label>`).join('')}<span class="mo-legend-note">회색: 이 동작에 역할 지정 없음</span></div>
       <div class="mo-info">
         <div class="mo-angles" data-mo-angles></div>

@@ -4,23 +4,23 @@
 <polyline points="230.0,757.0 588.0,757.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="588.0" cy="757.0" r="4.5" fill="#8A8F99" stroke="#fff" stroke-width="1.6"/>
 <text x="24" y="754.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="start">발꿈치뼈</text>
-<text x="24" y="774.0" font-size="13" fill="#5B6170" text-anchor="start">본문상 닿는곳 · 모델 접촉 없음</text>
+<text x="24" y="774.0" font-size="13" fill="#5B6170" text-anchor="start">본문상 정지 · 모델 접촉 없음</text>
 <line x1="230.0" y1="757.0" x2="224.0" y2="757.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,93.3 630.9,93.3" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="630.9" cy="93.3" r="4.5" fill="#C8323C" stroke="#fff" stroke-width="1.6"/>
 <rect x="1162" y="78.34575479901713" width="14" height="14" rx="3" fill="#C8323C"/>
-<text x="1156" y="90.3" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">정강뼈</text>
-<text x="1156" y="110.3" font-size="13" fill="#5B6170" text-anchor="end">이는곳 (근사)</text>
+<text x="1156" y="90.3" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">경골</text>
+<text x="1156" y="110.3" font-size="13" fill="#5B6170" text-anchor="end">기시 (근사)</text>
 <line x1="970.0" y1="93.3" x2="976.0" y2="93.3" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,139.3 645.1,108.3" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="645.1" cy="108.3" r="4.5" fill="#C8323C" stroke="#fff" stroke-width="1.6"/>
 <rect x="1162" y="124.34575479901713" width="14" height="14" rx="3" fill="#C8323C"/>
-<text x="1156" y="136.3" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">종아리뼈</text>
-<text x="1156" y="156.3" font-size="13" fill="#5B6170" text-anchor="end">이는곳 (근사)</text>
+<text x="1156" y="136.3" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">비골</text>
+<text x="1156" y="156.3" font-size="13" fill="#5B6170" text-anchor="end">기시 (근사)</text>
 <line x1="970.0" y1="139.3" x2="976.0" y2="139.3" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <g transform="translate(1130,905)" font-size="12" fill="#5B6170"><circle r="36" fill="#fff" stroke="#D2CCBE"/><line x1="0" y1="0" x2="0.0" y2="-26.0" stroke="#2F6F6A" stroke-width="2"/><circle cx="0.0" cy="-26.0" r="2.5" fill="#2F6F6A"/><text x="0.0" y="-41.5" text-anchor="middle" font-weight="600">위</text><line x1="0" y1="0" x2="-26.0" y2="-0.0" stroke="#2F6F6A" stroke-width="2"/><circle cx="-26.0" cy="-0.0" r="2.5" fill="#2F6F6A"/><text x="-45.5" y="4.0" text-anchor="middle" font-weight="600">왼쪽(대상자)</text></g>
-<g font-size="15" fill="#2B2F38"><rect x="40" y="829" width="14" height="14" rx="3" fill="#C8323C"/><text x="62" y="842"><tspan font-weight="700" fill="#1E2A44">이는곳</tspan>  종아리뼈머리·종아리뼈 뒷면 위 1/4 · 정강뼈 가자미근선 · 가자미근 힘줄활</text><rect x="40" y="853" width="14" height="14" rx="3" fill="#1E2A44"/><text x="62" y="866"><tspan font-weight="700" fill="#1E2A44">닿는곳</tspan>  발꿈치힘줄을 통해 발꿈치뼈 융기 뒷면</text></g><text x="600" y="900" font-size="12" fill="#5B6170" text-anchor="middle">색칠 = 근육 메쉬가 0.35cm 이내로 맞닿은 뼈 표면 중, 본문 이는곳·닿는곳에 이름이 나오는 뼈만 (근사 영역) · 힘줄이 메쉬에 없으면 실제와 다를 수 있음</text>
-<text x="600.0" y="956" font-size="22" font-weight="700" fill="#1E2A44" text-anchor="middle">가자미근 · 이는곳·닿는곳</text>
+<g font-size="15" fill="#2B2F38"><rect x="40" y="829" width="14" height="14" rx="3" fill="#C8323C"/><text x="62" y="842"><tspan font-weight="700" fill="#1E2A44">기시</tspan>  종아리뼈머리·종아리뼈 뒷면 위 1/4 · 정강뼈 가자미근선 · 가자미근 힘줄활</text><rect x="40" y="853" width="14" height="14" rx="3" fill="#1E2A44"/><text x="62" y="866"><tspan font-weight="700" fill="#1E2A44">정지</tspan>  발꿈치힘줄을 통해 발꿈치뼈 융기 뒷면</text></g><text x="600" y="900" font-size="12" fill="#5B6170" text-anchor="middle">색칠 = 근육 메쉬가 0.35cm 이내로 맞닿은 뼈 표면 중, 본문 기시·정지에 이름이 나오는 뼈만 (근사 영역) · 힘줄이 메쉬에 없으면 실제와 다를 수 있음</text>
+<text x="600.0" y="956" font-size="22" font-weight="700" fill="#1E2A44" text-anchor="middle">넙치근 · 기시·정지</text>
 <text x="600.0" y="980" font-size="14" fill="#5B6170" text-anchor="middle">뒷면 · 뼈만 표시</text>
 <text x="1188" y="18" font-size="11" fill="#8A8F99" text-anchor="end">형상: BodyParts3D © DBCLS (CC BY 4.0 / 원본 OBJ 표기 CC BY-SA 2.1 JP) · 도판: 자체 렌더링 · 검토 필요</text>
 </svg>

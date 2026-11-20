@@ -49,7 +49,9 @@ SH_PIVOTS = {
 
 def shoulder(id, item, title, hum_rots, scap=None, clav=None, load="gravity", phases=(), angles=None, extra_note=""):
     segs = [
-        seg("clavicle", ["clavicle"], SH_PIVOTS["sc"], [rot(Z, *(clav or [(0, 0), (1, 0)]))]),
+        # 빗장뼈 올림: 오른쪽 빗장뼈의 가쪽 끝이 올라가는 방향 = -Z 축 기준 양의 회전
+        # (V5 검증에서 발견: 이전에는 +Z 축이라 '올림' 값이 실제로는 가쪽 끝을 내리고 있었음 → 수정)
+        seg("clavicle", ["clavicle"], SH_PIVOTS["sc"], [rot(NZ, *(clav or [(0, 0), (1, 0)]))]),
         seg("scapula", ["scapula"], SH_PIVOTS["ac"], [rot(NZ, *(scap or [(0, 0), (1, 0)]))], parent="clavicle"),
         seg("humerus", ["humerus"], SH_PIVOTS["gh"], hum_rots, parent="scapula"),
     ]
@@ -59,9 +61,18 @@ def shoulder(id, item, title, hum_rots, scap=None, clav=None, load="gravity", ph
             "sources": ["os-9-5", "os-11-5"]}
 
 
+ABD_SLIDER = {"label": "위팔-가슴 거상각 (어깨 복합체 전체)", "max": 180, "seg": "humerus", "mesh": "humerus",
+              "rom": {"reference": "어깨 복합체 외전 약 180° (교과서 참고값)", "source": "os-9-5", "position": "선 자세, 팔 옆에 붙인 자세에서 시작",
+                      "axis": "앞뒤 방향 축 (관상면 운동)", "plane": "관상면", "active": "능동 운동 가정", "compound": "복합 관절 (오목위팔 + 어깨가슴 + 복장빗장·봉우리빗장)",
+                      "reviewStatus": "needs-review", "note": "개인·나이·측정 방법에 따라 다르며 모든 사람의 정상 범위가 같지 않습니다. 화면의 각도는 3D 모델에서 위팔뼈 장축이 처음 위치에서 기운 각을 직접 측정한 값입니다."}}
+
 MOTIONS = [
     shoulder("sh-abduction", "mv-shoulder-abduction", "어깨 · 벌림 (Abduction)",
-             [rot(NZ, (0, 0), (1, 110))], scap=[(0, 0), (0.2, 0), (1, 50)], clav=[(0, 0), (0.2, 0), (1, 15)],
+             # V5 JOINT-001: 어깨 복합체 전체 0→약 180° (t = 목표 위팔-가슴 거상각 / 180, 실제 각도는 화면에서 형상으로 측정)
+             # 구간별 비율이 다름: 초기(약 30°까지)는 대부분 오목위팔관절, 이후 어깨뼈 위쪽돌림 비중 증가 — 전 범위 고정 2:1 아님
+             [rot(NZ, (0, 0), (1 / 6, 28), (2 / 6, 48), (3 / 6, 65), (4 / 6, 82), (5 / 6, 100), (1, 120))],
+             scap=[(0, 0), (1 / 6, 2), (2 / 6, 10), (3 / 6, 20), (4 / 6, 30), (5 / 6, 38), (1, 45)],
+             clav=[(0, 0), (1 / 6, 1), (2 / 6, 4), (3 / 6, 8), (4 / 6, 11), (5 / 6, 13), (1, 15)],
              phases=[ph(0, "시작 자세", "팔이 몸통 옆. 어깨세모근·가시위근은 이완, 돌림근띠는 위팔뼈머리를 접시오목에 붙잡고 있습니다.", "위팔뼈머리는 접시오목 중앙에 놓입니다."),
                      ph(15, "벌림 초기", "어깨세모근 중간섬유와 가시위근이 단축성 수축으로 위팔뼈를 들어 올립니다. 이 구간은 주로 오목위팔관절에서 움직입니다 (어깨뼈 거의 고정).",
                         "볼록한 위팔뼈머리가 오목한 접시오목 위에서 위로 굴러가는(roll) 동안, 아래로 미끄러져(glide) 머리가 봉우리 쪽으로 올라붙지 않습니다. 돌림근띠가 이 아래 미끄러짐을 돕습니다."),
@@ -69,7 +80,7 @@ MOTIONS = [
                         "어깨가슴관절에서 어깨뼈가 가슴우리 위를 미끄러지며 돕니다. 복장빗장관절에서 빗장뼈가 올라가고 뒤로 돕니다(뒤돌림은 이 시뮬레이션에서 생략)."),
                      ph(75, "벌림 후반", "어깨세모근이 계속 작용하고, 어깨뼈 위쪽돌림의 비중이 커집니다. 실제로는 큰결절이 봉우리 아래에 걸리지 않도록 위팔뼈 가쪽돌림이 함께 일어나는 경우가 많습니다 (이 시뮬레이션에서는 생략).",
                         "위팔뼈머리의 아래 미끄러짐과 어깨뼈 위쪽돌림·뒤기울임이 함께 공간을 확보합니다."),
-                     ph(100, "최종 자세", "위팔뼈-몸통 각이 약 160°. 내릴 때는 같은 근육들이 신장성 수축으로 속도를 조절합니다 (역재생).", "")]),
+                     ph(100, "최종 자세", "위팔뼈-가슴 거상각 약 180°는 어깨 복합체 전체(오목위팔관절 + 어깨뼈 위쪽돌림 + 빗장뼈 올림)의 참고 위치이며, 오목위팔관절 단독 가동범위가 아닙니다. 내릴 때는 같은 근육들이 신장성 수축으로 속도를 조절합니다 (역재생).", "")]),
     shoulder("sh-flexion", "mv-shoulder-flexion", "어깨 · 굽힘 (Flexion)",
              [rot(NX, (0, 0), (1, 110))], scap=[(0, 0), (0.2, 0), (1, 45)], clav=[(0, 0), (0.2, 0), (1, 12)],
              phases=[ph(0, "시작 자세", "팔이 몸통 옆에 있습니다."),
@@ -356,6 +367,13 @@ MOTIONS += [
 ]
 
 
+def _post(motions):
+    for m in motions:
+        if m["id"] == "sh-abduction":
+            m["angleSlider"] = ABD_SLIDER
+    return motions
+
+
 def main():
     MESH_ROLES = {
         "sh-flexion": {"deltoid_posterior": "antagonist", "pecmaj_clavicular": "synergist", "pecmaj_sternocostal": "antagonist", "pecmaj_abdominal": "antagonist"},
@@ -375,7 +393,7 @@ def main():
         m.setdefault("roles", {})
         if m["id"] in MESH_ROLES:
             m["meshRoles"] = MESH_ROLES[m["id"]]
-    out = {"version": 1, "note": "3D 움직임 정의. tools/make_motions.py 로 생성.", "motions": MOTIONS}
+    out = {"version": 1, "note": "3D 움직임 정의. tools/make_motions.py 로 생성.", "motions": _post(MOTIONS)}
     json.dump(out, open(os.path.join(ROOT, "data", "motions3d.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     from collections import Counter
     print(len(MOTIONS), "motions", Counter(m["model"] for m in MOTIONS))

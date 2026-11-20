@@ -2,13 +2,16 @@
 
 | 항목 | 값 |
 |---|---|
-| items | 190 |
-| muscles | 89 |
-| media | 240 |
-| media_files | 224 |
-| svg_parsed | 224 |
-| models | 5 |
+| items | 191 |
+| muscles | 90 |
+| media | 242 |
+| media_files | 226 |
+| svg_parsed | 226 |
+| models | 6 |
 | motions | 42 |
+| fibers_shoulder-right | 25 |
+| dissection_steps | 11 |
+| fibers_back | 14 |
 | 오류 | 0 |
 | 경고 | 0 |
 

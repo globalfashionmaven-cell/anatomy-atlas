@@ -9,6 +9,9 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { esc, icon } from '../ui.js';
 import { onDispose } from '../lifecycle.js';
 import { createRig, contractionState, motionPanelHtml, ROLE } from './motion.js';
+import { terms, subName } from '../terms.js';
+import { dissectionPanelHtml, createDissection } from './dissect.js';
+import { overlayPanelHtml, createOverlays } from './overlays.js';
 
 const LAYER_COLOR = {
   skin: '#E6C3A5', superficial: '#B85C50', intermediate: '#C98466', deep: '#8F4B5B',
@@ -57,6 +60,7 @@ export function mountViewer3D(root, opts) {
       <div class="v3d-status" data-status><span class="spinner"></span><span data-status-text>3D 모델 불러오는 중…</span></div>
       <div class="v3d-selname" data-selname hidden></div>
       <div class="v3d-tip" data-tip hidden></div>
+      <div class="v3d-notice" data-notice hidden></div>
       <div class="v3d-views" role="group" aria-label="시점 선택">
         ${VIEWS.map((v) => `<button data-view="${v.id}">${v.label}</button>`).join('')}
       </div>
@@ -73,6 +77,8 @@ export function mountViewer3D(root, opts) {
       <label class="v3d-speed">속도<input type="range" min="0.5" max="8" step="0.5" value="2" data-speed aria-label="자동 회전 속도"></label>
       <button class="tbtn" data-act="lowspec" aria-pressed="${lowSpecDefault()}">${icon('info')}<span>저사양 모드</span></button>
     </div>
+    ${opts.fibers ? overlayPanelHtml(opts.fibers) : ''}
+    ${opts.dissection ? dissectionPanelHtml(opts.dissection) : ''}
     ${opts.motions?.length ? motionPanelHtml(opts.motions) : ''}
     <div class="v3d-anim" data-anim hidden></div>
     <div class="v3d-panels">
@@ -183,6 +189,9 @@ export function mountViewer3D(root, opts) {
   let isolate = false;
   let dimOthers = true;
   let selected = new Set();
+  let dissectFade = new Set();
+  let dissect = null;
+  let overlays = null;
   let center = new THREE.Vector3();
   let radius = 10;
   let mixer = null;
@@ -200,6 +209,7 @@ export function mountViewer3D(root, opts) {
       let op = layerOp[s.layer] ?? 1;
       const sel = selected.has(name);
       if (selected.size && dimOthers && !sel && !isolate) op *= 0.25;
+      if (dissectFade.has(name) && !sel) op *= 0.3; // 층별 해부: 다 젖혀진 근육은 흐리게
       if (sel && op < 0.6) op = 0.6; // 선택된 구조는 투명 레이어여도 보이도록
       const m = mesh.material;
       m.opacity = op;
@@ -304,19 +314,19 @@ export function mountViewer3D(root, opts) {
       <div class="sel-head">
         <p class="eyebrow">3D 선택 구조</p>
         <h3>${esc(whole && item ? item.koreanName : s.koreanName)}</h3>
-        <p class="sel-en">${esc(whole && item ? item.englishName : s.englishName)}</p>
-        ${item ? `<p class="sel-names">${item.latinName ? `<i lang="la">${esc(item.latinName)}</i>` : ''}${item.oldKoreanName.length ? ` · 구용어 ${esc(item.oldKoreanName.join(', '))}` : ''}</p>` : ''}
+        <p class="sel-en">${esc(whole && item ? subName(item) : s.englishName)}</p>
+        ${item ? `<p class="sel-names">${item.latinName ? `<i lang="la">${esc(item.latinName)}</i>` : ''}${item.oldKoreanName.length ? ` · ${esc(item.oldKoreanName.join(', '))}` : ''}</p>` : ''}
         <p class="sel-layer">${esc(layers.find((l) => l.id === s.layer)?.label || '')} · <span class="badge badge-warn">검토 필요</span></p>
       </div>
       ${parts.length > 1 ? `<div class="seg seg-wrap sel-parts" role="group" aria-label="부분 선택">
         <button data-part="__all" aria-pressed="${whole}">전체</button>
-        ${parts.map((p) => `<button data-part="${p.meshId}" aria-pressed="${!whole && names[0] === p.meshId}">${esc(p.koreanName.replace(item.koreanName, '').replace(/[()]/g, '').trim() || p.koreanName)}</button>`).join('')}
+        ${parts.map((p) => `<button data-part="${p.meshId}" aria-pressed="${!whole && names[0] === p.meshId}">${esc(p.partLabel || p.koreanName.replace(item.koreanName, '').replace(/[()]/g, '').trim() || p.koreanName)}</button>`).join('')}
       </div>` : ''}
       ${item ? `
         <dl class="sel-facts">
           <div><dt>위치</dt><dd>${esc(item.anatomicalPosition || item.summary || '')}</dd></div>
-          <div><dt>이는곳</dt><dd>${li(pi?.origin || item.origin)}</dd></div>
-          <div><dt>닿는곳</dt><dd>${li(pi?.insertion || item.insertion)}</dd></div>
+          <div><dt>${terms.attach.origin}</dt><dd>${li(pi?.origin || item.origin)}</dd></div>
+          <div><dt>${terms.attach.insertion}</dt><dd>${li(pi?.insertion || item.insertion)}</dd></div>
           ${item.innervation ? `<div><dt>신경 지배</dt><dd>${esc(item.innervation)}</dd></div>` : ''}
           ${item.category === 'muscle' ? `<div><dt>주요 기능</dt><dd>${li(pi?.action || item.action)}</dd></div>` : ''}
           ${item.features?.length ? `<div><dt>주요 구조</dt><dd>${li(item.features)}</dd></div>` : ''}
@@ -326,7 +336,7 @@ export function mountViewer3D(root, opts) {
           ${item.relatedJoints.length ? `<div><dt>관련 관절</dt><dd class="chips">${item.relatedJoints.map(chip).join('')}</dd></div>` : ''}
         </dl>
         ${motionCardHtml(item.id)}
-        ${pi ? '<p class="fine">부분별 이는곳·기능은 같은 근육의 교과서 서술을 섬유 방향에 따라 나눈 것입니다 (검토 필요).</p>' : ''}
+        ${pi ? '<p class="fine">부분별 기시·기능은 같은 근육의 교과서 서술을 섬유 방향에 따라 나눈 것입니다 (검토 필요).</p>' : ''}
         <div class="sel-actions">
           ${opts.focusItemId !== item.id ? `<a class="btn" href="#/item/${item.id}">${icon('book')}<span>상세 페이지</span></a>` : ''}
           ${item.relatedMovements.length && opts.onOpenMotion ? `<button class="btn" data-open-motion="${item.id}">${icon('film')}<span>움직임 분석 보기</span></button>` : ''}
@@ -440,10 +450,13 @@ export function mountViewer3D(root, opts) {
   const clock = new THREE.Clock();
   function loop(now) {
     raf = requestAnimationFrame(loop);
-    if (!visible) return;
     const dt = clock.getDelta();
+    // 진행(해부 단계·동작)은 화면 밖에서도 계속 계산 — 그리기만 생략 (자동 해부가 스크롤 때문에 멈추지 않게)
+    if (dissect?.playing()) { dissect.step(dt); dirty = true; }
+    if (!visible) return;
     if (tween) tween(now);
     if (motion.rig && motion.playing) { stepMotion(dt); dirty = true; }
+    if (overlays) overlays.update();
     const moved = controls.update();
     if (mixer && animState.playing) { mixer.update(dt * animState.speed * (animState.reverse ? -1 : 1)); syncAnim(); dirty = true; }
     if (moved || dirty || controls.autoRotate) {
@@ -590,7 +603,8 @@ export function mountViewer3D(root, opts) {
   }
   function setMotionHidden(on) {
     for (const [name, m] of meshes) m.userData.motionHidden = false;
-    if (on && motion.rig) for (const mu of motion.rig.muscles) if ((mu.mode === 'line' || mu.mode === 'hide') && mu.meshId && meshes.get(mu.meshId)) meshes.get(mu.meshId).userData.motionHidden = true;
+    const deforming = motion.rig?.deformOn?.();
+    if (on && motion.rig) for (const mu of motion.rig.muscles) if (((mu.mode === 'line' && !deforming) || mu.mode === 'hide') && mu.meshId && meshes.get(mu.meshId)) meshes.get(mu.meshId).userData.motionHidden = true;
     applyState();
   }
   function selectMotion(id) {
@@ -614,6 +628,13 @@ export function mountViewer3D(root, opts) {
       setMotionHidden(true);
       root.querySelector('[data-mo-note]').textContent = def.note || '';
       root.querySelector('[data-mo-select]').value = id;
+      root.querySelector('[data-mo="deform"]')?.setAttribute('aria-pressed', 'false');
+      const dg = root.querySelector('[data-mo-deg]');
+      dg.hidden = !def.angleSlider;
+      if (def.angleSlider) {
+        root.querySelector('[data-mo-deglabel]').textContent = def.angleSlider.label;
+        root.querySelector('[data-mo-degin]').max = def.angleSlider.max;
+      }
       applyMotion();
       renderCard();
     }, 30);
@@ -639,7 +660,15 @@ export function mountViewer3D(root, opts) {
     $m('[data-mo-range]').value = Math.round(motion.t * 1000);
     $m('[data-mo-pct]').textContent = `${pct}%`;
     $m('[data-mo="play"]').innerHTML = icon(motion.playing ? 'pause' : 'play');
-    $m('[data-mo-angles]').innerHTML = motion.rig.angles(motion.t).map((a) => `<span><b>${a.value}°</b>${esc(a.label)}</span>`).join('');
+    const el = motion.rig.def.angleSlider ? motion.rig.measure(motion.t) : null;
+    if (el !== null) {
+      motion.rig.apply(motion.t); // measure() 가 상태를 바꾸지 않도록 현재 t 로 복귀
+      if (!motion.degDrag) $m('[data-mo-degin]').value = Math.round(el);
+      $m('[data-mo-degout]').textContent = `${el.toFixed(1)}°`;
+    }
+    $m('[data-mo-angles]').innerHTML = (el !== null ? `<span class="mo-total"><b>${el.toFixed(0)}°</b>${esc(motion.rig.def.angleSlider.label)} (측정)</span>` : '')
+      + motion.rig.angles(motion.t).map((a) => `<span><b>${a.value}°</b>${esc(a.label)}</span>`).join('')
+      + (motion.rig.def.angleSlider?.rom ? `<details class="mo-rom"><summary>가동범위 참고값</summary><p>${esc(motion.rig.def.angleSlider.rom.reference)} · ${esc(motion.rig.def.angleSlider.rom.plane)} · ${esc(motion.rig.def.angleSlider.rom.axis)} · ${esc(motion.rig.def.angleSlider.rom.position)} · ${esc(motion.rig.def.angleSlider.rom.compound)} · 검토 필요</p><p class="fine">${esc(motion.rig.def.angleSlider.rom.note)}</p></details>` : '');
     const ph = [...(def.phases || [])].reverse().find((p) => pct >= p.at) || def.phases?.[0];
     $m('[data-mo-phase]').innerHTML = ph ? `<p class="mo-phase-t">${ph.at}% · ${esc(ph.title)}</p><p>${esc(ph.text)}</p>` : '';
     $m('[data-mo-kin]').innerHTML = ph?.kinematics ? `<p class="mo-phase-t">관절면 움직임</p><p>${esc(ph.kinematics)}</p>` : '';
@@ -659,6 +688,7 @@ export function mountViewer3D(root, opts) {
       if (e.target.dataset.moRole) { e.target.checked ? motion.roles.add(e.target.dataset.moRole) : motion.roles.delete(e.target.dataset.moRole); updateLines(); dirty = true; }
     });
     box.addEventListener('input', (e) => {
+      if ('moDegin' in e.target.dataset && motion.rig) { motion.playing = false; motion.dir = 0; motion.degDrag = true; motion.t = motion.rig.tForAngle(Number(e.target.value)); applyMotion(); motion.degDrag = false; }
       if ('moRange' in e.target.dataset && motion.rig) { motion.playing = false; motion.dir = 0; motion.t = Number(e.target.value) / 1000; applyMotion(); }
     });
     box.addEventListener('click', (e) => {
@@ -671,11 +701,12 @@ export function mountViewer3D(root, opts) {
       else if (a === 'loop') { motion.loop = !motion.loop; b.setAttribute('aria-pressed', motion.loop); }
       else if (a === 'reset') { motion.playing = false; motion.dir = 0; motion.t = 0; motion.reverse = false; root.querySelector('[data-mo="rev"]').setAttribute('aria-pressed', 'false'); applyMotion(); }
       else if (a === 'lines') { motion.showLines = !motion.showLines; b.setAttribute('aria-pressed', motion.showLines); updateLines(); dirty = true; }
+      else if (a === 'deform') { const on = !motion.rig.deformOn(); motion.rig.setDeform(on); b.setAttribute('aria-pressed', on); setMotionHidden(true); applyMotion(); }
       else if (b.dataset.moSpeed) { motion.speed = Number(b.dataset.moSpeed); box.querySelectorAll('[data-mo-speed]').forEach((x) => x.setAttribute('aria-pressed', x === b)); }
       const row = e.target.closest('[data-mo-row]');
       if (row) { select([row.dataset.moRow]); updateLines(); dirty = true; }
     });
-    const pre = (opts.motions || []).find((d) => d.movementItemId === opts.focusMovementId) || (opts.autoMotion && opts.motions[0]);
+    const pre = (opts.motions || []).find((d) => d.id === opts.focusMotionId) || (opts.motions || []).find((d) => d.movementItemId === opts.focusMovementId) || (opts.autoMotion && opts.motions[0]);
     if (pre) selectMotion(pre.id);
   }
 
@@ -732,8 +763,28 @@ export function mountViewer3D(root, opts) {
       statusEl.hidden = true;
       applyPixelRatio();
       initMotion();
-      const focus = model.meshes.filter((s) => s.anatomyItemId === opts.focusItemId).map((s) => s.meshId);
+      const focus = opts.focusItemId ? model.meshes.filter((s) => s.anatomyItemId === opts.focusItemId).map((s) => s.meshId) : [];
       select(focus, { silent: true });
+      const internal = {
+        root, meshes, structs, items: opts.items,
+        select: (names, o) => select(names, o), focusSelected, dirty: () => { dirty = true; }, wake: () => clock.getDelta(),
+        setDissectFade: (set) => { dissectFade = set; applyState(); },
+        notice: (txt) => {
+          const n = $('[data-notice]');
+          n.hidden = !txt;
+          if (!txt) { n.innerHTML = ''; return; }
+          // 3D 화면을 가리지 않게: 첫 문장만 보이고 '자세히'로 펼침, 닫기 가능
+          const first = txt.split(/(?<=[.다])\s/)[0];
+          n.innerHTML = `<details><summary>${esc(first)} <span class="nt-more">자세히</span></summary><p>${esc(txt.slice(first.length).trim())}</p></details><button class="nt-x" data-notice-close aria-label="안내 닫기">×</button>`;
+          n.querySelector('[data-notice-close]').onclick = () => { n.hidden = true; };
+        },
+        bonesOnly: () => { soloLayer = null; presentLayers.forEach((l) => { layerOn[l.id] = ['bone', 'cartilage'].includes(l.id); }); applyState(); },
+        showAllMuscles: () => { soloLayer = null; isolate = false; presentLayers.forEach((l) => { layerOn[l.id] = true; }); applyState(); $('[data-notice]').hidden = true; },
+        scene, camera, motionState: () => motion, selected: () => [...selected],
+      };
+      if (opts.dissection) dissect = createDissection(internal, opts.dissection, { items: opts.items, targetId: opts.dissectTarget, autoStart: opts.dissectAuto });
+      if (opts.fibers) overlays = createOverlays(internal, opts.fibers);
+      if (dissect && opts.dissectTarget && !opts.dissectAuto) internal.notice('');
       root.dataset.ready = 'true';
     },
     (ev) => {
@@ -757,6 +808,7 @@ export function mountViewer3D(root, opts) {
   function dispose() {
     if (disposed) return;
     disposed = true;
+    dissect?.dispose();
     cancelAnimationFrame(raf);
     ro.disconnect();
     io.disconnect();
@@ -781,10 +833,16 @@ export function mountViewer3D(root, opts) {
     },
     motion: (id) => (id === undefined ? { id: motion.rig?.def.id, t: motion.t, muscles: motion.rig?.muscles.map((m) => ({ id: m.meshId || m.label, item: m.itemId, mode: m.mode, role: m.role, len: m.len && +m.len.toFixed(2), len0: m.len0 && +m.len0.toFixed(2), pa: m.pa?.toArray().map((n) => +n.toFixed(1)), pb: m.pb?.toArray().map((n) => +n.toFixed(1)) })) } : selectMotion(id)),
     setMotionT: (t) => { if (motion.rig) { motion.t = t; applyMotion(); } },
+    setMotionAngle: (deg) => { if (motion.rig?.tForAngle) { motion.t = motion.rig.tForAngle(deg); applyMotion(); return +motion.rig.measure(motion.t).toFixed(2); } return null; },
+    setDeform: (on) => { if (motion.rig) { motion.rig.setDeform(on); setMotionHidden(true); applyMotion(); root.querySelector('[data-mo="deform"]')?.setAttribute('aria-pressed', on); } },
+    deformInfo: () => (motion.rig ? { on: motion.rig.deformOn(), meshes: motion.rig.deformable() } : null),
+    measureMotion: () => (motion.rig?.measure ? +(motion.rig.measure(motion.t).toFixed(2)) : null),
     motionReady: () => Boolean(motion.rig),
     // 품질 검수용: 메쉬의 현재(변환 후) 중심 좌표
     meshCenter: (name) => { const m = meshes.get(name); if (!m) return null; scene.updateMatrixWorld(true); return new THREE.Box3().setFromObject(m).getCenter(new THREE.Vector3()).toArray().map((n) => +n.toFixed(2)); },
     motionIds: () => (opts.motions || []).map((d) => d.id),
+    dissect: () => dissect,
+    overlays: () => overlays,
     state: () => ({ camera: camera.position.toArray().map((n) => +n.toFixed(2)), target: controls.target.toArray().map((n) => +n.toFixed(2)), distance: +camera.position.distanceTo(controls.target).toFixed(2), selected: [...selected], materials: Object.fromEntries([...meshes].map(([n, m]) => [n, { visible: m.visible, opacity: +m.material.opacity.toFixed(3), highlight: m.material.emissiveIntensity > 0 }])), visible: [...meshes].filter(([, m]) => m.visible).map(([n]) => n), triangles: renderer.info.render.triangles, calls: renderer.info.render.calls }),
   };
   // 품질 검수용: 클릭 정확도 — 각 화면 좌표에서 Raycaster 결과와

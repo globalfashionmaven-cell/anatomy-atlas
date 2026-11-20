@@ -1,6 +1,7 @@
 import { db, CATEGORY, hasVisual } from '../data.js';
 import { search } from '../search.js';
 import { esc, icon, itemCard, itemHref, emptyState } from '../ui.js';
+import { autoDissectHref } from './visual.js';
 
 const EXAMPLES = ['큰가슴근', '대흉근', 'Pectoralis major', '어깨관절', '굽힘', '외전', 'ㅋㄱㅅㄱ', '넙다리신경', '허벅지'];
 
@@ -46,7 +47,7 @@ export function searchView(params) {
       </li>`).join('')}</ul></section>` : ''}
     ${groups.length ? groups.map(([k, rs]) => `
       <section class="block"><h2 class="block-title">${esc(CATEGORY[k].label)} <span class="count">${rs.length}</span></h2>
-      <div class="grid grid-cards">${rs.map((r) => itemCard(r.item, { reason: reasonText(r) })).join('')}</div></section>`).join('')
+      <div class="grid grid-cards">${rs.map((r) => itemCard(r.item, { reason: reasonText(r) }) + (autoDissectHref(r.item.id) ? `<a class="dissect-link" href="${autoDissectHref(r.item.id)}">${icon('layers')}<span>${esc(r.item.koreanName)} — 3D 자동 해부로 찾아가기</span></a>` : '')).join('')}</div></section>`).join('')
       : glossary.length ? '' : emptyState('검색 결과가 없습니다', '철자를 확인하거나 다른 명칭(구용어·영어·초성)으로 검색해 보세요. 아직 등록되지 않은 자료일 수도 있습니다.')}
   `}`;
 

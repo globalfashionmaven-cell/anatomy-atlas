@@ -1,12 +1,12 @@
 """
-어깨세모근 해부학 도판 생성 — BodyParts3D 모델(models/shoulder-right.glb)에서 직접 렌더링
+삼각근 해부학 도판 생성 — BodyParts3D 모델(models/shoulder-right.glb)에서 직접 렌더링
 
 만드는 것 (media/plates/deltoid/):
   hero.svg                대표 도판 (앞가쪽 사선)
   view-*.svg              다각도 7장 (앞·뒤·가쪽·안쪽·앞가쪽 사선·뒤가쪽 사선·위)
   parts.svg               앞·중간·뒤섬유 구분 (가쪽면, 주변 구조 흐리게)
-  origin.svg              이는곳 (위에서 본 빗장뼈·봉우리·어깨뼈가시, 접촉면 계산)
-  insertion.svg           닿는곳 (가쪽에서 본 위팔뼈, 접촉면 계산)
+  origin.svg              기시 (위에서 본 빗장뼈·봉우리·어깨뼈가시, 접촉면 계산)
+  insertion.svg           정지 (가쪽에서 본 위팔뼈, 접촉면 계산)
   abduction/f*.svg        어깨관절 벌림 0–90°  (앞면)
   flexion/f*.svg          어깨관절 굽힘 0–90°  (가쪽면)
   extension/f*.svg        어깨관절 폄 0–50°    (가쪽면)
@@ -15,7 +15,7 @@
 움직임 도판의 단순화 (도판에 명시):
   - 위팔뼈만 '위팔뼈머리 중심(구 맞춤으로 계산)'을 축으로 강체 회전. 어깨뼈·빗장뼈는 고정
     (실제로는 어깨위팔리듬으로 어깨뼈가 함께 돌아감)
-  - 근육은 변형하지 않고 '작용선'(이는곳 접촉면 중심 → 닿는곳 접촉면 중심)으로 표시
+  - 근육은 변형하지 않고 '작용선'(기시 접촉면 중심 → 정지 접촉면 중심)으로 표시
   - 작용선 길이 변화는 기하학 계산값이며 근육 활성도를 뜻하지 않음
 
 사용법: python3 tools/make_deltoid_plates.py   (약 4–6분)
@@ -37,9 +37,9 @@ AREA = (250, 40, 950, 900)
 CREDIT = "형상: BodyParts3D © DBCLS (CC BY 4.0 / 원본 OBJ 표기 CC BY-SA 2.1 JP) · 도판: 자체 렌더링 · 검토 필요"
 
 PART = {
-    "deltoid_anterior": ("#D1495B", "어깨세모근 앞섬유", "빗장부분 · clavicular part"),
-    "deltoid_middle": ("#E89B2E", "어깨세모근 중간섬유", "봉우리부분 · acromial part"),
-    "deltoid_posterior": ("#2E86AB", "어깨세모근 뒤섬유", "가시부분 · spinal part"),
+    "deltoid_anterior": ("#D1495B", "삼각근 앞섬유", "빗장부분 · clavicular part"),
+    "deltoid_middle": ("#E89B2E", "삼각근 중간섬유", "봉우리부분 · acromial part"),
+    "deltoid_posterior": ("#2E86AB", "삼각근 뒤섬유", "가시부분 · spinal part"),
 }
 MUTED_MUSCLE = "#DDB8AF"
 FADED_MUSCLE = "#EFE6E3"
@@ -215,23 +215,23 @@ def main():
         media.append(kw)
 
     # 1) 대표 도판
-    svg, names, _ = plate(meshes, mapping, "oblique-front", "어깨세모근 (Deltoid)",
+    svg, names, _ = plate(meshes, mapping, "oblique-front", "삼각근 (Deltoid)",
                           "앞가쪽에서 본 오른쪽 어깨 · 세 섬유를 색으로 구분")
     url = save("hero.svg", svg)
     add(id="pl-deltoid-hero", anatomyItemId="m-deltoid", type="plate", role="hero", url=url, labels=names,
-        title="어깨세모근 대표 도판", description="앞가쪽 사선에서 본 오른쪽 어깨. 앞섬유(빨강)·중간섬유(주황)·뒤섬유(파랑)",
-        altText="BodyParts3D 모델로 렌더링한 오른쪽 어깨 도판. 어깨세모근 세 부분이 색으로 구분되고 주변 근육·뼈에 명칭이 표시됨")
+        title="삼각근 대표 도판", description="앞가쪽 사선에서 본 오른쪽 어깨. 앞섬유(빨강)·중간섬유(주황)·뒤섬유(파랑)",
+        altText="BodyParts3D 모델로 렌더링한 오른쪽 어깨 도판. 삼각근 세 부분이 색으로 구분되고 주변 근육·뼈에 명칭이 표시됨")
     print("hero")
 
     # 2) 다각도
     for key, (_, _, ko, desc) in VIEWS.items():
-        svg, names, _ = plate(meshes, mapping, key, f"어깨세모근 · {ko}", desc)
+        svg, names, _ = plate(meshes, mapping, key, f"삼각근 · {ko}", desc)
         url = save(f"view-{key}.svg", svg)
         add(id=f"pl-deltoid-view-{key}", anatomyItemId="m-deltoid", type="image", viewAngle=key, url=url, labels=names,
             title=f"{ko}", description=desc, altText=f"BodyParts3D 모델의 오른쪽 어깨를 {ko}에서 렌더링한 도판")
         print("view", key)
 
-    # 3) 섬유 구분 (가쪽면, 주변 흐리게) + 부분별 이는곳 설명
+    # 3) 섬유 구분 (가쪽면, 주변 흐리게) + 부분별 기시 설명
     part_labels = [("deltoid_anterior",), ("deltoid_middle",), ("deltoid_posterior",),
                    ("clavicle", "빗장뼈", "clavicle"), ("scapula", "어깨뼈 (봉우리·가시)", "scapula"), ("humerus", "위팔뼈", "humerus")]
     extra = ('<g font-size="14" fill="#2B2F38">'
@@ -239,16 +239,16 @@ def main():
              '<rect x="40" y="778" width="14" height="14" rx="3" fill="#D1495B"/><text x="62" y="790">앞섬유: 빗장뼈 가쪽 1/3 → 굽힘·안쪽돌림</text>'
              '<rect x="40" y="808" width="14" height="14" rx="3" fill="#E89B2E"/><text x="62" y="820">중간섬유: 봉우리 → 벌림 (주동)</text>'
              '<rect x="40" y="838" width="14" height="14" rx="3" fill="#2E86AB"/><text x="62" y="850">뒤섬유: 어깨뼈가시 → 폄·가쪽돌림</text>'
-             '<text x="40" y="876" fill="#5B6170" font-size="12">닿는곳은 세 부분 공통: 위팔뼈 세모근거친면</text></g>')
-    svg, names, _ = plate(meshes, mapping, "right", "어깨세모근의 세 부분", "가쪽면 · 주변 근육은 흐리게 표시",
+             '<text x="40" y="876" fill="#5B6170" font-size="12">정지은 세 부분 공통: 위팔뼈 세모근거친면</text></g>')
+    svg, names, _ = plate(meshes, mapping, "right", "삼각근의 세 부분", "가쪽면 · 주변 근육은 흐리게 표시",
                       style="faded", label_set=part_labels, extra=extra)
     url = save("parts.svg", svg)
     add(id="pl-deltoid-parts", anatomyItemId="m-deltoid", type="plate", role="parts", url=url, labels=names,
-        title="앞·중간·뒤섬유 구분", description="가쪽면에서 본 세 부분과 각 부분의 이는곳·주요 기능",
-        altText="가쪽에서 본 어깨세모근. 앞섬유·중간섬유·뒤섬유가 서로 다른 색으로 칠해짐")
+        title="앞·중간·뒤섬유 구분", description="가쪽면에서 본 세 부분과 각 부분의 기시·주요 기능",
+        altText="가쪽에서 본 삼각근. 앞섬유·중간섬유·뒤섬유가 서로 다른 색으로 칠해짐")
     print("parts")
 
-    # 4) 이는곳·닿는곳 (모델 접촉면 계산)
+    # 4) 기시·정지 (모델 접촉면 계산)
     hum = meshes["humerus"]["v"]
     hy = [p[1] for p in hum]
     htop, hbot = max(hy), min(hy)
@@ -278,10 +278,10 @@ def main():
         cv, ids, screen, _ = R.render(meshes, bones_items, v, SIZE, AREA, vertex_colors=vc, fit_names=fit_names)
         labs = []
         for part, (color, text, sub) in PART.items():
-            pts = origin_pts.get(part) if "이는곳" in title else insert_pts.get(part)
+            pts = origin_pts.get(part) if "기시" in title else insert_pts.get(part)
             if pts:
                 x, y = screen(centroid(pts))
-                labs.append({"x": x, "y": y, "text": text, "sub": legend[part], "color": color if "이는곳" in title else "#1E2A44", "swatch": True})
+                labs.append({"x": x, "y": y, "text": text, "sub": legend[part], "color": color if "기시" in title else "#1E2A44", "swatch": True})
         for mid, ko, en in (("clavicle", "빗장뼈", "clavicle"), ("scapula", "어깨뼈", "scapula"), ("humerus", "위팔뼈", "humerus")):
             an = R.anchors(cv, ids, {mid})
             if mid in an:
@@ -294,19 +294,19 @@ def main():
         return R.svg(R.png_bytes(w, h, rgb), SIZE, lay, title, subtitle, CREDIT,
                      R.compass(v, 1130, 905, {"up": "위", "front": "앞", "left": "안쪽"}), note), names
 
-    svg, names = attach_plate("top", "어깨세모근의 이는곳", "위에서 본 빗장뼈·봉우리·어깨뼈가시 (화면 위쪽 = 앞)",
+    svg, names = attach_plate("top", "삼각근의 기시", "위에서 본 빗장뼈·봉우리·어깨뼈가시 (화면 위쪽 = 앞)",
                        {"deltoid_anterior": "빗장뼈 가쪽 1/3", "deltoid_middle": "어깨뼈의 봉우리", "deltoid_posterior": "어깨뼈가시"},
                        fit, vc_origin)
     url = save("origin.svg", svg)
     add(id="pl-deltoid-origin", anatomyItemId="m-deltoid", type="plate", role="attachment", url=url, labels=names,
-        title="이는곳 (Origin)", description="세 부분의 이는곳을 부분별 색으로 표시 — 모델 접촉면으로 계산한 근사 영역",
+        title="기시 (Origin)", description="세 부분의 기시을 부분별 색으로 표시 — 모델 접촉면으로 계산한 근사 영역",
         altText="위에서 본 빗장뼈와 어깨뼈. 빗장뼈 가쪽, 봉우리, 어깨뼈가시에 세 가지 색 영역이 칠해짐")
-    svg, names = attach_plate("right", "어깨세모근의 닿는곳", "가쪽에서 본 위팔뼈 · 세모근거친면 (세 부분 공통)",
+    svg, names = attach_plate("right", "삼각근의 정지", "가쪽에서 본 위팔뼈 · 세모근거친면 (세 부분 공통)",
                        {"deltoid_anterior": "→ 세모근거친면", "deltoid_middle": "→ 세모근거친면", "deltoid_posterior": "→ 세모근거친면"},
                        ["humerus", "scapula", "clavicle"], vc_insert)
     url = save("insertion.svg", svg)
     add(id="pl-deltoid-insertion", anatomyItemId="m-deltoid", type="plate", role="attachment", url=url, labels=names,
-        title="닿는곳 (Insertion)", description="위팔뼈 가쪽면의 세모근거친면 — 모델 접촉면으로 계산한 근사 영역",
+        title="정지 (Insertion)", description="위팔뼈 가쪽면의 세모근거친면 — 모델 접촉면으로 계산한 근사 영역",
         altText="가쪽에서 본 위팔뼈. 몸통 중간 위쪽 가쪽면에 진한 남색 영역이 칠해짐")
     print("attachments")
 
@@ -324,9 +324,9 @@ def main():
         return (centroid(o) if o else None), (centroid(ins) if ins else None)
 
     LINES = {
-        "deltoid_anterior": (action_ends("deltoid_anterior", ["clavicle"], 0.22), "#D1495B", "앞섬유"),
-        "deltoid_middle": (action_ends("deltoid_middle", ["scapula"], 0.22), "#E89B2E", "중간섬유"),
-        "deltoid_posterior": (action_ends("deltoid_posterior", ["scapula"], 0.22), "#2E86AB", "뒤섬유"),
+        "deltoid_anterior": (action_ends("deltoid_anterior", ["clavicle"], 0.22), "#D1495B", "전면"),
+        "deltoid_middle": (action_ends("deltoid_middle", ["scapula"], 0.22), "#E89B2E", "측면"),
+        "deltoid_posterior": (action_ends("deltoid_posterior", ["scapula"], 0.22), "#2E86AB", "후면"),
         "supraspinatus": (action_ends("supraspinatus", ["scapula"], 0.0), "#6A994E", "가시위근"),
         "pecmaj_clavicular": (action_ends("pecmaj_clavicular", ["clavicle"], 0.10), "#9B5DE5", "큰가슴근 빗장부분"),
         "teres_major": (action_ends("teres_major", ["scapula"], 0.10), "#5C677D", "큰원근"),
@@ -384,7 +384,7 @@ def main():
                            f'<text x="62" y="{y}">{name}</text><text x="308" y="{y}" text-anchor="end">{length:.1f} cm ({ch:+.0f}%)</text>')
             leg.append("</g>")
             note = ('<text x="600" y="925" font-size="12" fill="#5B6170" text-anchor="middle">'
-                    '단순화: 위팔뼈만 위팔뼈머리 중심에서 회전, 어깨뼈·빗장뼈 고정 · 선 = 이는곳→닿는곳 작용선(근육 변형 아님) · 높은 각도에서 뼈가 겹쳐 보일 수 있음</text>')
+                    '단순화: 위팔뼈만 위팔뼈머리 중심에서 회전, 어깨뼈·빗장뼈 고정 · 선 = 기시→정지 작용선(근육 변형 아님) · 높은 각도에서 뼈가 겹쳐 보일 수 있음</text>')
             w, h, rgb = cv.downsample(2)
             title = f"어깨관절 {ko} {ang}°"
             sub = {"abduction": "앞면 · 관상면 움직임", "flexion": "가쪽면 · 시상면 움직임 (팔이 앞으로)", "extension": "가쪽면 · 시상면 움직임 (팔이 뒤로)"}[seq]
@@ -395,7 +395,7 @@ def main():
             add(id=f"pl-{seq}-{fi:02d}", anatomyItemId=item_id, type="frame", sequence="bp3d", sequenceLabel="모델 도판 (BodyParts3D)",
                 frameOrder=fi, frameLabel=f"{ang}°", url=url, viewAngle=vkey, title=title,
                 description="위팔뼈 회전 + 근육 작용선 (단순화 도판)",
-                altText=f"BodyParts3D 뼈 모델에서 위팔뼈를 {ang}도 {ko}시킨 도판과 어깨세모근 작용선")
+                altText=f"BodyParts3D 뼈 모델에서 위팔뼈를 {ang}도 {ko}시킨 도판과 삼각근 작용선")
             print(seq, ang)
 
     # data/media.json 에 병합 (이 스크립트가 만든 항목만 교체)
