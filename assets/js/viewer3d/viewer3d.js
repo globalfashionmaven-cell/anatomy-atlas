@@ -450,11 +450,12 @@ export function mountViewer3D(root, opts) {
   const clock = new THREE.Clock();
   function loop(now) {
     raf = requestAnimationFrame(loop);
-    if (!visible) return;
     const dt = clock.getDelta();
+    // 진행(해부 단계·동작)은 화면 밖에서도 계속 계산 — 그리기만 생략 (자동 해부가 스크롤 때문에 멈추지 않게)
+    if (dissect?.playing()) { dissect.step(dt); dirty = true; }
+    if (!visible) return;
     if (tween) tween(now);
     if (motion.rig && motion.playing) { stepMotion(dt); dirty = true; }
-    if (dissect?.playing()) { dissect.step(dt); dirty = true; }
     if (overlays) overlays.update();
     const moved = controls.update();
     if (mixer && animState.playing) { mixer.update(dt * animState.speed * (animState.reverse ? -1 : 1)); syncAnim(); dirty = true; }

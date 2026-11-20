@@ -344,7 +344,7 @@ async function render3D(el, item, api, opts = {}) {
     },
   });
   if (mode === 'joint') requestAnimationFrame(() => el.querySelector('.mo')?.scrollIntoView({ block: 'nearest' }));
-  if (mode === 'dissect') requestAnimationFrame(() => el.querySelector('[data-dx]')?.scrollIntoView({ block: 'nearest' }));
+  if (mode === 'dissect') requestAnimationFrame(() => el.querySelector('.v3d-stage')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));
   if (opts.openLayers) {
     const d = el.querySelector('[data-panel="layers"]');
     if (d) { d.open = true; d.scrollIntoView({ block: 'nearest' }); }
