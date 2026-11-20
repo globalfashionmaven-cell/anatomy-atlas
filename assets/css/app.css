@@ -743,7 +743,13 @@ button.text-link { border: 0; background: none; padding: 0; cursor: pointer; }
 .learn-modes button { display: inline-flex; align-items: center; gap: 6px; }
 .btn-dissect { background: #2F6F6A; color: #fff; border-color: #2F6F6A; }
 .dissect-link { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 6px; margin: -4px 0 6px; font-size: 13px; color: #2F6F6A; text-decoration: underline; text-underline-offset: 3px; }
-.v3d-notice { position: absolute; left: 12px; right: 12px; bottom: 56px; z-index: 5; background: rgba(255, 244, 229, .96); color: #6B3A00; border: 1px solid #E0A84E; border-radius: 10px; padding: 8px 12px; font-size: 13px; line-height: 1.5; }
+.v3d-notice { position: absolute; left: 10px; right: 10px; bottom: 52px; z-index: 5; max-height: 45%; overflow: auto; background: rgba(255, 244, 229, .95); color: #6B3A00; border: 1px solid #E0A84E; border-radius: 10px; padding: 6px 34px 6px 10px; font-size: 12.5px; line-height: 1.45; }
+.v3d-notice summary { cursor: pointer; list-style: none; }
+.v3d-notice summary::-webkit-details-marker { display: none; }
+.v3d-notice .nt-more { text-decoration: underline; font-weight: 600; white-space: nowrap; }
+.v3d-notice details[open] .nt-more { display: none; }
+.v3d-notice p { margin: 4px 0 0; }
+.v3d-notice .nt-x { position: absolute; top: 2px; right: 4px; width: 30px; height: 30px; border: 0; background: none; font-size: 18px; color: inherit; cursor: pointer; }
 .dx { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; margin: 10px 0; background: var(--card, #fff); display: grid; gap: 10px; }
 .dx-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 .dx-head h3 { display: inline-flex; align-items: center; gap: 6px; margin: 0; font-size: 16px; }

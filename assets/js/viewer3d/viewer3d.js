@@ -769,7 +769,15 @@ export function mountViewer3D(root, opts) {
         root, meshes, structs, items: opts.items,
         select: (names, o) => select(names, o), focusSelected, dirty: () => { dirty = true; }, wake: () => clock.getDelta(),
         setDissectFade: (set) => { dissectFade = set; applyState(); },
-        notice: (txt) => { const n = $('[data-notice]'); n.hidden = !txt; n.textContent = txt || ''; },
+        notice: (txt) => {
+          const n = $('[data-notice]');
+          n.hidden = !txt;
+          if (!txt) { n.innerHTML = ''; return; }
+          // 3D 화면을 가리지 않게: 첫 문장만 보이고 '자세히'로 펼침, 닫기 가능
+          const first = txt.split(/(?<=[.다])\s/)[0];
+          n.innerHTML = `<details><summary>${esc(first)} <span class="nt-more">자세히</span></summary><p>${esc(txt.slice(first.length).trim())}</p></details><button class="nt-x" data-notice-close aria-label="안내 닫기">×</button>`;
+          n.querySelector('[data-notice-close]').onclick = () => { n.hidden = true; };
+        },
         bonesOnly: () => { soloLayer = null; presentLayers.forEach((l) => { layerOn[l.id] = ['bone', 'cartilage'].includes(l.id); }); applyState(); },
         showAllMuscles: () => { soloLayer = null; isolate = false; presentLayers.forEach((l) => { layerOn[l.id] = true; }); applyState(); $('[data-notice]').hidden = true; },
         scene, camera, motionState: () => motion, selected: () => [...selected],
