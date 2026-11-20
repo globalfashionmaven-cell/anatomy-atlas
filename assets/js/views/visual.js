@@ -260,8 +260,19 @@ function renderInfo(el, item) {
     </div>`;
 }
 
+// 3D 학습 모드: 근육 보기 / 관절 보기 / 층별 해부 — 같은 3D 탭 안에서 전환, URL(?view=3d&mode=)에 남음
+const MODES = [['muscle', '근육 보기', 'angles'], ['joint', '관절 보기', 'film'], ['dissect', '층별 해부', 'layers']];
+const dissectModel = () => db.models3d?.models.find((m) => m.dissection);
+export const autoDissectHref = (id) => (dissectModel()?.autoDissect || []).includes(id) ? `${itemHref(id)}?view=3d&mode=dissect&auto=1` : null;
+async function getJSONMaybe(url) {
+  try { const r = await fetch(url, { cache: 'no-cache' }); return r.ok ? await r.json() : null; } catch { return null; }
+}
+const motionFor = (item, motions) => motions.find((d) => d.movementItemId === item.id)
+  || motions.find((d) => item.relatedMovements.includes(d.movementItemId));
+
 async function render3D(el, item, api, opts = {}) {
-  const found = model3dFor(item);
+  const mode = MODES.some(([m]) => m === opts.mode) ? opts.mode : 'muscle';
+  let found = model3dFor(item);
   el.innerHTML = '<div class="v3d-loading"><span class="spinner"></span><span>3D 뷰어 준비 중…</span></div>';
   let mod;
   try {
@@ -272,21 +283,58 @@ async function render3D(el, item, api, opts = {}) {
     return null;
   }
   if (!el.isConnected) return null;
-  if (!found.inModel) {
-    el.insertAdjacentHTML('beforebegin', `<p class="media-notice v3d-nomesh">${icon('info')}<span>‘${esc(item.koreanName)}’은(는) BodyParts3D 모델에 별도 메쉬가 없어 3D에서 직접 선택할 수 없습니다. 같은 부위의 실제 메쉬(뼈·주변 근육)를 함께 보여 줍니다${found.motions.length ? '. 아래 움직임 시뮬레이션에서 관련 동작을 확인할 수 있습니다' : ''}.</span></p>`);
-  }
   if (!mod.webglAvailable()) {
     el.innerHTML = `<div class="empty"><p class="empty-title">이 브라우저에서는 3D를 표시할 수 없습니다</p><p class="empty-text">WebGL을 지원하지 않거나 꺼져 있습니다. ‘근육 구조’, ‘다각도 이미지’, ‘움직임 분석’ 탭의 자료를 이용해 주세요.</p></div>`;
     return null;
   }
+  // 모드 전환 막대
+  el.insertAdjacentHTML('beforebegin', `<div class="seg learn-modes" role="group" aria-label="3D 학습 모드">${MODES.map(([m, label, ic]) =>
+    `<button data-learn-mode="${m}" aria-pressed="${m === mode}">${icon(ic)}<span>${label}</span></button>`).join('')}</div>`);
+  const bar = el.previousElementSibling;
+  bar.addEventListener('click', (e) => { const b = e.target.closest('[data-learn-mode]'); if (b) api.show('3d', { mode: b.dataset.learnMode }); });
+
+  let dissection = null;
+  let fibers = null;
+  let motions = found.motions;
+  let focusMovementId = opts.motionId || (item.category === 'movement' ? item.id : null);
+  let focusItemId = item.id;
+  let focusMotionId = opts.motionId && motions.some((d) => d.id === opts.motionId) ? opts.motionId : null;
+  const note = (html) => el.insertAdjacentHTML('beforebegin', `<p class="media-notice v3d-nomesh">${icon('info')}<span>${html}</span></p>`);
+  if (mode === 'dissect') {
+    const dm = dissectModel();
+    dissection = dm && await getJSONMaybe(dm.dissection);
+    if (!dissection) { note('층별 해부 데이터를 불러오지 못했습니다.'); return null; }
+    const inRegion = Boolean(dissection.views.back.autoPaths[item.id]) || dm.meshes.some((s) => s.anatomyItemId === item.id);
+    if (!inRegion) note(`‘${esc(item.koreanName)}’ 부위의 층별 해부 데이터는 아직 없습니다. 시범 구현된 <strong>등 부위</strong>로 보여 줍니다.`);
+    found = { ...found, model: dm, layers: dm.layers || found.layers, inModel: dm.meshes.some((s) => s.anatomyItemId === item.id) };
+    motions = [];
+    focusMovementId = null;
+    focusItemId = null; // 목표를 미리 강조하면 겹침이 드러나 버림 → 해부 끝에서 강조
+    dissection.__target = inRegion ? item.id : null;
+  } else {
+    if (found.model.fibers) fibers = await getJSONMaybe(found.model.fibers);
+    if (mode === 'joint') {
+      const mv = motionFor(item, motions);
+      focusMotionId = focusMotionId || mv?.id || null;
+      focusMovementId = focusMovementId || mv?.movementItemId || null;
+      if (!mv && !focusMovementId) note(`‘${esc(item.koreanName)}’에 연결된 3D 관절 동작이 아직 없습니다. 근육 보기 모드에서 구조를 확인하세요.`);
+    }
+    if (!found.inModel) note(`‘${esc(item.koreanName)}’은(는) BodyParts3D 모델에 별도 메쉬가 없어 3D에서 직접 선택할 수 없습니다. 같은 부위의 실제 메쉬(뼈·주변 근육)를 함께 보여 줍니다${autoDissectHref(item.id) ? ` · <a href="${autoDissectHref(item.id)}">층별 해부로 위치 찾아가기</a>` : ''}.`);
+  }
+  if (!el.isConnected) return null;
   const viewer = mod.mountViewer3D(el, {
     model: found.model,
     layers: found.layers,
     items: db.item,
-    focusItemId: item.id,
-    initialView: opts.view,
-    motions: found.motions,
-    focusMovementId: opts.motionId || (item.category === 'movement' ? item.id : null),
+    focusItemId,
+    initialView: opts.view || (mode === 'dissect' ? 'back' : undefined),
+    motions,
+    focusMovementId,
+    focusMotionId,
+    fibers,
+    dissection,
+    dissectTarget: dissection?.__target || null,
+    dissectAuto: Boolean(opts.auto && dissection?.__target),
     cardEl: api.card,
     onOpenMotion: (id) => {
       const it = db.item.get(id);
@@ -295,14 +343,14 @@ async function render3D(el, item, api, opts = {}) {
       else api.show('motion', { motionId: mv?.id });
     },
   });
+  if (mode === 'joint') requestAnimationFrame(() => el.querySelector('.mo')?.scrollIntoView({ block: 'nearest' }));
+  if (mode === 'dissect') requestAnimationFrame(() => el.querySelector('[data-dx]')?.scrollIntoView({ block: 'nearest' }));
   if (opts.openLayers) {
     const d = el.querySelector('[data-panel="layers"]');
     if (d) { d.open = true; d.scrollIntoView({ block: 'nearest' }); }
   }
   return viewer;
 }
-
-// ---------------------------------------------------------------- 패널
 export function visualPanel(item, params = new URLSearchParams()) {
   const tabs = tabsFor(item);
   const want = params.get('view');
@@ -350,7 +398,9 @@ export function visualPanel(item, params = new URLSearchParams()) {
         root.querySelectorAll('[data-tab]').forEach((b) => b.setAttribute('aria-selected', b.dataset.tab === tab));
         // 공유 링크에 현재 탭을 남김 (재렌더 없이)
         const base = location.hash.split('?')[0];
-        history.replaceState(null, '', tab === def ? base : `${base}?view=${tab}`);
+        const q = tab === '3d' && opts.mode && opts.mode !== 'muscle' ? `?view=3d&mode=${opts.mode}` : tab === def ? '' : `?view=${tab}`;
+        history.replaceState(null, '', base + q);
+        root.querySelectorAll('.learn-modes, .v3d-nomesh').forEach((n) => n.remove());
         card.hidden = true;
         const host = fresh();
         if (tab === '3d') render3D(host, item, api, opts).then((v) => { if (state.tab === '3d') state.viewer = v; else v?.dispose(); placeCard(); });
@@ -379,7 +429,7 @@ export function visualPanel(item, params = new URLSearchParams()) {
       const s = e.target.closest('[data-sub]');
       if (s) { state.motionMode = s.dataset.sub; renderMotion(fresh(), item, state); }
     });
-    api.show(first);
+    api.show(first, { mode: params.get('mode'), auto: params.get('auto') === '1' });
   }
   return { html, mount };
 }

@@ -9,7 +9,7 @@
 <polyline points="230.0,567.0 556.0,525.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="556.0" cy="525.0" r="4.5" fill="#C8323C" stroke="#fff" stroke-width="1.6"/>
 <rect x="24" y="552.0" width="14" height="14" rx="3" fill="#C8323C"/>
-<text x="44" y="564.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="start">등세모근</text>
+<text x="44" y="564.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="start">승모근</text>
 <text x="44" y="584.0" font-size="13" fill="#5B6170" text-anchor="start">Trapezius</text>
 <line x1="230.0" y1="567.0" x2="224.0" y2="567.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="230.0,613.0 452.0,576.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
@@ -19,12 +19,12 @@
 <line x1="230.0" y1="613.0" x2="224.0" y2="613.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,424.0 798.0,447.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="798.0" cy="447.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="1176" y="421.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">어깨세모근 뒤섬유 (가시부분)</text>
+<text x="1176" y="421.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">삼각근 후면 (견갑극부)</text>
 <text x="1176" y="441.0" font-size="13" fill="#5B6170" text-anchor="end">Deltoid — spinal part (posterior fibers)</text>
 <line x1="970.0" y1="424.0" x2="976.0" y2="424.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,479.0 676.0,502.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="676.0" cy="502.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="1176" y="476.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">가시아래근</text>
+<text x="1176" y="476.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">극하근</text>
 <text x="1176" y="496.0" font-size="13" fill="#5B6170" text-anchor="end">Infraspinatus</text>
 <line x1="970.0" y1="479.0" x2="976.0" y2="479.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,665.0 649.0,688.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
@@ -34,27 +34,27 @@
 <line x1="970.0" y1="665.0" x2="976.0" y2="665.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,711.0 705.0,690.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="705.0" cy="690.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="1176" y="708.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">앞톱니근</text>
+<text x="1176" y="708.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">전거근</text>
 <text x="1176" y="728.0" font-size="13" fill="#5B6170" text-anchor="end">Serratus anterior</text>
 <line x1="970.0" y1="711.0" x2="976.0" y2="711.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,757.0 866.0,692.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="866.0" cy="692.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="1176" y="754.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">위팔세갈래근 가쪽갈래</text>
+<text x="1176" y="754.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">상완삼두근 가쪽갈래</text>
 <text x="1176" y="774.0" font-size="13" fill="#5B6170" text-anchor="end">Triceps brachii — lateral head</text>
 <line x1="970.0" y1="757.0" x2="976.0" y2="757.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,803.0 813.0,698.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="813.0" cy="698.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="1176" y="800.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">위팔세갈래근 긴갈래</text>
+<text x="1176" y="800.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">상완삼두근 긴갈래</text>
 <text x="1176" y="820.0" font-size="13" fill="#5B6170" text-anchor="end">Triceps brachii — long head</text>
 <line x1="970.0" y1="803.0" x2="976.0" y2="803.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,860.0 892.0,883.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="892.0" cy="883.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="1176" y="857.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">위팔뼈</text>
+<text x="1176" y="857.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">상완골</text>
 <text x="1176" y="877.0" font-size="13" fill="#5B6170" text-anchor="end">Humerus</text>
 <line x1="970.0" y1="860.0" x2="976.0" y2="860.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <g transform="translate(1130,905)" font-size="12" fill="#5B6170"><circle r="36" fill="#fff" stroke="#D2CCBE"/><line x1="0" y1="0" x2="0.0" y2="-26.0" stroke="#2F6F6A" stroke-width="2"/><circle cx="0.0" cy="-26.0" r="2.5" fill="#2F6F6A"/><text x="0.0" y="-41.5" text-anchor="middle" font-weight="600">위</text><line x1="0" y1="0" x2="-26.0" y2="-0.0" stroke="#2F6F6A" stroke-width="2"/><circle cx="-26.0" cy="-0.0" r="2.5" fill="#2F6F6A"/><text x="-45.5" y="4.0" text-anchor="middle" font-weight="600">왼쪽(대상자)</text></g>
-<text x="600" y="925" font-size="12" fill="#5B6170" text-anchor="middle">빨강 = 등세모근 · 시점은 이 근육이 가장 많이 보이는 방향을 자동 선택 · 오른쪽 몸 모델</text>
-<text x="600.0" y="956" font-size="22" font-weight="700" fill="#1E2A44" text-anchor="middle">등세모근 (Trapezius)</text>
+<text x="600" y="925" font-size="12" fill="#5B6170" text-anchor="middle">빨강 = 승모근 · 시점은 이 근육이 가장 많이 보이는 방향을 자동 선택 · 오른쪽 몸 모델</text>
+<text x="600.0" y="956" font-size="22" font-weight="700" fill="#1E2A44" text-anchor="middle">승모근 (Trapezius / 등세모근)</text>
 <text x="600.0" y="980" font-size="14" fill="#5B6170" text-anchor="middle">뒷면에서 본 모습</text>
 <text x="1188" y="18" font-size="11" fill="#8A8F99" text-anchor="end">형상: BodyParts3D © DBCLS (CC BY 4.0 / 원본 OBJ 표기 CC BY-SA 2.1 JP) · 도판: 자체 렌더링 · 검토 필요</text>
 </svg>

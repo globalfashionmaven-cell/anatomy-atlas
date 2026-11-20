@@ -6,7 +6,7 @@
     hero.svg        대표 도판 — 그 근육을 빨강으로, 주변 근육은 흐린 색, 뼈는 상아색
                     시점은 6~7개 후보 중 '그 근육이 가장 많이 보이는 방향'을 저해상도 렌더로 골라 사용
     attach.svg      부착 도판 — 뼈만 그리고, 근육 메쉬가 뼈 표면에 맞닿은 정점을 빨강으로 칠함
-                    (모델 접촉면으로 계산한 '근사 부착 영역'. 이는곳/닿는곳 구분은 하단 본문 텍스트로)
+                    (모델 접촉면으로 계산한 '근사 부착 영역'. 기시/정지 구분은 하단 본문 텍스트로)
   뼈
     hero.svg        그 뼈를 금색으로, 같은 모델의 다른 뼈는 흐리게 (근육 숨김)
   근육 메쉬가 모델에 없는 근육 (배벽 근육·씹기근육·얼굴근육·넓은등근·뭇갈래근 등)
@@ -28,6 +28,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import plate_renderer as R  # noqa: E402
 from make_deltoid_plates import contact_vertices  # noqa: E402
+import terms_py as TERMS  # noqa: E402  화면과 같은 표시 용어 (구용어 주 명칭·기시/정지)
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 GEN = "tools/make_region_plates.py"
@@ -80,7 +81,7 @@ REGION_GROUPS = {
 
 MODELS = {}  # id -> (meshes, mapping, bbox)
 
-# 본문(이는곳·닿는곳) 텍스트에서 뼈를 찾는 정규식 — 뼈 항목/메쉬 그룹별
+# 본문(기시·정지) 텍스트에서 뼈를 찾는 정규식 — 뼈 항목/메쉬 그룹별
 BONE_RX = {
     "b-scapula": r"어깨뼈|봉우리|부리돌기|관절위결절|관절아래결절|가시위오목|가시아래오목|어깨밑오목",
     "b-clavicle": r"빗장뼈",
@@ -126,9 +127,13 @@ def bbox(pts):
 
 def load_models():
     reg = json.load(open(os.path.join(ROOT, "data", "models3d.json"), encoding="utf-8"))
+    raw_items = {i["id"]: i for i in json.load(open(os.path.join(ROOT, "data", "items.json"), encoding="utf-8"))}
     for m in reg["models"]:
         meshes = R.read_glb(os.path.join(ROOT, m["url"]))
         mapping = json.load(open(os.path.join(ROOT, m["mapping"]), encoding="utf-8"))["meshes"]
+        for e in mapping:  # 표시 이름은 구용어, 본문 대조용 원래 이름은 newKoreanName
+            e["newKoreanName"] = e["koreanName"]
+            e["koreanName"] = TERMS.mesh_name(e, raw_items.get(e.get("anatomyItemId") or ""))
         boxes = {k: bbox(v["v"]) for k, v in meshes.items()}
         MODELS[m["id"]] = (meshes, mapping, boxes)
 
@@ -313,7 +318,7 @@ def job_muscle(args):
                                    '이 시점에서는 대상 근육이 다른 구조에 가려 거의 보이지 않음 — 3D 보기에서 회전해 확인하세요</text>')
     note = ('<text x="600" y="925" font-size="12" fill="#5B6170" text-anchor="middle">'
             f'빨강 = {R.esc(item["koreanName"])} · 시점은 이 근육이 가장 많이 보이는 방향을 자동 선택 · 오른쪽 몸 모델</text>')
-    svgt = R.svg(finish(cv, AREA), SIZE, lay, f'{item["koreanName"]} ({item.get("englishName", "")})', f"{vko}에서 본 모습",
+    svgt = R.svg(finish(cv, AREA), SIZE, lay, f'{item["koreanName"]} ({item.get("_sub", "")})', f"{vko}에서 본 모습",
                  CREDIT, compass(v), hidden_note + note)
     url = save(f"media/plates/{item['id']}/hero.svg", svgt)
     lab_names = [l["text"] for l in sorted(lay, key=lambda l: (l["side"], l["ty"]))]
@@ -322,7 +327,7 @@ def job_muscle(args):
                           title=f"{item['koreanName']} 대표 도판", description=f"{vko}에서 본 {item['koreanName']} (빨강) 과 주변 구조" + (f" · 가리는 근육 {len(hid_names)}개 숨김" if hid_names else ""),
                           altText=f"BodyParts3D 모델로 렌더링한 도판. {vko}에서 본 {item['koreanName']}이(가) 빨간색으로, 주변 근육은 흐린 색, 뼈는 상아색으로 표시됨"))
 
-    # 2) 부착 도판 — 맞닿은 뼈 중 '본문 이는곳·닿는곳에 이름이 나오는 뼈'만 색칠
+    # 2) 부착 도판 — 맞닿은 뼈 중 '본문 기시·정지에 이름이 나오는 뼈'만 색칠
     #    (근육이 뼈 위에 단순히 얹혀 있는 면(예: 위팔두갈래근 ↔ 위팔뼈 몸통)을 부착으로 오해하지 않게)
     o_text = " ".join(item.get("origin") or [])
     i_text = " ".join(item.get("insertion") or [])
@@ -342,7 +347,7 @@ def job_muscle(args):
     for key, lst in groups.items():
         if any(b in touched for b, _ in lst):
             continue
-        named = [x for x in lst if (entries[x[0]].get("koreanName") or "@@").replace("오른쪽 ", "") in o_text + i_text]
+        named = [x for x in lst if (entries[x[0]].get("newKoreanName") or "@@").replace("오른쪽 ", "") in o_text + i_text]
         b, k = min(named or lst, key=lambda x: math.dist(tc, [(boxes[x[0]][0][i] + boxes[x[0]][1][i]) / 2 for i in range(3)]))
         missing[b] = k
     matched = bool(att)
@@ -350,7 +355,7 @@ def job_muscle(args):
         att = {b: "contact" for b in touched}
     if att:
         KCOL = {"origin": TARGET, "insertion": "#1E2A44", "both": "#7B3FA0", "contact": TARGET}
-        KLAB = {"origin": "이는곳 (근사)", "insertion": "닿는곳 (근사)", "both": "이는곳·닿는곳 (근사)", "contact": "맞닿은 면"}
+        KLAB = {"origin": "기시 (근사)", "insertion": "정지 (근사)", "both": "기시·정지 (근사)", "contact": "맞닿은 면"}
         vc = {}
         for bname, k in att.items():
             arr = [None] * len(meshes[bname]["v"])
@@ -383,24 +388,24 @@ def job_muscle(args):
         lay = R.layout_labels(labs[:11], SIZE, AREA_ATT, gap=46, bottom=790)
         o_txt = R.esc(short(item.get("origin"), 62))
         i_txt = R.esc(short(item.get("insertion"), 62))
-        how = (f"색칠 = 근육 메쉬가 {tol_used}cm 이내로 맞닿은 뼈 표면 중, 본문 이는곳·닿는곳에 이름이 나오는 뼈만 (근사 영역)" if matched else
+        how = (f"색칠 = 근육 메쉬가 {tol_used}cm 이내로 맞닿은 뼈 표면 중, 본문 기시·정지에 이름이 나오는 뼈만 (근사 영역)" if matched else
                f"색칠 = 근육 메쉬가 {tol_used}cm 이내로 맞닿은 뼈 표면 (본문과 자동 대응 실패 — 단순 접촉면이 포함될 수 있음)")
         extra = ('<g font-size="15" fill="#2B2F38">'
                  f'<rect x="40" y="829" width="14" height="14" rx="3" fill="{TARGET}"/>'
-                 f'<text x="62" y="842"><tspan font-weight="700" fill="#1E2A44">이는곳</tspan>  {o_txt}</text>'
+                 f'<text x="62" y="842"><tspan font-weight="700" fill="#1E2A44">기시</tspan>  {o_txt}</text>'
                  '<rect x="40" y="853" width="14" height="14" rx="3" fill="#1E2A44"/>'
-                 f'<text x="62" y="866"><tspan font-weight="700" fill="#1E2A44">닿는곳</tspan>  {i_txt}</text></g>'
+                 f'<text x="62" y="866"><tspan font-weight="700" fill="#1E2A44">정지</tspan>  {i_txt}</text></g>'
                  f'<text x="600" y="900" font-size="12" fill="#5B6170" text-anchor="middle">{R.esc(how)} · 힘줄이 메쉬에 없으면 실제와 다를 수 있음</text>')
-        svgt = R.svg(finish(cv, AREA_ATT), SIZE, lay, f"{item['koreanName']} · 이는곳·닿는곳", f"{vko} · 뼈만 표시",
+        svgt = R.svg(finish(cv, AREA_ATT), SIZE, lay, f"{item['koreanName']} · 기시·정지", f"{vko} · 뼈만 표시",
                      CREDIT, compass(v), extra)
         url = save(f"media/plates/{item['id']}/attach.svg", svgt)
         out.append(base_media(id=f"pl-{item['id']}-attach", anatomyItemId=item["id"], type="plate", role="attachment", url=url, viewAngle=vkey,
                               labels=[l["text"] + " — " + l["sub"] for l in lay], model=model_id, contactToleranceCm=tol_used,
                               attachMatchedToText=matched,
-                              title="이는곳·닿는곳 (근사 영역)",
-                              description=("모델 접촉면 중 본문에 나오는 뼈만 색칠 — 빨강 이는곳, 남색 닿는곳" if matched else
+                              title="기시·정지 (근사 영역)",
+                              description=("모델 접촉면 중 본문에 나오는 뼈만 색칠 — 빨강 기시, 남색 정지" if matched else
                                            "모델 접촉면 (본문 대응 실패, 단순 접촉 포함 가능)"),
-                              altText=f"{item['koreanName']}이(가) 붙는 뼈만 그린 도판. 이는곳은 빨간색, 닿는곳은 남색으로 뼈 표면이 칠해짐"))
+                              altText=f"{item['koreanName']}이(가) 붙는 뼈만 그린 도판. 기시은 빨간색, 정지은 남색으로 뼈 표면이 칠해짐"))
     return item["id"], vkey, len(touched), out
 
 
@@ -438,7 +443,7 @@ def job_bone(args):
             used.add(text)
             labs.append({"x": an[n][0], "y": an[n][1], "text": text, "sub": "", "color": "#2B2F38"})
     lay = R.layout_labels(labs, SIZE, AREA, gap=46)
-    svgt = R.svg(finish(cv, AREA), SIZE, lay, f"{item['koreanName']} ({item.get('englishName', '')})", f"{vko}에서 본 모습 · 금색 = 대상 뼈",
+    svgt = R.svg(finish(cv, AREA), SIZE, lay, f"{item['koreanName']} ({item.get('_sub', '')})", f"{vko}에서 본 모습 · 금색 = 대상 뼈",
                  CREDIT, compass(v))
     url = save(f"media/plates/{item['id']}/hero.svg", svgt)
     return item["id"], vkey, 0, [base_media(id=f"pl-{item['id']}-hero", anatomyItemId=item["id"], type="plate", role="hero", url=url, viewAngle=vkey,
@@ -476,7 +481,7 @@ def job_region(args):
              '<text x="600" y="64" font-size="17" font-weight="700" fill="#8A4B00" text-anchor="middle">근육 형상 없음 — 뼈대만 표시한 부위 도판</text>'
              f'<text x="600" y="86" font-size="13" fill="#8A4B00" text-anchor="middle">{R.esc(short(mus, 70))}</text></g>'
              '<text x="600" y="925" font-size="12" fill="#5B6170" text-anchor="middle">'
-             '사용한 3D 모델(BodyParts3D)에 이 근육들의 메쉬가 없어 근육 모양을 그리지 않았습니다 · 이는곳·닿는곳은 본문 텍스트 참고</text>')
+             '사용한 3D 모델(BodyParts3D)에 이 근육들의 메쉬가 없어 근육 모양을 그리지 않았습니다 · 기시·정지은 본문 텍스트 참고</text>')
     svgt = R.svg(finish(cv, AREA), SIZE, lay, title, f"{vko} · 근육 형상 없음", CREDIT, compass(v), extra)
     url = save(f"media/plates/region/{gid}.svg", svgt)
     out = []
@@ -504,6 +509,9 @@ def run(job):
 def main():
     load_models()
     items = json.load(open(os.path.join(ROOT, "data", "items.json"), encoding="utf-8"))
+    for it in items:  # 표시 이름 (구용어) + 병기용 '영어 / 신용어'
+        it["_sub"] = TERMS.sub_name(it)
+        it["koreanName"] = TERMS.item_name(it)
     by_id = {i["id"]: i for i in items}
     only = set(sys.argv[1:])
     jobs = []

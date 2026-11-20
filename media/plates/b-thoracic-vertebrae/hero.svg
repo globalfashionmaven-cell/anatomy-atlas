@@ -4,12 +4,12 @@
 <polyline points="230.0,454.0 590.0,454.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="590.0" cy="454.0" r="4.5" fill="#9A6B12" stroke="#fff" stroke-width="1.6"/>
 <rect x="24" y="439.0" width="14" height="14" rx="3" fill="#9A6B12"/>
-<text x="44" y="451.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="start">7번 등뼈</text>
+<text x="44" y="451.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="start">7번 흉추</text>
 <text x="44" y="471.0" font-size="13" fill="#5B6170" text-anchor="start">T7</text>
 <line x1="230.0" y1="454.0" x2="224.0" y2="454.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="230.0,524.0 395.0,524.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="395.0" cy="524.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="24" y="521.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="start">왼쪽 갈비뼈 (12)</text>
+<text x="24" y="521.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="start">늑골</text>
 <line x1="230.0" y1="524.0" x2="224.0" y2="524.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="230.0,570.0 478.0,542.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="478.0" cy="542.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
@@ -18,51 +18,47 @@
 <polyline points="970.0,173.0 600.0,173.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="600.0" cy="173.0" r="4.5" fill="#9A6B12" stroke="#fff" stroke-width="1.6"/>
 <rect x="1162" y="158.0" width="14" height="14" rx="3" fill="#9A6B12"/>
-<text x="1156" y="170.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">3번 등뼈</text>
+<text x="1156" y="170.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">3번 흉추</text>
 <text x="1156" y="190.0" font-size="13" fill="#5B6170" text-anchor="end">T3</text>
 <line x1="970.0" y1="173.0" x2="976.0" y2="173.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,236.0 603.0,236.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="603.0" cy="236.0" r="4.5" fill="#9A6B12" stroke="#fff" stroke-width="1.6"/>
 <rect x="1162" y="221.0" width="14" height="14" rx="3" fill="#9A6B12"/>
-<text x="1156" y="233.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">4번 등뼈</text>
+<text x="1156" y="233.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">4번 흉추</text>
 <text x="1156" y="253.0" font-size="13" fill="#5B6170" text-anchor="end">T4</text>
 <line x1="970.0" y1="236.0" x2="976.0" y2="236.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,302.0 600.0,302.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="600.0" cy="302.0" r="4.5" fill="#9A6B12" stroke="#fff" stroke-width="1.6"/>
 <rect x="1162" y="287.0" width="14" height="14" rx="3" fill="#9A6B12"/>
-<text x="1156" y="299.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">5번 등뼈</text>
+<text x="1156" y="299.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">5번 흉추</text>
 <text x="1156" y="319.0" font-size="13" fill="#5B6170" text-anchor="end">T5</text>
 <line x1="970.0" y1="302.0" x2="976.0" y2="302.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,376.0 611.0,376.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="611.0" cy="376.0" r="4.5" fill="#9A6B12" stroke="#fff" stroke-width="1.6"/>
 <rect x="1162" y="361.0" width="14" height="14" rx="3" fill="#9A6B12"/>
-<text x="1156" y="373.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">6번 등뼈</text>
+<text x="1156" y="373.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">6번 흉추</text>
 <text x="1156" y="393.0" font-size="13" fill="#5B6170" text-anchor="end">T6</text>
 <line x1="970.0" y1="376.0" x2="976.0" y2="376.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
-<polyline points="970.0,524.0 805.0,524.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
-<circle cx="805.0" cy="524.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="1176" y="521.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">오른쪽 갈비뼈 (12)</text>
-<line x1="970.0" y1="524.0" x2="976.0" y2="524.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
-<polyline points="970.0,570.0 611.0,529.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
+<polyline points="970.0,529.0 611.0,529.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="611.0" cy="529.0" r="4.5" fill="#9A6B12" stroke="#fff" stroke-width="1.6"/>
-<rect x="1162" y="555.0" width="14" height="14" rx="3" fill="#9A6B12"/>
-<text x="1156" y="567.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">8번 등뼈</text>
-<text x="1156" y="587.0" font-size="13" fill="#5B6170" text-anchor="end">T8</text>
-<line x1="970.0" y1="570.0" x2="976.0" y2="570.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
-<polyline points="970.0,616.0 611.0,601.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
+<rect x="1162" y="514.0" width="14" height="14" rx="3" fill="#9A6B12"/>
+<text x="1156" y="526.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">8번 흉추</text>
+<text x="1156" y="546.0" font-size="13" fill="#5B6170" text-anchor="end">T8</text>
+<line x1="970.0" y1="529.0" x2="976.0" y2="529.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
+<polyline points="970.0,601.0 611.0,601.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="611.0" cy="601.0" r="4.5" fill="#9A6B12" stroke="#fff" stroke-width="1.6"/>
-<rect x="1162" y="601.0" width="14" height="14" rx="3" fill="#9A6B12"/>
-<text x="1156" y="613.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">9번 등뼈</text>
-<text x="1156" y="633.0" font-size="13" fill="#5B6170" text-anchor="end">T9</text>
-<line x1="970.0" y1="616.0" x2="976.0" y2="616.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
+<rect x="1162" y="586.0" width="14" height="14" rx="3" fill="#9A6B12"/>
+<text x="1156" y="598.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">9번 흉추</text>
+<text x="1156" y="618.0" font-size="13" fill="#5B6170" text-anchor="end">T9</text>
+<line x1="970.0" y1="601.0" x2="976.0" y2="601.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,683.0 605.0,683.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="605.0" cy="683.0" r="4.5" fill="#9A6B12" stroke="#fff" stroke-width="1.6"/>
 <rect x="1162" y="668.0" width="14" height="14" rx="3" fill="#9A6B12"/>
-<text x="1156" y="680.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">10번 등뼈</text>
+<text x="1156" y="680.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">10번 흉추</text>
 <text x="1156" y="700.0" font-size="13" fill="#5B6170" text-anchor="end">T10</text>
 <line x1="970.0" y1="683.0" x2="976.0" y2="683.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <g transform="translate(1130,905)" font-size="12" fill="#5B6170"><circle r="36" fill="#fff" stroke="#D2CCBE"/><line x1="0" y1="0" x2="0.0" y2="-26.0" stroke="#2F6F6A" stroke-width="2"/><circle cx="0.0" cy="-26.0" r="2.5" fill="#2F6F6A"/><text x="0.0" y="-41.5" text-anchor="middle" font-weight="600">위</text><line x1="0" y1="0" x2="-26.0" y2="-0.0" stroke="#2F6F6A" stroke-width="2"/><circle cx="-26.0" cy="-0.0" r="2.5" fill="#2F6F6A"/><text x="-45.5" y="4.0" text-anchor="middle" font-weight="600">왼쪽(대상자)</text></g>
-<text x="600.0" y="956" font-size="22" font-weight="700" fill="#1E2A44" text-anchor="middle">등뼈 (Thoracic vertebrae)</text>
+<text x="600.0" y="956" font-size="22" font-weight="700" fill="#1E2A44" text-anchor="middle">흉추 (Thoracic vertebrae / 등뼈)</text>
 <text x="600.0" y="980" font-size="14" fill="#5B6170" text-anchor="middle">뒷면에서 본 모습 · 금색 = 대상 뼈</text>
 <text x="1188" y="18" font-size="11" fill="#8A8F99" text-anchor="end">형상: BodyParts3D © DBCLS (CC BY 4.0 / 원본 OBJ 표기 CC BY-SA 2.1 JP) · 도판: 자체 렌더링 · 검토 필요</text>
 </svg>

@@ -2,12 +2,14 @@
 //   근육·뼈: 구용어가 주 명칭 (삼각근), 신용어는 it.newKoreanName 으로 보존해 병기 (Deltoid / 어깨세모근)
 //   움직임: 운동 용어만 교체 (어깨관절 벌림 → 어깨관절 외전)
 //   검색: 신용어는 oldKoreanName(관련 명칭) 목록 맨 앞에 넣어 계속 검색됨
-export const terms = { attach: { origin: '기시', insertion: '정지', help: '' }, partLabels: {}, ready: false, moveRe: null, moveMap: new Map() };
+export const terms = { attach: { origin: '기시', insertion: '정지', help: '' }, partLabels: {}, protect: [], overrides: {}, ready: false, moveRe: null, moveMap: new Map() };
 
 export function initTerms(def) {
   if (!def) return;
   Object.assign(terms.attach, def.attach || {});
   terms.partLabels = def.partLabels || {};
+  terms.protect = def.protect || [];
+  terms.overrides = def.itemOverrides || {};
   const pairs = [...(def.movementTerms || [])].sort((a, b) => b[0].length - a[0].length);
   pairs.forEach(([from, to]) => terms.moveMap.set(from, to));
   // 낱말 경계(공백·가운뎃점·괄호·쉼표·빗금)일 때만 바꿈 → '노쪽손목굽힘근'처럼 근육 이름 안의 글자는 그대로
@@ -18,7 +20,11 @@ export function initTerms(def) {
 
 export function moveTerm(s) {
   if (!s || !terms.moveRe) return s;
-  return String(s).replace(terms.moveRe, (m) => terms.moveMap.get(m) || m);
+  // 바꾸면 안 되는 구절(예: 입 벌림 ≠ 외전)은 잠시 표식으로 감쌌다가 되돌림
+  let out = String(s);
+  terms.protect.forEach((p, i) => { out = out.split(p).join(`\u0001${i}\u0002`); });
+  out = out.replace(terms.moveRe, (m) => terms.moveMap.get(m) || m);
+  return out.replace(/\u0001(\d+)\u0002/g, (_, i) => terms.protect[Number(i)]);
 }
 
 const uniq = (a) => [...new Set(a.filter(Boolean))];
@@ -30,6 +36,7 @@ export function applyItemTerms(it) {
   let main = it.koreanName;
   if ((it.category === 'muscle' || it.category === 'bone') && it.oldKoreanName?.[0]) main = it.oldKoreanName[0];
   else if (it.category === 'movement') main = moveTerm(it.koreanName);
+  if (terms.overrides[it.id]) main = terms.overrides[it.id];
   it.koreanName = main;
   it.oldKoreanName = uniq([main !== it.newKoreanName ? it.newKoreanName : '', ...(it.oldKoreanName || []).filter((x) => x !== main)]);
   if (it.category === 'muscle') {

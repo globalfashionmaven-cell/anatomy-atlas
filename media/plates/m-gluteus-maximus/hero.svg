@@ -8,53 +8,53 @@
 <line x1="230.0" y1="44.0" x2="224.0" y2="44.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="230.0,205.0 495.0,205.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="495.0" cy="205.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="24" y="202.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="start">엉치뼈</text>
+<text x="24" y="202.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="start">천골</text>
 <text x="24" y="222.0" font-size="13" fill="#5B6170" text-anchor="start">Sacrum</text>
 <line x1="230.0" y1="205.0" x2="224.0" y2="205.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="230.0,776.0 563.0,776.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="563.0" cy="776.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="24" y="773.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="start">반막근</text>
+<text x="24" y="773.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="start">반막양근</text>
 <text x="24" y="793.0" font-size="13" fill="#5B6170" text-anchor="start">Semimembranosus</text>
 <line x1="230.0" y1="776.0" x2="224.0" y2="776.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,71.0 655.0,71.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="655.0" cy="71.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="1176" y="68.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">볼기뼈</text>
+<text x="1176" y="68.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">관골</text>
 <text x="1176" y="88.0" font-size="13" fill="#5B6170" text-anchor="end">Hip bone</text>
 <line x1="970.0" y1="71.0" x2="976.0" y2="71.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,150.0 745.0,150.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="745.0" cy="150.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="1176" y="147.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">중간볼기근</text>
+<text x="1176" y="147.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">중둔근</text>
 <text x="1176" y="167.0" font-size="13" fill="#5B6170" text-anchor="end">Gluteus medius</text>
 <line x1="970.0" y1="150.0" x2="976.0" y2="150.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,330.0 664.0,330.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="664.0" cy="330.0" r="4.5" fill="#C8323C" stroke="#fff" stroke-width="1.6"/>
 <rect x="1162" y="315.0" width="14" height="14" rx="3" fill="#C8323C"/>
-<text x="1156" y="327.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">큰볼기근</text>
+<text x="1156" y="327.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">대둔근</text>
 <text x="1156" y="347.0" font-size="13" fill="#5B6170" text-anchor="end">Gluteus maximus</text>
 <line x1="970.0" y1="330.0" x2="976.0" y2="330.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,404.0 781.0,404.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="781.0" cy="404.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="1176" y="401.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">넙다리뼈</text>
+<text x="1176" y="401.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">대퇴골</text>
 <text x="1176" y="421.0" font-size="13" fill="#5B6170" text-anchor="end">Femur</text>
 <line x1="970.0" y1="404.0" x2="976.0" y2="404.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,700.0 780.0,700.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="780.0" cy="700.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="1176" y="697.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">가쪽넓은근</text>
+<text x="1176" y="697.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">외측광근</text>
 <text x="1176" y="717.0" font-size="13" fill="#5B6170" text-anchor="end">Vastus lateralis</text>
 <line x1="970.0" y1="700.0" x2="976.0" y2="700.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,746.0 601.0,738.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="601.0" cy="738.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="1176" y="743.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">반힘줄근</text>
+<text x="1176" y="743.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">반건양근</text>
 <text x="1176" y="763.0" font-size="13" fill="#5B6170" text-anchor="end">Semitendinosus</text>
 <line x1="970.0" y1="746.0" x2="976.0" y2="746.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,792.0 688.0,772.0" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="688.0" cy="772.0" r="4.5" fill="#2B2F38" stroke="#fff" stroke-width="1.6"/>
-<text x="1176" y="789.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">넙다리두갈래근 긴갈래</text>
+<text x="1176" y="789.0" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">대퇴이두근 긴갈래</text>
 <text x="1176" y="809.0" font-size="13" fill="#5B6170" text-anchor="end">Biceps femoris — long head</text>
 <line x1="970.0" y1="792.0" x2="976.0" y2="792.0" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <g transform="translate(1130,905)" font-size="12" fill="#5B6170"><circle r="36" fill="#fff" stroke="#D2CCBE"/><line x1="0" y1="0" x2="0.0" y2="-26.0" stroke="#2F6F6A" stroke-width="2"/><circle cx="0.0" cy="-26.0" r="2.5" fill="#2F6F6A"/><text x="0.0" y="-41.5" text-anchor="middle" font-weight="600">위</text><line x1="0" y1="0" x2="-26.0" y2="-0.0" stroke="#2F6F6A" stroke-width="2"/><circle cx="-26.0" cy="-0.0" r="2.5" fill="#2F6F6A"/><text x="-45.5" y="4.0" text-anchor="middle" font-weight="600">왼쪽(대상자)</text></g>
-<text x="600" y="925" font-size="12" fill="#5B6170" text-anchor="middle">빨강 = 큰볼기근 · 시점은 이 근육이 가장 많이 보이는 방향을 자동 선택 · 오른쪽 몸 모델</text>
-<text x="600.0" y="956" font-size="22" font-weight="700" fill="#1E2A44" text-anchor="middle">큰볼기근 (Gluteus maximus)</text>
+<text x="600" y="925" font-size="12" fill="#5B6170" text-anchor="middle">빨강 = 대둔근 · 시점은 이 근육이 가장 많이 보이는 방향을 자동 선택 · 오른쪽 몸 모델</text>
+<text x="600.0" y="956" font-size="22" font-weight="700" fill="#1E2A44" text-anchor="middle">대둔근 (Gluteus maximus / 큰볼기근)</text>
 <text x="600.0" y="980" font-size="14" fill="#5B6170" text-anchor="middle">뒷면에서 본 모습</text>
 <text x="1188" y="18" font-size="11" fill="#8A8F99" text-anchor="end">형상: BodyParts3D © DBCLS (CC BY 4.0 / 원본 OBJ 표기 CC BY-SA 2.1 JP) · 도판: 자체 렌더링 · 검토 필요</text>
 </svg>

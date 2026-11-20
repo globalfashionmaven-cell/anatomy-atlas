@@ -4,24 +4,24 @@
 <polyline points="230.0,390.9 597.1,390.9" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="597.1" cy="390.9" r="4.5" fill="#C8323C" stroke="#fff" stroke-width="1.6"/>
 <rect x="24" y="375.9291817190184" width="14" height="14" rx="3" fill="#C8323C"/>
-<text x="44" y="387.9" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="start">위팔뼈</text>
-<text x="44" y="407.9" font-size="13" fill="#5B6170" text-anchor="start">이는곳 (근사)</text>
+<text x="44" y="387.9" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="start">상완골</text>
+<text x="44" y="407.9" font-size="13" fill="#5B6170" text-anchor="start">기시 (근사)</text>
 <line x1="230.0" y1="390.9" x2="224.0" y2="390.9" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,644.1 609.1,644.1" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="609.1" cy="644.1" r="4.5" fill="#C8323C" stroke="#fff" stroke-width="1.6"/>
 <rect x="1162" y="629.1321565499753" width="14" height="14" rx="3" fill="#C8323C"/>
-<text x="1156" y="641.1" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">자뼈</text>
-<text x="1156" y="661.1" font-size="13" fill="#5B6170" text-anchor="end">이는곳 (근사)</text>
+<text x="1156" y="641.1" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">척골</text>
+<text x="1156" y="661.1" font-size="13" fill="#5B6170" text-anchor="end">기시 (근사)</text>
 <line x1="970.0" y1="644.1" x2="976.0" y2="644.1" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <polyline points="970.0,723.2 613.3,723.2" fill="none" stroke="#2B2F38" stroke-width="1.3"/>
 <circle cx="613.3" cy="723.2" r="4.5" fill="#1E2A44" stroke="#fff" stroke-width="1.6"/>
 <rect x="1162" y="708.1872501068749" width="14" height="14" rx="3" fill="#1E2A44"/>
-<text x="1156" y="720.2" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">손허리뼈 (1–5)</text>
-<text x="1156" y="740.2" font-size="13" fill="#5B6170" text-anchor="end">닿는곳 (근사)</text>
+<text x="1156" y="720.2" font-size="19" font-weight="700" fill="#1E2A44" text-anchor="end">중수골</text>
+<text x="1156" y="740.2" font-size="13" fill="#5B6170" text-anchor="end">정지 (근사)</text>
 <line x1="970.0" y1="723.2" x2="976.0" y2="723.2" stroke="#2B2F38" stroke-width="0.8" stroke-dasharray="2 3" opacity=".5"/>
 <g transform="translate(1130,905)" font-size="12" fill="#5B6170"><circle r="36" fill="#fff" stroke="#D2CCBE"/><line x1="0" y1="0" x2="0.0" y2="-26.0" stroke="#2F6F6A" stroke-width="2"/><circle cx="0.0" cy="-26.0" r="2.5" fill="#2F6F6A"/><text x="0.0" y="-41.5" text-anchor="middle" font-weight="600">위</text><line x1="0" y1="0" x2="-26.0" y2="-0.0" stroke="#2F6F6A" stroke-width="2"/><circle cx="-26.0" cy="-0.0" r="2.5" fill="#2F6F6A"/><text x="-45.5" y="4.0" text-anchor="middle" font-weight="600">왼쪽(대상자)</text></g>
-<g font-size="15" fill="#2B2F38"><rect x="40" y="829" width="14" height="14" rx="3" fill="#C8323C"/><text x="62" y="842"><tspan font-weight="700" fill="#1E2A44">이는곳</tspan>  위팔뼈 가쪽위관절융기 · 자뼈 뒷모서리</text><rect x="40" y="853" width="14" height="14" rx="3" fill="#1E2A44"/><text x="62" y="866"><tspan font-weight="700" fill="#1E2A44">닿는곳</tspan>  5번 손허리뼈 바닥</text></g><text x="600" y="900" font-size="12" fill="#5B6170" text-anchor="middle">색칠 = 근육 메쉬가 0.35cm 이내로 맞닿은 뼈 표면 중, 본문 이는곳·닿는곳에 이름이 나오는 뼈만 (근사 영역) · 힘줄이 메쉬에 없으면 실제와 다를 수 있음</text>
-<text x="600.0" y="956" font-size="22" font-weight="700" fill="#1E2A44" text-anchor="middle">자쪽손목폄근 · 이는곳·닿는곳</text>
+<g font-size="15" fill="#2B2F38"><rect x="40" y="829" width="14" height="14" rx="3" fill="#C8323C"/><text x="62" y="842"><tspan font-weight="700" fill="#1E2A44">기시</tspan>  위팔뼈 가쪽위관절융기 · 자뼈 뒷모서리</text><rect x="40" y="853" width="14" height="14" rx="3" fill="#1E2A44"/><text x="62" y="866"><tspan font-weight="700" fill="#1E2A44">정지</tspan>  5번 손허리뼈 바닥</text></g><text x="600" y="900" font-size="12" fill="#5B6170" text-anchor="middle">색칠 = 근육 메쉬가 0.35cm 이내로 맞닿은 뼈 표면 중, 본문 기시·정지에 이름이 나오는 뼈만 (근사 영역) · 힘줄이 메쉬에 없으면 실제와 다를 수 있음</text>
+<text x="600.0" y="956" font-size="22" font-weight="700" fill="#1E2A44" text-anchor="middle">척측수근신근 · 기시·정지</text>
 <text x="600.0" y="980" font-size="14" fill="#5B6170" text-anchor="middle">뒷면 · 뼈만 표시</text>
 <text x="1188" y="18" font-size="11" fill="#8A8F99" text-anchor="end">형상: BodyParts3D © DBCLS (CC BY 4.0 / 원본 OBJ 표기 CC BY-SA 2.1 JP) · 도판: 자체 렌더링 · 검토 필요</text>
 </svg>

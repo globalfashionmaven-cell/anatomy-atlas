@@ -241,6 +241,71 @@ def main():
                 errors.append(f"{tag}: 없는 출처 {s}")
     stats["motions"] = len(motions)
 
+    # ---------------- V5: 용어표 · 층별 해부 · 근섬유 · 각도 슬라이더
+    terms = load("data/terms.json") or {}
+    for pair in terms.get("movementTerms", []):
+        if not (isinstance(pair, list) and len(pair) == 2 and all(isinstance(x, str) and x for x in pair)):
+            errors.append(f"terms.json: 잘못된 용어 쌍 {pair}")
+    for m in [x for x in items if x["category"] in ("muscle", "bone")]:
+        if not m.get("oldKoreanName"):
+            warns.append(f"{m['id']}: 구용어(oldKoreanName) 없음 → 신용어로 표시")
+    for mdl in reg["models"]:
+        nodes = model_nodes.get(mdl["id"], set())
+        if mdl.get("dissection"):
+            dz = load(mdl["dissection"])
+            if not dz:
+                continue
+            for vk, vw in dz["views"].items():
+                if not vw["steps"]:
+                    errors.append(f"해부 {mdl['id']}/{vk}: 단계 없음")
+                for st in vw["steps"]:
+                    for m_ in st["remove"] + st["exposes"]:
+                        if m_ not in nodes:
+                            errors.append(f"해부 {mdl['id']}: 단계 메쉬 '{m_}' 가 GLB에 없음")
+                for iid, ap in vw["autoPaths"].items():
+                    if iid not in known:
+                        errors.append(f"해부 {mdl['id']}: 자동 탐색 항목 {iid} 없음")
+                    for m_ in ap["path"] + ap.get("target", []) + ap.get("proxyBones", []):
+                        if m_ not in nodes:
+                            errors.append(f"해부 {mdl['id']}: 경로 메쉬 '{m_}' 없음")
+                    flat = [m_ for st in ap["steps"] for m_ in st]
+                    if sorted(flat) != sorted(ap["path"]):
+                        errors.append(f"해부 {mdl['id']}: {iid} 경로와 단계가 다름 (빠진 메쉬 {sorted(set(ap['path']) - set(flat))})")
+                    if ap.get("proxy") and not ap.get("note"):
+                        errors.append(f"해부 {mdl['id']}: {iid} 대리 영역 안내문 없음")
+            for m_, rf in dz["reflect"].items():
+                if m_ not in nodes:
+                    errors.append(f"해부 {mdl['id']}: 젖히기 메쉬 '{m_}' 없음")
+                if abs(sum(a * a for a in rf["axis"]) - 1) > 1e-2 or rf["span"] <= 0:
+                    errors.append(f"해부 {mdl['id']}: '{m_}' 경첩 정의 오류")
+            for iid in mdl.get("autoDissect", []):
+                if iid not in dz["views"]["back"]["autoPaths"] or not dz["views"]["back"]["autoPaths"][iid]["path"]:
+                    errors.append(f"모델 {mdl['id']}: autoDissect {iid} 에 경로 없음")
+            stats["dissection_steps"] = len(dz["views"]["back"]["steps"])
+        if mdl.get("fibers"):
+            fb = load(mdl["fibers"])
+            if not fb:
+                continue
+            for m_, f in fb["muscles"].items():
+                if m_ not in nodes:
+                    errors.append(f"근섬유 {mdl['id']}: 메쉬 '{m_}' 없음")
+                if f.get("item") not in known:
+                    errors.append(f"근섬유 {mdl['id']}: 항목 {f.get('item')} 없음")
+                for g in f["glyphs"]:
+                    if len(g) != 9 or abs(sum(x * x for x in g[3:6]) - 1) > 0.05:
+                        errors.append(f"근섬유 {mdl['id']}: '{m_}' 방향 벡터 오류")
+                        break
+            stats[f"fibers_{mdl['id']}"] = len(fb["muscles"])
+    for x in motions:
+        sl = x.get("angleSlider")
+        if sl:
+            if sl["seg"] not in {s_["id"] for s_ in x["segments"]}:
+                errors.append(f"동작 {x['id']}: 각도 슬라이더 분절 {sl['seg']} 없음")
+            rom = sl.get("rom", {})
+            for k in ("reference", "source", "position", "axis", "plane", "active", "compound", "reviewStatus"):
+                if not rom.get(k):
+                    errors.append(f"동작 {x['id']}: 가동범위 메타데이터 '{k}' 없음")
+
     # ---------------- 정적 파일 참조 (index.html → css/js)
     html = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
     for ref in re.findall(r'(?:src|href)="([^"#:]+)"', html):

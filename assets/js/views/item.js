@@ -2,7 +2,7 @@
 import { db, chapterItems, related, REVIEW } from '../data.js';
 import { store } from '../store.js';
 import { esc, icon, catLabel, reviewBadge, refChip, itemCard, itemHref, chapterHref, shareLink, toast, emptyState } from '../ui.js';
-import { visualPanel, depthIndicator } from './visual.js';
+import { visualPanel, depthIndicator, autoDissectHref } from './visual.js';
 import { terms, subName } from '../terms.js';
 
 const wide = () => matchMedia('(min-width: 1024px)').matches;
@@ -120,6 +120,7 @@ export function itemView(id, params = new URLSearchParams()) {
         <button class="btn ${fav ? 'btn-on' : ''}" data-fav aria-pressed="${fav}">${icon('star')}<span>${fav ? '즐겨찾기됨' : '즐겨찾기'}</span></button>
         <button class="btn ${done ? 'btn-on' : ''}" data-done aria-pressed="${done}">${icon('checkCircle')}<span>${done ? '학습 완료' : '학습 완료 표시'}</span></button>
         <button class="btn btn-ghost" data-share>${icon('share')}<span>링크 공유</span></button>
+        ${autoDissectHref(it.id) ? `<a class="btn btn-primary btn-dissect" href="${autoDissectHref(it.id)}">${icon('layers')}<span>3D 자동 해부로 찾아가기</span></a>` : ''}
       </div>
     </header>
 
